@@ -7,3 +7,9 @@ Double Deep Q-Learning for Optimal Execution implementation
 Work Repartition :
 
 [WIP]
+
+
+# Code convention
+
+Black formatting
+flake8 linting (except line size)
