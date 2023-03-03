@@ -28,6 +28,6 @@ def inventory_action_transformer(
     :param inv_act_pairs: a tensor of shape (batch_size, 2) where the first column is the inventory and
     the second column is the action
     """
-
-    # TODO: implement inventory_action_transformer according to Appendix A.1 and add tests for it in tests/test_data_utils.py (if possible) (might need to implement a function to compute the inverse of the transformation)
+    # TODO: implement inventory_action_transformer according to Appendix A.1 
+    # and add tests for it in tests/test_data_utils.py (if possible) (might need to implement a function to compute the inverse of the transformation)
     pass
