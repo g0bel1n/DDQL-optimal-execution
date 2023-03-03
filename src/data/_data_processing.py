@@ -29,5 +29,5 @@ def inventory_action_transformer(
     the second column is the action
     """
 
-    
+    # TODO: implement inventory_action_transformer according to Appendix A.1 and add tests for it in tests/test_data_utils.py (if possible) (might need to implement a function to compute the inverse of the transformation)
     pass
