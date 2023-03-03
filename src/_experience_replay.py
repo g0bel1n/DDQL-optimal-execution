@@ -30,7 +30,7 @@ class ExperienceReplay:
         """Saves a transition."""
         # If we have reached the capacity, replace  a random element between the capacity//2 older elements
         if self.position >= self.capacity:
-            deleted_row = random.randint(self.capacity // 2)
+            deleted_row = random.randint(0, self.capacity // 2)
             self.memory[deleted_row:] = self.memory[deleted_row + 1 :]
             self.position = self.capacity - 1
         self.memory[self.position] = transition

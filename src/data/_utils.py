@@ -15,9 +15,11 @@ def create_fake_prices(n_samples:int =1000, mean : float = 10., std : float = 1.
         raise ValueError("return_type must be either 'numpy' or 'torch'")
 
 
-
+# TODO: implement create_fake_LOB_data
+# following the same data structure outputs than in the paper
 def create_fake_LOB_data(
     n_samples: int = 1000, n_features: int = 10, n_classes: int = 2
 ) -> tuple:
     """Creates fake LOB data for testing purposes."""
+    
     pass
