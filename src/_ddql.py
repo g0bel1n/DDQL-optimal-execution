@@ -43,7 +43,7 @@ class DDQL:
 
 
     def _pretrain(self, n_steps: int = 1000) -> dict:
-        #TODO: Implement pretraining on boundary cases
+        # TODO: Implement pretraining on boundary cases
         # assignee: @g0bel1n
         state_dict = dict()
         return state_dict
