@@ -10,18 +10,25 @@ from typing import Optional
 
 class DDQL:
 
-    def __init__(self, state_dict: Optional[dict] = None) -> None:
+    def __init__(self, state_dict: Optional[dict] = None, replay_size : int = 1000, greedy_decay_rate: float = .1, target_update_rate: int = 100, quadratic_penalty_coefficient : float = 1.) -> None:
         self.device = get_device()
         print(f"Using {self.device} device")
 
         self.main_net = QNet().to(self.device)
         self.target_net = QNet().to(self.device)
 
+        self.pretrain_required = True
+
         if state_dict is not None:
             self.main_net.load_state_dict(state_dict)
             self.target_net.load_state_dict(state_dict)
+            self.pretrain_required = False
 
-        self.experior_replay = ExperienceReplay()
+        self.experience_replay = ExperienceReplay(replay_size)
+        self.greedy_decay_rate = greedy_decay_rate
+        self.target_update_rate = target_update_rate
+        self.quadratic_penalty_coefficient = quadratic_penalty_coefficient
+
 
 
     def _execute_action(self, state: torch.Tensor, action: torch.Tensor) -> torch.Tensor:
@@ -34,7 +41,17 @@ class DDQL:
     def _update_target_net(self) -> None:
         self.target_net.load_state_dict(self.main_net.state_dict())
 
+
+    def _pretrain(self, n_steps: int = 1000) -> dict:
+        #TODO: Implement pretraining on boundary cases
+        # assignee: @g0bel1n
+        state_dict = dict()
+        return state_dict
+
     def train(self, replay: ExperienceReplay, batch_size: int = 128, lr: float = 1e-3, gamma: float = 0.99, n_epochs: int = 1000) -> None:
+        if self.pretrain_required:
+            self._pretrain()
+
         self.main_net.train()
         optimizer = optim.RMSprop(self.main_net.parameters(), lr=lr)
 
