@@ -1,5 +1,7 @@
-import torch
+import numpy as np
 import random
+
+from .environnement._state import State
 
 
 class ExperienceReplay:
@@ -7,14 +9,16 @@ class ExperienceReplay:
         self, capacity: int = 10000, device: str = "cpu", transition_size: int = 5
     ):
         self.capacity = capacity
-        self.memory = torch.zeros(capacity, transition_size)
+        self.memory = np.zeros(
+            capacity, transition_size, dtype=State
+        )  # check if this is correct
         self.position = 0
         self.to(device)
 
-    def __getitem__(self, index):
+    def __getitem__(self, index) -> State:
         return self.memory[index]
 
-    def __setitem__(self, index, value):
+    def __setitem__(self, index, value: State):
         self.memory[index] = value
 
     def __iter__(self):
@@ -23,10 +27,7 @@ class ExperienceReplay:
     def __next__(self):
         return next(self.memory)
 
-    def to(self, device: str = "cpu"):
-        self.memory = self.memory.to(device)
-
-    def push(self, transition):
+    def push(self, transition: State):
         """Saves a transition."""
         # If we have reached the capacity, replace  a random element between the capacity//2 older elements
         if self.position >= self.capacity:
