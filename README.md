@@ -13,3 +13,5 @@ Work Repartition :
 
 Black formatting
 flake8 linting (except line size)
+
+test push Augustin
