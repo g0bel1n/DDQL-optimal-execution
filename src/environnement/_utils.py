@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 
-import numpy as np
+
 def create_fake_prices(n_samples:int =1000, mean : float = 10., std : float = 1., return_type: str = 'numpy') -> torch.Tensor:
     increments = np.random.normal(0, 1, n_samples)
     prices = np.exp(np.cumsum(increments))

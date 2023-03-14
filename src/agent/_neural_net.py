@@ -1,7 +1,7 @@
-import torch.nn as nn
-import torch
-
 from typing import Optional
+
+import torch
+import torch.nn as nn
 
 #  RMSprop optimizer
 

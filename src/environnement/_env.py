@@ -25,7 +25,7 @@ class MarketEnvironnement:
 
         self.state = State(states_elements, initial_state)    
 
-    def step(self, action: int) -> tuple:
+    def step(self, action: float) -> tuple:
         # Execute one time step within the environment
         self.current_step += 1
 

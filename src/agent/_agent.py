@@ -55,7 +55,8 @@ class Agent:
         if np.random.rand() < self.greediness and self.mode == 'train':
             action = np.random.binomial(state['inventory'], 1/state['inventory'])
         else:
-            action = self.main_net(state, action).argmax().item() #clarify
+            action = self.main_net(state, action).argmax().item() 
+            # scipy
         
         return action
     
