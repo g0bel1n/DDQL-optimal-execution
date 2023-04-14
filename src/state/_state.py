@@ -7,5 +7,8 @@ class State(dict):
             self[k] = v
 
     @property
-    def tensor(self):
-        return torch.tensor(list(self.values()))
+    def astensor(self):
+        return torch.Tensor(list(self.values())).float()
+
+    def copy(self) -> "State":
+        return State(self)

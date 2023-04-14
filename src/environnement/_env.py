@@ -52,13 +52,15 @@ class MarketEnvironnement:
         self.state = State(
             dict(
                 zip(
-                    [*self.historical_data.columns, "inventory", "reward"],
-                    [*self.historical_data.iloc[0].values, initial_inventory, 0],
+                    [*self.historical_data.columns, "inventory"],
+                    [*self.historical_data.iloc[0].values, initial_inventory],
                 )
             )
         )
 
         self.quadratic_penalty_coefficient = quadratic_penalty_coefficient
+
+        self.state_size = len(self.state)
 
     def swap_episode(self, episode: int) -> None:
         if self.state["period"] >= 1 and not self.done:
@@ -81,19 +83,19 @@ class MarketEnvironnement:
         self.state = State(
             dict(
                 zip(
-                    [*self.historical_data.columns, "inventory", "reward"],
-                    [*self.historical_data.iloc[0].values, self.initial_inventory, 0],
+                    [*self.historical_data.columns, "inventory"],
+                    [*self.historical_data.iloc[0].values, self.initial_inventory],
                 )
             )
         )
 
-    def step(self, action: int) -> tuple:
+    def step(self, action: int) -> float:
         # Execute one time step within the environment
 
         if action > self.state["inventory"]:
             raise InvalidActionError
 
-        self._execute_action(action)
+        reward = self._execute_action(action)
 
         self.state["period"] = self.state["period"] + 1
 
@@ -110,11 +112,7 @@ class MarketEnvironnement:
                 .to_dict()
             )
 
-        return None
-
-    def get_trading_episodes(self) -> tuple:
-        # Return the trading episodes
-        return None
+        return reward
 
     def _execute_action(self, action: int) -> float:
         inventory = self.state["inventory"]
@@ -131,15 +129,16 @@ class MarketEnvironnement:
             )
 
         self.state["inventory"] -= action  # stays an integer
-        self.state["reward"] = reward
+
+        return reward
 
     def reset(self) -> None:
         # Reset the state of the environment to an initial state
         self.state = State(
             dict(
                 zip(
-                    [*self.historical_data.columns, "inventory", "reward"],
-                    [*self.historical_data.iloc[0].values, self.initial_inventory, 0],
+                    [*self.historical_data.columns, "inventory"],
+                    [*self.historical_data.iloc[0].values, self.initial_inventory],
                 )
             )
         )

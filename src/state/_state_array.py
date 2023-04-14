@@ -6,9 +6,9 @@ from ._state import State
 
 
 class StateArray:
-    def __init__(self) -> None:
-        self.values: List[State] = []
-        self.n: int = 0
+    def __init__(self, *args) -> None:
+        self.values: List[State] = list(args) if args else []
+        self.n: int = len(self.values)
 
     def __getitem__(self, item):
         return self.values[item]
@@ -26,18 +26,9 @@ class StateArray:
     def __len__(self):
         return self.n
 
-    @property
-    def inventory(self):
-        return torch.tensor([s["inventory"] for s in self.values])
+    def __get_item__(self, item):
+        return torch.tensor([state[item] for state in self.values]).float()
 
     @property
-    def price(self):
-        return torch.tensor([s["price"] for s in self.values])
-
-    @property
-    def values(self):
-        return torch.tensor(self.values)
-
-    @property
-    def n(self):
-        return self.n
+    def astensor(self):
+        return torch.tensor([state.astensor for state in self.values]).float()

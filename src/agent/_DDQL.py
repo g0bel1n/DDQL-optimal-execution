@@ -11,13 +11,15 @@ from src import State, StateArray, get_device
 
 class DDQL(Agent):
 
-    def __init__(self, state_dict: Optional[dict] = None,  greedy_decay_rate: float = .1, target_update_rate: int = 100, initial_greediness : float = .2, mode :str = 'train', lr:float = 1e-3) -> None:
+    def __init__(self, state_dict: Optional[dict] = None,  greedy_decay_rate: float = .1, target_update_rate: int = 100, initial_greediness : float = .2, mode :str = 'train', lr:float = 1e-3, state_size : int = 5, initial_budget: int =100, horizon:int = 100 ) -> None:
+
+        super().__init__(initial_budget, horizon)
 
         self.device = get_device()
         print(f"Using {self.device} device")
 
-        self.main_net = QNet().to(self.device)
-        self.target_net = QNet().to(self.device)
+        self.main_net = QNet(state_size=state_size, action_size=initial_budget).to(self.device)
+        self.target_net = QNet(state_size=state_size, action_size=initial_budget).to(self.device)
 
     
         if state_dict is not None:
@@ -52,7 +54,7 @@ class DDQL(Agent):
         return (
             np.random.binomial(state['inventory'], 1 / state['inventory'])
             if np.random.rand() < self.greediness and self.mode == 'train'
-            else self.main_net(state).max().item()
+            else self.main_net(state).argmax().item()
         )
     
     def _update_target_net(self) -> None:
