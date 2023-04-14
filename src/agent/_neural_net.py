@@ -3,6 +3,8 @@ from typing import Optional
 import torch.nn as nn
 import torch
 
+from src import StateArray
+
 #  RMSprop optimizer
 
 
@@ -36,7 +38,7 @@ class QNet(nn.Module):
         )
         self.output_head = nn.Linear(n_nodes, action_size)
 
-    def forward(self, states: StatesArray):
+    def forward(self, states: StateArray):
         x = self.input_head(states.values)
         for layer in self.hidden_layers:
             x = layer(x)

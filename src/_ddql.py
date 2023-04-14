@@ -1,9 +1,8 @@
 from ._experience_replay import ExperienceReplay
-from ._neural_net import QNet
+from .agent import Agent
 from ._utils import get_device
-from .environnement._state import State
-from .environnement._env import MarketEnvironnement
-from ._agent import Agent
+from .environnement import  MarketEnvironnement
+from .state import State, StateArray
 
 import torch
 import torch.nn as nn

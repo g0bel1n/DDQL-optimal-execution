@@ -1,7 +1,7 @@
 import numpy as np
 import random
 
-from .environnement._state import State
+from .state._state import State
 
 
 class ExperienceReplay:

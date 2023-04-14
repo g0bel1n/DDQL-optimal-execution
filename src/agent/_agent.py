@@ -1,15 +1,12 @@
 from typing import Optional
 
 import numpy as np
-import scipy
 import torch
 import torch.nn as nn
 import torch.optim as optim
 
 from ._neural_net import QNet
-from ._state import State
-from ._utils import get_device
-
+from src import State, StateArray, get_device
 
 class Agent:
 
