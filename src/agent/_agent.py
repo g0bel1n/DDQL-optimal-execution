@@ -1,16 +1,15 @@
-from ._neural_net import QNet
-from ._utils import get_device
-from ._state import State
+from typing import Optional
 
+import numpy as np
+import scipy
 import torch
 import torch.nn as nn
 import torch.optim as optim
 
-import numpy as np
-import scipy
+from ._neural_net import QNet
+from ._state import State
+from ._utils import get_device
 
-
-from typing import Optional
 
 class Agent:
 
@@ -50,15 +49,13 @@ class Agent:
         self.mode = 'eval'
     
 
-    def _get_action(self, state) -> torch.Tensor:
+    def _get_action(self, state: State) -> torch.Tensor:
 
-        if np.random.rand() < self.greediness and self.mode == 'train':
-            action = np.random.binomial(state['inventory'], 1/state['inventory'])
-        else:
-            action = self.main_net(state, action).argmax().item() 
-            # scipy
-        
-        return action
+        return (
+            np.random.binomial(state['inventory'], 1 / state['inventory'])
+            if np.random.rand() < self.greediness and self.mode == 'train'
+            else self.main_net(state).max().item()
+        )
     
     def _update_target_net(self) -> None:
         self.target_net.load_state_dict(self.main_net.state_dict())
@@ -66,12 +63,9 @@ class Agent:
 
     def _complete_target(self, experience_batch : torch.Tensor) -> torch.Tensor:
         ids = torch.cat(torch.where(experience_batch['done'] == 0)[0], torch.where(experience_batch['predone'] == 0)[0])
-        for experience in experience_batch[ids]:
-            constraints = ({'type': 'ineq', 'fun': lambda x: x}, {'type': 'ineq', 'fun': lambda x: experience['inventory'] - x}) 
-            # TODO: check if this is correct and clarify numpy/torch/State object
-            # assignees: g0bel1n
-            best_action = scipy.optimize.minimize(lambda x: -self.main_net(experience['next_state'], x), np.array([0.]), constraints=constraints).x
-            target_complement = experience['gamma'] * self.target_net(experience['next_state'],best_action)
+        for experience in experience_batch[ids]:#can be vectorized 
+            best_action =  self.main_net(experience['next_state']).argmax().item()
+            target_complement = experience['gamma'] * self.target_net(experience['next_state'])[best_action]
             experience['target'] += target_complement
 
         return experience_batch

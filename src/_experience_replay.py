@@ -6,12 +6,11 @@ from .environnement._state import State
 
 class ExperienceReplay:
     def __init__(
-        self, capacity: int = 10000, device: str = "cpu", transition_size: int = 5
+        self, capacity: int = 10000, transition_size: int = 5
     ):
         self.capacity = capacity
         self.memory = np.zeros(capacity, transition_size, dtype=State)  # check if this is correct
         self.position = 0
-        self.to(device)
 
     def __getitem__(self, index) -> State:
         return self.memory[index]

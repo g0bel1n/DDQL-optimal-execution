@@ -13,3 +13,8 @@ Work Repartition :
 
 Black formatting
 flake8 linting (except line size)
+
+
+# Notes
+
+- Action space is taken as an integer to avoid minimization 

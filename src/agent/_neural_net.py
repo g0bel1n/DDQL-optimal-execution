@@ -1,7 +1,7 @@
 from typing import Optional
 
-import torch
 import torch.nn as nn
+import torch
 
 #  RMSprop optimizer
 
@@ -22,18 +22,25 @@ class BaseQNetLayer(nn.Module):
 
 
 class QNet(nn.Module):
-    def __init__(self, state_size: int = 5, n_nodes: int = 20, n_layers: int = 6):
+    def __init__(
+        self,
+        action_size: int = 20,
+        state_size: int = 5,
+        n_nodes: int = 20,
+        n_layers: int = 6,
+    ):
         super(QNet, self).__init__()
-        self.input_head = nn.Linear(state_size + 1, n_nodes)
+        self.input_head = nn.Linear(state_size, n_nodes)
         self.hidden_layers = nn.ModuleList(
-            [BaseQNetLayer(n_nodes, n_nodes, nn.ReLU()) for _ in range(n_layers-2)]
+            [BaseQNetLayer(n_nodes, n_nodes, nn.ReLU()) for _ in range(n_layers - 2)]
         )
-        self.output_head = nn.Linear(n_nodes, 1)
+        self.output_head = nn.Linear(n_nodes, action_size)
 
-    def forward(self, states, action):
-        x = torch.cat([states, action], dim=1)
-        x = self.input_head(x)
+    def forward(self, states: StatesArray):
+        x = self.input_head(states.values)
         for layer in self.hidden_layers:
             x = layer(x)
         x = self.output_head(x)
+        for i in range(states.n):
+            x[i, states[i].inventory] = -torch.inf
         return x
