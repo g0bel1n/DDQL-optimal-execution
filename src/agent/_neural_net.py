@@ -24,7 +24,6 @@ class BaseQNetLayer(nn.Module):
 
 
 class QNet(nn.Module):
-
     def __init__(
         self,
         action_size: int = 20,
@@ -40,11 +39,13 @@ class QNet(nn.Module):
         )
         self.output_head = nn.Linear(n_nodes, action_size)
 
-    def forward(self, states: StateArray | State):
-
-        x = self.input_head(states.astensor)
+    def forward(self, states: StateArray | State | torch.Tensor):
+        x = self.input_head(states.astensor if isinstance(states, State) else states)
         for layer in self.hidden_layers:
             x = layer(x)
         x = self.output_head(x)
-        x[states["inventory"] :] = -torch.inf
+        if isinstance(states, State):
+            x[states["inventory"]:] = -torch.inf
+        else:
+            x[states[:, -1].long():] = -torch.inf
         return x

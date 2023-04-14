@@ -5,12 +5,15 @@ import torch
 from .state import State
 
 
+class ExperienceDict(dict):
+    def __repr__(self) -> str:
+        return f"ExperienceDict({super().__repr__()})"
+
+
 class ExperienceReplay:
     def __init__(self, capacity: int = 10000, state_size: int = 5):
         self.capacity = capacity
-        self.memory = torch.empty(
-            (capacity, 2 * state_size + 3), dtype=torch.float
-        )
+        self.memory = np.empty(capacity, dtype=object)
         self.position = 0
 
     def push(self, state, action, reward, next_state, done):
@@ -18,15 +21,16 @@ class ExperienceReplay:
         # If we have reached the capacity, replace  a random element between the capacity//2 older elements
         if self.position >= self.capacity:
             deleted_row = random.randint(0, self.capacity // 2)
-            self.memory[deleted_row:] = self.memory[deleted_row + 1 :]
+            self.memory[deleted_row:-1] = self.memory[deleted_row + 1 :]
             self.position = self.capacity - 1
-        self.memory[self.position] = torch.cat(
-            (
-                state.astensor,
-                torch.tensor([action, reward]),
-                next_state.astensor,
-                torch.tensor([done]),
-            )
+        self.memory[self.position] = ExperienceDict(
+            {
+                "state": state,
+                "action": action,
+                "reward": reward,
+                "next_state": next_state,
+                "done": done,
+            }
         )
 
         self.position += 1
