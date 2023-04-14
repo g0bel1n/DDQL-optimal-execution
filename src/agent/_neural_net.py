@@ -1,9 +1,9 @@
 from typing import Optional
 
-import torch.nn as nn
 import torch
+import torch.nn as nn
 
-from src import StateArray, State
+from src import State, StateArray
 
 #  RMSprop optimizer
 
@@ -47,5 +47,6 @@ class QNet(nn.Module):
         if isinstance(states, State):
             x[states["inventory"]:] = -torch.inf
         else:
-            x[states[:, -1].long():] = -torch.inf
+            for i, state in enumerate(states):
+                x[i, state[-1].long() :] = -torch.inf
         return x

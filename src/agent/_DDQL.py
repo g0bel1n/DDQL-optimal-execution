@@ -12,7 +12,7 @@ from src import State, StateArray, get_device, ExperienceDict
 
 class DDQL(Agent):
 
-    def __init__(self, state_dict: Optional[dict] = None,  greedy_decay_rate: float = .1, target_update_rate: int = 100, initial_greediness : float = .2, mode :str = 'train', lr:float = 1e-3, state_size : int = 5, initial_budget: int =100, horizon:int = 100, gamma :float =.99, quadratic_penalty_coefficient : float = 1.) -> None:
+    def __init__(self, state_dict: Optional[dict] = None,  greedy_decay_rate: float = .95, target_update_rate: int = 15, initial_greediness : float = 1, mode :str = 'train', lr:float = 1e-3, state_size : int = 5, initial_budget: int =100, horizon:int = 100, gamma :float =.99, quadratic_penalty_coefficient : float = .01) -> None:
 
         super().__init__(initial_budget, horizon)
 
@@ -87,7 +87,6 @@ class DDQL(Agent):
     def learn(self, experience_batch : np.ndarray) -> None:
     
         targets, actions, states  = self._complete_target(experience_batch)
-        state_size = states.shape[1]
         dataloader = DataLoader(
             TensorDataset(states, actions, targets),
             batch_size=32,
@@ -95,12 +94,17 @@ class DDQL(Agent):
         )
 
         for batch in dataloader:
+
+
             target = batch[2]
             pred = self.main_net(batch[0])[torch.arange(len(batch[0])), batch[1].long()]
             loss = self.loss_fn(pred, target)
             self.optimizer.zero_grad()
-            loss.backward()
+            loss.backward(retain_graph=True)
             self.optimizer.step()
+            print(loss)
+
+        
 
         self.learning_step += 1
         self.greediness = max(0.01, self.greediness * self.greedy_decay_rate)

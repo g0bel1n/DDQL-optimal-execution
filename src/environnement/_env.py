@@ -14,7 +14,7 @@ class MarketEnvironnement:
         self,
         initial_inventory: float = 100.0,
         data_path: str = "../data",
-        n_periods: int = 100,
+        n_periods: int = 5,
         quadratic_penalty_coefficient: float = 0.01,
         multi_episodes: bool = False,
     ) -> None:
