@@ -5,6 +5,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
+from torch.utils.data import DataLoader, TensorDataset
 
 from ._neural_net import QNet
 from src import State, StateArray, get_device, ExperienceDict
@@ -64,7 +65,7 @@ class DDQL(Agent):
         self.target_net.load_state_dict(self.main_net.state_dict())
 
 
-    def _complete_target(self, experience_batch : np.ndarray[ExperienceDict]) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    def _complete_target(self, experience_batch : np.ndarray) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         targets, actions , states = torch.empty(len(experience_batch)), torch.empty(len(experience_batch)), torch.empty((len(experience_batch), self.state_size))
         for i,experience in enumerate(experience_batch):#can be vectorized 
 
@@ -83,12 +84,12 @@ class DDQL(Agent):
         return targets, actions, states
 
     
-    def learn(self, experience_batch : np.ndarray[ExperienceDict]) -> None:
+    def learn(self, experience_batch : np.ndarray) -> None:
     
         targets, actions, states  = self._complete_target(experience_batch)
         state_size = states.shape[1]
-        dataloader = torch.utils.data.DataLoader(
-            torch.utils.data.TensorDataset(states, actions, targets),
+        dataloader = DataLoader(
+            TensorDataset(states, actions, targets),
             batch_size=32,
             shuffle=True,
         )

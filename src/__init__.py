@@ -1,6 +1,6 @@
 from .state import State, StateArray
 from ._utils import get_device
-from ._experience_replay import ExperienceReplay, ExperienceDict
+from .experience_replay._experience_replay import ExperienceReplay, ExperienceDict
 from .agent import TWAP, DDQL
 from .environnement import MarketEnvironnement
 #from ._ddql import DDQL

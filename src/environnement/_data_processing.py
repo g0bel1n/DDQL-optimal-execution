@@ -70,7 +70,7 @@ def inventory_action_transformer(
     the second column is the action
     """
 
-    inventory_action_pairs_transformed = np.copy(inventory_action_pairs)
+    inventory_action_pairs_transformed = np.copy(inventory_action_pairs) #type: ignore
 
     inventory_action_pairs_transformed /= q0
     inventory_action_pairs_transformed[:, 0] -= 1

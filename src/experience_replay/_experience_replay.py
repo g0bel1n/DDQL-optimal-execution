@@ -1,13 +1,8 @@
-import numpy as np
 import random
-import torch
 
-from .state import State
+import numpy as np
 
-
-class ExperienceDict(dict):
-    def __repr__(self) -> str:
-        return f"ExperienceDict({super().__repr__()})"
+from ._experience_dict import ExperienceDict
 
 
 class ExperienceReplay:

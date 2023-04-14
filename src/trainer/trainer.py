@@ -1,6 +1,5 @@
-from .agent import Agent
-from .environnement import MarketEnvironnement
-
+from src.agent._agent import Agent
+from src.environnement import MarketEnvironnement
 
 class Trainer:
 
@@ -10,7 +9,7 @@ class Trainer:
 
 
     def train(self, max_steps: int = 1000):
-        pass
+        ...
 
     def test(self, max_steps: int = 1000):
-        pass
+        ...

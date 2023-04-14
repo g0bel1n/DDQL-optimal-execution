@@ -4,7 +4,7 @@ import torch
 
 from ._state import State
 
-
+#useless
 class StateArray:
     def __init__(self, *args) -> None:
         self.values: List[State] = list(args) if args else []
@@ -19,9 +19,6 @@ class StateArray:
     def append(self, state):
         self.values.append(state)
         self.n += 1
-
-    def to(self, device: str = "cpu"):
-        self.values = [s.to(device) for s in self.values]
 
     def __len__(self):
         return self.n
