@@ -14,13 +14,13 @@ class MarketEnvironnement:
         self,
         initial_inventory: float = 100.0,
         data_path: str = "../data",
-        intra_time_steps: int = 100,
+        n_periods: int = 100,
         quadratic_penalty_coefficient: float = 0.01,
         multi_episodes: bool = False,
     ) -> None:
         # multi episodes
         self.initial_inventory = initial_inventory
-        self.intra_time_steps = intra_time_steps
+        self.n_periods = n_periods
 
         self.current_episode = 0
         self.multi_episodes = multi_episodes
@@ -38,7 +38,7 @@ class MarketEnvironnement:
         else:
             self.historical_data = pd.read_csv(f"{data_path}/historical_data.csv")
         self.historical_data = self.historical_data.set_index("Date")
-        _date_splits = np.split(self.historical_data.index, intra_time_steps)
+        _date_splits = np.split(self.historical_data.index, n_periods)
         self.historical_data["period"] = 0
         self.historical_data["period"] = self.historical_data["period"].astype(int)
         for i, split in enumerate(_date_splits):
@@ -61,13 +61,13 @@ class MarketEnvironnement:
         self.quadratic_penalty_coefficient = quadratic_penalty_coefficient
 
     def swap_episode(self, episode: int) -> None:
-        if self.state["period"] >=1 and not self.done:
+        if self.state["period"] >= 1 and not self.done:
             raise InvalidSwapError
 
         self.current_episode = episode
         self.historical_data = pd.read_csv(self.historical_data_series[episode])
         self.historical_data = self.historical_data.set_index("Date")
-        _date_splits = np.split(self.historical_data.index, self.intra_time_steps)
+        _date_splits = np.split(self.historical_data.index, self.n_periods)
         self.historical_data["period"] = 0
 
         for i, split in enumerate(_date_splits):
