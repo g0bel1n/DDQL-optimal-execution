@@ -16,13 +16,13 @@ class Agent:
         self.horizon = horizon
     
 
-    def _get_action(self, state: State) -> torch.Tensor | int:
+    def __get_action(self, state: State) -> torch.Tensor | int:
         ...
         
 
 
     def __call__(self, state) -> torch.Tensor | int:
-        return self._get_action(state)
+        return self.__get_action(state)
        
         
         

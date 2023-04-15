@@ -8,85 +8,149 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 
 from ._neural_net import QNet
-from src import State, StateArray, get_device, ExperienceDict
+from src import State, get_device
+
 
 class DDQL(Agent):
-
-    def __init__(self, state_dict: Optional[dict] = None,  greedy_decay_rate: float = .95, target_update_rate: int = 15, initial_greediness : float = 1, mode :str = 'train', lr:float = 1e-3, state_size : int = 5, initial_budget: int =100, horizon:int = 100, gamma :float =.99, quadratic_penalty_coefficient : float = .01) -> None:
-
+    def __init__(
+        self,
+        state_dict: Optional[dict] = None,
+        greedy_decay_rate: float = 0.95,
+        target_update_rate: int = 15,
+        initial_greediness: float = 1,
+        mode: str = "train",
+        lr: float = 1e-3,
+        state_size: int = 5,
+        initial_budget: int = 100,
+        horizon: int = 100,
+        gamma: float = 0.99,
+        quadratic_penalty_coefficient: float = 0.01,
+    ) -> None:
         super().__init__(initial_budget, horizon)
 
         self.device = get_device()
         print(f"Using {self.device} device")
 
-        self.main_net = QNet(state_size=state_size, action_size=initial_budget).to(self.device)
-        self.target_net = QNet(state_size=state_size, action_size=initial_budget).to(self.device)
+        self.main_net = QNet(state_size=state_size, action_size=initial_budget).to(
+            self.device
+        )
+        self.target_net = QNet(state_size=state_size, action_size=initial_budget).to(
+            self.device
+        )
 
         self.state_size = state_size
 
         self.gamma = gamma
-    
+
         if state_dict is not None:
             self.main_net.load_state_dict(state_dict)
             self.target_net.load_state_dict(state_dict)
 
         self.greedy_decay_rate = greedy_decay_rate
         self.target_update_rate = target_update_rate
-        self.greediness= initial_greediness
+        self.greediness = initial_greediness
         self.quadratic_penalty_coefficient = quadratic_penalty_coefficient
 
         self.mode = mode
 
         self.learning_step = 0
 
-        if self.mode == 'train':
+        if self.mode == "train":
             self.optimizer = optim.RMSprop(self.main_net.parameters(), lr=lr)
             self.loss_fn = nn.MSELoss()
 
-
     def train(self) -> None:
         self.main_net.train()
-        self.mode = 'train'
+        self.mode = "train"
 
     def eval(self) -> None:
         self.main_net.eval()
-        self.mode = 'eval'
-    
+        self.mode = "eval"
 
-    def _get_action(self, state: State) -> torch.Tensor:
+    def __get_action(self, state: State) -> torch.Tensor:
+        """
+        This function returns a tensor that is either a random binomial distribution or the index of the
+        maximum value in the output of a neural network, depending on certain conditions.
 
+        Args:
+          state (State): The `state` parameter is an instance of the `State` class, which contains
+        information about the current state of the environment in which the agent is operating.
+
+        Returns:
+          a tensor that represents the action to be taken based on the given state. If the `greediness`
+        parameter is set and the `mode` is set to 'train', a random binomial distribution is generated using
+        the state's inventory as the number of trials and the probability of success as 1/inventory.
+        Otherwise, the action is determined by the main neural network's output
+        """
         return (
-            np.random.binomial(state['inventory'], 1 / state['inventory'])
-            if np.random.rand() < self.greediness and self.mode == 'train'
+            np.random.binomial(state["inventory"], 1 / state["inventory"])
+            if np.random.rand() < self.greediness and self.mode == "train"
             else self.main_net(state).argmax().item()
         )
-    
-    def _update_target_net(self) -> None:
+
+    def __update_target_net(self) -> None:
+        """
+        This function updates the target network by loading the state dictionary of the main network.
+        """
         self.target_net.load_state_dict(self.main_net.state_dict())
 
+    def __complete_target(
+        self, experience_batch: np.ndarray
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        """
+        The function takes in a batch of experiences and returns the corresponding targets, actions, and
+        states for training a reinforcement learning agent.
 
-    def _complete_target(self, experience_batch : np.ndarray) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-        targets, actions , states = torch.empty(len(experience_batch)), torch.empty(len(experience_batch)), torch.empty((len(experience_batch), self.state_size))
-        for i,experience in enumerate(experience_batch):#can be vectorized 
+        Args:
+          experience_batch (np.ndarray): A batch of experiences, where each experience is a dictionary
+        containing information about a single transition in the environment. The dictionary contains keys
+        such as 'state', 'action', 'reward', 'next_state', and 'done'.
 
-            actions[i] = experience['action']
-            states[i] = experience['state'].astensor
-            if experience['done'] == 1:
-                
-                targets[i] = experience['reward']
+        Returns:
+          a tuple of three torch Tensors: targets, actions, and states.
+        """
+        targets, actions, states = (
+            torch.empty(len(experience_batch)),
+            torch.empty(len(experience_batch)),
+            torch.empty((len(experience_batch), self.state_size)),
+        )
+        for i, experience in enumerate(experience_batch):  # can be vectorized
+            actions[i] = experience["action"]
+            states[i] = experience["state"].astensor
+            if experience["done"] == 1:
+                targets[i] = experience["reward"]
 
-            elif experience['done'] == 0:
-                targets[i]  = experience['reward'] + self.gamma * experience['next_state']['inventory'](experience['next_state']['Price']-experience['state']['Price']) - self.quadratic_penalty_coefficient * (experience['next_state']['inventory'])**2
+            elif experience["done"] == 0:
+                targets[i] = (
+                    experience["reward"]
+                    + self.gamma
+                    * experience["next_state"]["inventory"](
+                        experience["next_state"]["Price"] - experience["state"]["Price"]
+                    )
+                    - self.quadratic_penalty_coefficient
+                    * (experience["next_state"]["inventory"]) ** 2
+                )
             else:
-                best_action =  self.main_net(experience['next_state']).argmax().item()
-                targets[i]  = experience['reward'] + self.gamma * self.target_net(experience['next_state'])[int(best_action)]
+                best_action = self.main_net(experience["next_state"]).argmax().item()
+                targets[i] = (
+                    experience["reward"]
+                    + self.gamma
+                    * self.target_net(experience["next_state"])[int(best_action)]
+                )
 
         return targets, actions, states
 
-    
-    def learn(self, experience_batch : np.ndarray) -> None:
-    
-        targets, actions, states  = self._complete_target(experience_batch)
+    def learn(self, experience_batch: np.ndarray) -> None:
+        """
+        This is a function for training a neural network using a batch of experiences and updating the
+        target network periodically.
+
+        Args:
+          experience_batch (np.ndarray): `experience_batch` is a numpy array containing a batch of
+        experiences. Each experience is a tuple of (state, action, reward, next_state, done) where:
+        """
+
+        targets, actions, states = self.__complete_target(experience_batch)
         dataloader = DataLoader(
             TensorDataset(states, actions, targets),
             batch_size=32,
@@ -94,8 +158,6 @@ class DDQL(Agent):
         )
 
         for batch in dataloader:
-
-
             target = batch[2]
             pred = self.main_net(batch[0])[torch.arange(len(batch[0])), batch[1].long()]
             loss = self.loss_fn(pred, target)
@@ -104,18 +166,10 @@ class DDQL(Agent):
             self.optimizer.step()
             print(loss)
 
-        
-
         self.learning_step += 1
         self.greediness = max(0.01, self.greediness * self.greedy_decay_rate)
         if self.learning_step % self.target_update_rate == 0:
-            self._update_target_net()
-            print(f"Target network updated at step {self.learning_step} with greediness {self.greediness:.2f}")
-
-        
-
-    def __call__(self, state) -> torch.Tensor:
-        return self._get_action(state)
-       
-        
-        
+            self.__update_target_net()
+            print(
+                f"Target network updated at step {self.learning_step} with greediness {self.greediness:.2f}"
+            )

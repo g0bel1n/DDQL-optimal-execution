@@ -25,6 +25,9 @@ class StateArray:
 
     def __get_item__(self, item):
         return torch.tensor([state[item] for state in self.values]).float()
+    
+    def __iter__(self):
+        return iter(self.values)
 
     @property
     def astensor(self):

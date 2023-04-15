@@ -63,6 +63,14 @@ class MarketEnvironnement:
         self.state_size = len(self.state)
 
     def swap_episode(self, episode: int) -> None:
+        """
+        This function swaps the current episode in a time series environment and updates the historical
+        data, periods, and state accordingly.
+        
+        Args:
+          episode (int): The episode parameter is an integer that represents the episode number to be
+        swapped to.
+        """
         if self.state["period"] >= 1 and not self.done:
             raise InvalidSwapError
 
@@ -90,12 +98,40 @@ class MarketEnvironnement:
         )
 
     def step(self, action: int) -> float:
+        """
+        This function executes one time step within the environment, raises an error if the action is
+        invalid, executes the action, updates the state, and returns the reward.
+        
+        Args:
+          action (int): an integer representing the action taken by the agent in the environment. In this
+        case, it is assumed that the agent is making a decision about how much of a certain item to
+        sell, and the action parameter represents the quantity of that item to sell.
+        
+        Returns:
+          a float value, which is the reward obtained after executing the action in the environment.
+        """
         # Execute one time step within the environment
 
         if action > self.state["inventory"]:
             raise InvalidActionError
 
-        reward = self._execute_action(action)
+        reward = self.__compute_reward(action)
+
+        self.__update_state(action)
+
+        return reward
+    
+    def __update_state(self, action:int) -> None:
+        """
+        This function updates the state of an inventory management environment based on a given action and
+        historical data.
+        
+        Args:
+          action (int): The parameter `action` is an integer representing the amount of inventory to be
+        subtracted from the current inventory level in the `self.state` State object.
+        """
+  
+        self.state["inventory"] -= action  
 
         self.state["period"] = self.state["period"] + 1
 
@@ -112,9 +148,18 @@ class MarketEnvironnement:
                 .to_dict()
             )
 
-        return reward
-
-    def _execute_action(self, action: int) -> float:
+    def __compute_reward(self, action: int) -> float:
+        """
+        This function computes the reward for a given action based on the current inventory and historical
+        price data.
+        
+        Args:
+          action (int): The input parameter `action` is an integer representing the number of shares to sell at each time step.
+        
+        Returns:
+          The function `__compute_reward` returns a float value which represents the reward calculated based
+        on the given action and the current state of the environment.
+        """
         inventory = self.state["inventory"]
         intra_time_steps = self.historical_data[
             self.historical_data.period == self.state["period"]
@@ -128,12 +173,12 @@ class MarketEnvironnement:
                 - self.quadratic_penalty_coefficient * (action / len_ts) ** 2
             )
 
-        self.state["inventory"] -= action  # stays an integer
-
         return reward
 
     def reset(self) -> None:
-        # Reset the state of the environment to an initial state
+        """
+        The "reset" function reinitializes the environment to its initial state.
+        """
         self.state = State(
             dict(
                 zip(

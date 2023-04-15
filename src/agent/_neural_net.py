@@ -44,7 +44,7 @@ class QNet(nn.Module):
         for layer in self.hidden_layers:
             x = layer(x)
         x = self.output_head(x)
-        if isinstance(states, State):
+        if isinstance(states, (State, StateArray)):
             x[states["inventory"]:] = -torch.inf
         else:
             for i, state in enumerate(states):
