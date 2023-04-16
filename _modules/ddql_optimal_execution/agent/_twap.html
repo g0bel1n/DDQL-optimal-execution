@@ -66,16 +66,41 @@
 
 <span class="c1"># The TWAP class is an agent that calculates the action based on the budget and horizon.</span>
 <div class="viewcode-block" id="TWAP"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.agent.TWAP.html#ddql_optimal_execution.agent.TWAP">[docs]</a><span class="k">class</span> <span class="nc">TWAP</span><span class="p">(</span><span class="n">Agent</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    The TWAP class inherits from the Agent class. It is an agent that calculates the action based on the budget and horizon.</span>
+<span class="sd">    It is used to compare the performance of the DDQL agent with the performance of a simple agent that uniformly distributes</span>
+<span class="sd">    its budget over the horizon.</span>
+
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    initial_budget : int</span>
+<span class="sd">        The initial budget, by default 100</span>
+
+<span class="sd">    horizon : int</span>
+<span class="sd">        The horizon, by default 100</span>
+
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    budget : int</span>
+<span class="sd">        The budget of the agent.</span>
+
+<span class="sd">    horizon : int</span>
+<span class="sd">        The horizon of the agent.</span>
+<span class="sd">    """</span>
+
     <span class="k">def</span> <span class="nf">__get_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">"""</span>
 <span class="sd">        This function returns the action to take based on the budget and horizon values.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Args:</span>
 <span class="sd">          state (State): The "state" parameter is an instance of the "State" class, which represents the</span>
 <span class="sd">        current state of the environment in which the agent is operating. It contains information such</span>
 <span class="sd">        as the current time step, the agent's current position, and any other relevant information about</span>
 <span class="sd">        the environment. The "__get_action"</span>
-<span class="sd">        </span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">          an integer value which is the result of the division of the budget attribute of the object by</span>
 <span class="sd">        the horizon attribute of the object.</span>

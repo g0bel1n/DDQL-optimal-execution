@@ -66,6 +66,39 @@
 <dt class="sig sig-object py" id="ddql_optimal_execution.agent.TWAP">
 <em class="property">class<span class="w"> </span></em><code class="sig-prename descclassname">ddql_optimal_execution.agent.</code><code class="sig-name descname">TWAP</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">initial_budget</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em>, <em class="sig-param"><span class="n">horizon</span><span class="p">:</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">100</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ddql_optimal_execution/agent/_twap.html#TWAP"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.agent.TWAP">¶</a></dt>
 <dd>
+<p>The TWAP class inherits from the Agent class. It is an agent that calculates the action based on the budget and horizon.
+It is used to compare the performance of the DDQL agent with the performance of a simple agent that uniformly distributes
+its budget over the horizon.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>initial_budget</strong> (<em>int</em>) – The initial budget, by default 100</p></li>
+<li><p><strong>horizon</strong> (<em>int</em>) – The horizon, by default 100</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute code-definition">
+<dt class="sig sig-object py" id="ddql_optimal_execution.agent.TWAP.budget">
+<code class="sig-name descname">budget</code><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.agent.TWAP.budget">¶</a></dt>
+<dd>
+<p>The budget of the agent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute code-definition">
+<dt class="sig sig-object py" id="ddql_optimal_execution.agent.TWAP.horizon">
+<code class="sig-name descname">horizon</code><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.agent.TWAP.horizon">¶</a></dt>
+<dd>
+<p>The horizon of the agent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
 <dl class="py method code-definition">
 <dt class="sig sig-object py" id="ddql_optimal_execution.agent.TWAP.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">initial_budget</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em>, <em class="sig-param"><span class="n">horizon</span><span class="p">:</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">100</span></em><span class="sig-paren">)</span><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.agent.TWAP.__init__">¶</a></dt>
