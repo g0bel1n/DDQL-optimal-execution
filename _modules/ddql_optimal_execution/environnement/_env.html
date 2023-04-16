@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8"/>
+<title>ddql_optimal_execution.environnement._env | DDQL Optimal Execution  documentation</title>
+<link href="../../../_static/pygments.css" rel="stylesheet"/>
+<link href="../../../_static/theme.2e8060a090e1247124e3.css" rel="stylesheet"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+</head>
+<body class="antialiased text-gray scroll-smooth">
+<div class="min-h-screen xl:h-screen flex flex-col xl:grid xl:grid-layout print:block print:h-auto" data-action="keydown@window-&gt;search#focus " data-controller="sidebar search " id="page">
+<a class="block transition -translate-x-full focus:translate-x-0 opacity-0 focus:opacity-100 text-xl bg-white p-4 z-20 absolute top-0 left-0 h-14" href="#ddql-optimal-execution-environnement-env" title="Skip navigation links">Skip to content</a>
+<header class="grid-area-header z-10 h-14 fixed w-full top-0 print:hidden">
+<div class="bg-gray-dark shadow-md flex items-center h-full xl:px-2 relative"><div class="flex items-center">
+<button class="xl:hidden h-14 w-14 leading-14 text-gray-100 hover:bg-gray-700 hover:text-brand focus:outline-none focus:bg-gray-700 focus:text-brand" data-action="sidebar#open" data-sidebar-target="hamburger">
+<span class="sr-only">Open navigation menu</span>
+<svg aria-hidden="true" class="fill-current h-8 w-8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
+</button><a class="hover:bg-gray-700 focus:bg-gray-700 focus:outline-none" href="../../../index.html" title="Back to homepage"><span class="hidden lg:inline-block shrink-0 font-medium text-gray-100 mx-5 leading-14 tracking-wider">DDQL Optimal Execution  documentation</span>
+</a></div><div class="flex justify-end items-center flex-1"><form action="../../../search.html" class="flex print:hidden justify-between items-center leading-14 md:ml-4 bg-gray-dark text-gray-300 focus-within:bg-gray-50 focus-within:text-gray-800 focus-within:absolute focus-within:inset-x-0 focus-within:top-0 md:focus-within:w-full md:focus-within:static z-10" data-action="click-&gt;search#focusSearchInput" id="searchbox" method="get">
+<button aria-label="Get search results" class="text-inherit h-14 w-14" tabindex="-1">
+<svg aria-hidden="true" class="fill-current stroke-current h-8 w-8" stroke-width="0.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+</button>
+<input aria-label="Search the docs" class="pr-2 bg-transparent text-inherit focus:outline-none w-0 md:w-auto focus:w-full transition-all duration-100" data-search-target="searchInput" id="search-input" name="q" placeholder="Search the docs" type="search"/>
+</form></div>
+</div>
+</header>
+<aside class="grid-area-sidebar h-full fixed pt-14 xl:relative inset-y-0 left-0 z-20 xl:z-0 print:hidden overflow-y-auto transition-all transform transform-gpu -translate-x-full opacity-0 duration-300 xl:translate-x-0 xl:opacity-100" data-sidebar-target="sidebar">
+<nav class="h-full overflow-y-auto bg-white text-gray-600 pt-8 flex flex-col" role="navigation">
+<div class="nav-toc flex-1 pl-6"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../usage.html">Installation</a></div></li>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../quickstart.html">Quickstart Guide</a></div></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Main Objects:</span></p>
+<ul>
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.DDQL.html">ddql_optimal_execution.agent.DDQL</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL"><code class="docutils literal notranslate">DDQL</code></a></div><ul>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.__complete_target"><code class="docutils literal notranslate">__complete_target()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.__get_action"><code class="docutils literal notranslate">__get_action()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.__update_target_net"><code class="docutils literal notranslate">__update_target_net()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.eval"><code class="docutils literal notranslate">eval()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.learn"><code class="docutils literal notranslate">learn()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.train"><code class="docutils literal notranslate">train()</code></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.TWAP.html">ddql_optimal_execution.agent.TWAP</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.TWAP.html#ddql_optimal_execution.agent.TWAP"><code class="docutils literal notranslate">TWAP</code></a></div><ul>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.TWAP.html#ddql_optimal_execution.agent.TWAP.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.TWAP.html#ddql_optimal_execution.agent.TWAP.__get_action"><code class="docutils literal notranslate">__get_action()</code></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html">ddql_optimal_execution.environnement.MarketEnvironnement</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement"><code class="docutils literal notranslate">MarketEnvironnement</code></a></div><ul>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.__compute_reward"><code class="docutils literal notranslate">__compute_reward()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.__update_state"><code class="docutils literal notranslate">__update_state()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.get_state"><code class="docutils literal notranslate">get_state()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.reset"><code class="docutils literal notranslate">reset()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.step"><code class="docutils literal notranslate">step()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.swap_episode"><code class="docutils literal notranslate">swap_episode()</code></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.experience_replay.ExperienceReplay.html">ddql_optimal_execution.experience_replay.ExperienceReplay</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.experience_replay.ExperienceReplay.html#ddql_optimal_execution.experience_replay.ExperienceReplay"><code class="docutils literal notranslate">ExperienceReplay</code></a></div><ul>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.experience_replay.ExperienceReplay.html#ddql_optimal_execution.experience_replay.ExperienceReplay.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.experience_replay.ExperienceReplay.html#ddql_optimal_execution.experience_replay.ExperienceReplay.__make_room"><code class="docutils literal notranslate">__make_room()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.experience_replay.ExperienceReplay.html#ddql_optimal_execution.experience_replay.ExperienceReplay.get_sample"><code class="docutils literal notranslate">get_sample()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.experience_replay.ExperienceReplay.html#ddql_optimal_execution.experience_replay.ExperienceReplay.push"><code class="docutils literal notranslate">push()</code></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.State.html">ddql_optimal_execution.state.State</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State"><code class="docutils literal notranslate">State</code></a></div><ul>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.astensor"><code class="docutils literal notranslate">astensor</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.copy"><code class="docutils literal notranslate">copy()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.update_state"><code class="docutils literal notranslate">update_state()</code></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.StateArray.html">ddql_optimal_execution.state.StateArray</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.StateArray.html#ddql_optimal_execution.state.StateArray"><code class="docutils literal notranslate">StateArray</code></a></div><ul>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.StateArray.html#ddql_optimal_execution.state.StateArray.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.StateArray.html#ddql_optimal_execution.state.StateArray.append"><code class="docutils literal notranslate">append()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.StateArray.html#ddql_optimal_execution.state.StateArray.astensor"><code class="docutils literal notranslate">astensor</code></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<button class="text-4xl text-gray-800 p-4 bottom-0 hover:text-brand xl:hidden focus:text-brand self-center" data-action="sidebar#close" title="Close navigation menu">
+<span class="sr-only">Close navigation menu</span>
+<svg aria-hidden="true" class="fill-current stroke-current h-6 w-6" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</aside>
+<main class="px-4 pt-14 xl:ml-fluid grid-area-main overflow-y-auto flex flex-col flex-1 h-full mx-0 md:mx-auto xl:mr-0"><nav aria-label="breadcrumbs" class="print:hidden mt-12 text-sm text-gray-light" role="navigation">
+<a class="text-gray-light text-sm hover:text-gray-dark font-medium focus:text-gray-dark" href="../../../index.html">DDQL Optimal Execution  documentation</a>
+<span class="mr-1">/</span><a class="text-gray-light text-sm hover:text-gray-dark" href="../../index.html">Module code</a>
+<span class="mr-1">/</span><span aria-current="page">ddql_optimal_execution.environnement._env</span>
+</nav>
+<article class="flex-1" role="main">
+<h1>Source code for ddql_optimal_execution.environnement._env</h1><div class="highlight"><pre>
+<code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">ddql_optimal_execution</span> <span class="kn">import</span> <span class="n">State</span>
+
+<span class="kn">from</span> <span class="nn">._exceptions</span> <span class="kn">import</span> <span class="n">InvalidActionError</span><span class="p">,</span> <span class="n">InvalidSwapError</span>
+
+
+<div class="viewcode-block" id="MarketEnvironnement"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement">[docs]</a><span class="k">class</span> <span class="nc">MarketEnvironnement</span><span class="p">:</span>
+<div class="viewcode-block" id="MarketEnvironnement.__init__"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">initial_inventory</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">,</span>
+        <span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"../data"</span><span class="p">,</span>
+        <span class="n">n_periods</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">quadratic_penalty_coefficient</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
+        <span class="n">multi_episodes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># multi episodes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_inventory</span> <span class="o">=</span> <span class="n">initial_inventory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_periods</span> <span class="o">=</span> <span class="n">n_periods</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_episode</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">multi_episodes</span> <span class="o">=</span> <span class="n">multi_episodes</span>
+
+        <span class="k">if</span> <span class="n">multi_episodes</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">historical_data_series</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">data_path</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">".csv"</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">historical_data_series</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">data_path</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">historical_data_series</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">current_episode</span><span class="p">]</span>
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">data_path</span><span class="si">}</span><span class="s2">/historical_data.csv"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"Date"</span><span class="p">)</span>
+        <span class="n">_date_splits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">n_periods</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">split</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">_date_splits</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">split</span><span class="p">,</span> <span class="s2">"period"</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+
+        <span class="c1"># agent move along Ts while reward along ts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">horizon</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">_date_splits</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span>
+            <span class="nb">dict</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span>
+                    <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="s2">"inventory"</span><span class="p">],</span>
+                    <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">initial_inventory</span><span class="p">],</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">quadratic_penalty_coefficient</span> <span class="o">=</span> <span class="n">quadratic_penalty_coefficient</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MarketEnvironnement.swap_episode"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.swap_episode">[docs]</a>    <span class="k">def</span> <span class="nf">swap_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">episode</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        This function swaps the current episode in a time series environment and updates the historical</span>
+<span class="sd">        data, periods, and state accordingly.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">          episode (int): The episode parameter is an integer that represents the episode number to be</span>
+<span class="sd">        swapped to.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">done</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidSwapError</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_episode</span> <span class="o">=</span> <span class="n">episode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data_series</span><span class="p">[</span><span class="n">episode</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"Date"</span><span class="p">)</span>
+        <span class="n">_date_splits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_periods</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">split</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">_date_splits</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">split</span><span class="p">,</span> <span class="s2">"period"</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+
+        <span class="c1"># agent move along Ts while reward along ts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">horizon</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">_date_splits</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span>
+            <span class="nb">dict</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span>
+                    <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="s2">"inventory"</span><span class="p">],</span>
+                    <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_inventory</span><span class="p">],</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="MarketEnvironnement.step"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        This function executes one time step within the environment, raises an error if the action is</span>
+<span class="sd">        invalid, executes the action, updates the state, and returns the reward.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">          action (int): an integer representing the action taken by the agent in the environment. In this</span>
+<span class="sd">        case, it is assumed that the agent is making a decision about how much of a certain item to</span>
+<span class="sd">        sell, and the action parameter represents the quantity of that item to sell.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">          a float value, which is the reward obtained after executing the action in the environment.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Execute one time step within the environment</span>
+
+        <span class="k">if</span> <span class="n">action</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"inventory"</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">InvalidActionError</span>
+
+        <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__compute_reward</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__update_state</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">reward</span></div>
+    
+    <span class="k">def</span> <span class="nf">__update_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        This function updates the state of an inventory management environment based on a given action and</span>
+<span class="sd">        historical data.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">          action (int): The parameter `action` is an integer representing the amount of inventory to be</span>
+<span class="sd">        subtracted from the current inventory level in the `self.state` State object.</span>
+<span class="sd">        """</span>
+  
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"inventory"</span><span class="p">]</span> <span class="o">-=</span> <span class="n">action</span>  
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">horizon</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"inventory"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">done</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">update_state</span><span class="p">(</span>
+                <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="p">[</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">period</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span>
+                <span class="p">]</span>
+                <span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+            <span class="p">)</span>
+
+<div class="viewcode-block" id="MarketEnvironnement.get_state"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.get_state">[docs]</a>    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">State</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">'''This function returns a copy of the current state of an object if the copy parameter is True,</span>
+<span class="sd">        otherwise it returns the current state itself.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        copy, optional</span>
+<span class="sd">            A boolean parameter that determines whether a copy of the state should be returned or the original</span>
+<span class="sd">        state object. If copy is True, a copy of the state object is returned, otherwise the original state</span>
+<span class="sd">        object is returned.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns </span>
+<span class="sd">        -------</span>
+<span class="sd">            The method `get_state` is returning a copy of the current state of the object if `copy` is set to</span>
+<span class="sd">        `True`, otherwise it returns the current state object itself. The return type is `State`.</span>
+<span class="sd">        </span>
+<span class="sd">        '''</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">if</span> <span class="n">copy</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span></div>
+
+    <span class="k">def</span> <span class="nf">__compute_reward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        This function computes the reward for a given action based on the current inventory and historical</span>
+<span class="sd">        price data.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">          action (int): The input parameter `action` is an integer representing the number of shares to sell at each time step.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns:</span>
+<span class="sd">          The function `__compute_reward` returns a float value which represents the reward calculated based</span>
+<span class="sd">        on the given action and the current state of the environment.</span>
+<span class="sd">        """</span>
+        <span class="n">inventory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"inventory"</span><span class="p">]</span>
+        <span class="n">intra_time_steps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">period</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span>
+        <span class="p">]</span><span class="o">.</span><span class="n">Price</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">len_ts</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">intra_time_steps</span><span class="p">)</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">intra_time_steps</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">intra_time_steps</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+            <span class="n">inventory</span> <span class="o">-=</span> <span class="n">action</span> <span class="o">/</span> <span class="n">len_ts</span>
+            <span class="n">reward</span> <span class="o">+=</span> <span class="p">(</span>
+                <span class="n">inventory</span> <span class="o">*</span> <span class="p">(</span><span class="n">p2</span> <span class="o">-</span> <span class="n">p1</span><span class="p">)</span>
+                <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">quadratic_penalty_coefficient</span> <span class="o">*</span> <span class="p">(</span><span class="n">action</span> <span class="o">/</span> <span class="n">len_ts</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">reward</span>
+
+<div class="viewcode-block" id="MarketEnvironnement.reset"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        The "reset" function reinitializes the environment to its initial state.</span>
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">State</span><span class="p">(</span>
+            <span class="nb">dict</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span>
+                    <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="s2">"inventory"</span><span class="p">],</span>
+                    <span class="p">[</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_inventory</span><span class="p">],</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"MarketEnvironnement(initial_inventory=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">initial_inventory</span><span class="si">}</span><span class="s2">, quadratic_penalty_coefficient=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">quadratic_penalty_coefficient</span><span class="si">}</span><span class="s2">, current_episode=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">current_episode</span><span class="si">}</span><span class="s2">, multi_episodes=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">multi_episodes</span><span class="si">}</span><span class="s2">)"</span></div>
+</code></pre></div>
+</article>
+<footer>
+<div class="mt-20 mb-4 text-sm text-gray-700 print:mt-4">© 2023, g0bel1n Made with <a href="https://www.sphinx-doc.org">Sphinx 6.1.3</a></div>
+</footer></main>
+<button class="fixed bottom-0 right-0 z-20 opacity-0 p-4 m-4 tracking-wide bg-gray-900 text-gray-100 transition transform transform-gpu duration-500 translate-y-full" data-action="search#hideSnackbar" data-search-target="snackbar">
+  Clear highlights
+</button><div class="fixed hidden inset-0 bg-black bg-opacity-50" data-action="click-&gt;sidebar#close" data-sidebar-target="screen">
+</div>
+</div>
+<script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/sphinx_highlight.js"></script>
+<script src="../../../_static/theme.b62e1ded0c8c099a2d47.js"></script>
+</body>
+</html>
