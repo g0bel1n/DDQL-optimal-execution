@@ -12,6 +12,69 @@ from ddql_optimal_execution import State, get_device
 
 
 class DDQL(Agent):
+    """
+    The DDQL class inherits from the Agent class. It is an agent that implements a Double Deep Q-Learning algorithm.
+
+    Parameters
+    ----------
+    state_dict : dict, optional
+        A dictionary containing the state of the agent, by default None
+    greedy_decay_rate : float, optional
+        The greedy decay rate, by default 0.95
+    target_update_rate : int, optional
+        The target update rate, by default 15
+    initial_greediness : float, optional
+        The initial greediness, by default 1
+    mode : str, optional
+        The mode, by default "train"
+    lr : float, optional
+        The learning rate, by default 1e-3
+    state_size : int, optional
+        The state size, by default 5
+    initial_budget : int, optional
+        The initial budget, by default 100
+    horizon : int, optional
+        The horizon, by default 100
+    gamma : float, optional
+        The gamma parameter used in the Q-Learning algorithm, by default 0.99
+    quadratic_penalty_coefficient : float, optional
+        The quadratic penalty coefficient used to penalize the agent for selling big quantities of stocks, by default 0.01
+
+
+    Attributes
+    ----------
+    device : torch.device
+        The device used to run the agent
+    main_net : QNet
+        The main neural network used to predict the Q-values of the state-action pairs
+    target_net : QNet
+        The target neural network used to predict the Q-values of the state-action pairs
+    state_size : int
+        The state size
+    greedy_decay_rate : float
+        The greedy decay rate
+    target_update_rate : int
+        The target update rate
+    initial_greediness : float
+        The initial greediness of the agent. It is used to determine the probability of the agent taking a random action.
+    greediness : float
+        The current greediness of the agent.
+    mode : str
+        The mode of the agent. It can be either "train" or "test".
+    lr : float
+        The learning rate used to update the weights of the neural network.
+    gamma : float
+        The gamma parameter used in the Q-Learning algorithm.
+    quadratic_penalty_coefficient : float
+        The quadratic penalty coefficient used to penalize the agent for selling big quantities of stocks.
+    optimizer : torch.optim
+        The optimizer used to update the weights of the neural network.
+    loss_fn : torch.nn
+        The loss function used to calculate the loss between the predicted Q-values and the target Q-values.
+
+
+    """
+
     def __init__(
         self,
         state_dict: Optional[dict] = None,
