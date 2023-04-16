@@ -5,17 +5,17 @@
 <head>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta charset="utf-8"/>
-<title>ddql_optimal_execution.state.StateArray | DDQL Optimal Execution  documentation</title>
+<title>ddql_optimal_execution.agent.TWAP | DDQL Optimal Execution  documentation</title>
 <link href="../_static/pygments.css" rel="stylesheet"/>
 <link href="../_static/theme.2e8060a090e1247124e3.css" rel="stylesheet"/>
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
-<link href="ddql_optimal_execution.agent.DDQL.html" rel="next" title="ddql_optimal_execution.agent.DDQL"/>
-<link href="ddql_optimal_execution.state.State.html" rel="prev" title="ddql_optimal_execution.state.State"/>
+<link href="ddql_optimal_execution.trainer.Trainer.html" rel="next" title="ddql_optimal_execution.trainer.Trainer"/>
+<link href="ddql_optimal_execution.agent.DDQL.html" rel="prev" title="ddql_optimal_execution.agent.DDQL"/>
 </head>
 <body class="antialiased text-gray scroll-smooth">
 <div class="min-h-screen xl:h-screen flex flex-col xl:grid xl:grid-layout print:block print:h-auto" data-action="keydown@window-&gt;search#focus " data-controller="sidebar search " id="page">
-<a class="block transition -translate-x-full focus:translate-x-0 opacity-0 focus:opacity-100 text-xl bg-white p-4 z-20 absolute top-0 left-0 h-14" href="#ddql-optimal-execution-state-statearray" title="Skip navigation links">Skip to content</a>
+<a class="block transition -translate-x-full focus:translate-x-0 opacity-0 focus:opacity-100 text-xl bg-white p-4 z-20 absolute top-0 left-0 h-14" href="#ddql-optimal-execution-agent-twap" title="Skip navigation links">Skip to content</a>
 <header class="grid-area-header z-10 h-14 fixed w-full top-0 print:hidden">
 <div class="bg-gray-dark shadow-md flex items-center h-full xl:px-2 relative"><div class="flex items-center">
 <button class="xl:hidden h-14 w-14 leading-14 text-gray-100 hover:bg-gray-700 hover:text-brand focus:outline-none focus:bg-gray-700 focus:text-brand" data-action="sidebar#open" data-sidebar-target="hamburger">
@@ -42,9 +42,9 @@
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.preprocessing.Preprocessor.html">ddql_optimal_execution.preprocessing.Preprocessor</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.experience_replay.ExperienceReplay.html">ddql_optimal_execution.experience_replay.ExperienceReplay</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html">ddql_optimal_execution.state.State</a></div></li>
-<li class="toctree-l1 current expanded"><div class="nav-link"><a class="current reference internal" data-action="click-&gt;sidebar#close" href="#">ddql_optimal_execution.state.StateArray</a></div></li>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.StateArray.html">ddql_optimal_execution.state.StateArray</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.DDQL.html">ddql_optimal_execution.agent.DDQL</a></div></li>
-<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.TWAP.html">ddql_optimal_execution.agent.TWAP</a></div></li>
+<li class="toctree-l1 current expanded"><div class="nav-link"><a class="current reference internal" data-action="click-&gt;sidebar#close" href="#">ddql_optimal_execution.agent.TWAP</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.trainer.Trainer.html">ddql_optimal_execution.trainer.Trainer</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.environnement.MarketEnvironnement.html">ddql_optimal_execution.environnement.MarketEnvironnement</a></div></li>
 </ul>
@@ -57,18 +57,18 @@
 </aside>
 <main class="px-4 pt-14 xl:ml-fluid grid-area-main overflow-y-auto flex flex-col flex-1 h-full mx-0 md:mx-auto xl:mr-0"><nav aria-label="breadcrumbs" class="print:hidden mt-12 text-sm text-gray-light" role="navigation">
 <a class="text-gray-light text-sm hover:text-gray-dark font-medium focus:text-gray-dark" href="../index.html">DDQL Optimal Execution  documentation</a>
-<span class="mr-1">/</span><span aria-current="page">ddql_optimal_execution.state.StateArray</span>
+<span class="mr-1">/</span><span aria-current="page">ddql_optimal_execution.agent.TWAP</span>
 </nav>
 <article class="flex-1" role="main">
-<div class="section" id="ddql-optimal-execution-state-statearray">
-<h1>ddql_optimal_execution.state.StateArray<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql-optimal-execution-state-statearray">¶</a></h1>
+<div class="section" id="ddql-optimal-execution-agent-twap">
+<h1>ddql_optimal_execution.agent.TWAP<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql-optimal-execution-agent-twap">¶</a></h1>
 <dl class="py class code-definition">
-<dt class="sig sig-object py" id="ddql_optimal_execution.state.StateArray">
-<em class="property">class<span class="w"> </span></em><code class="sig-prename descclassname">ddql_optimal_execution.state.</code><code class="sig-name descname">StateArray</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ddql_optimal_execution/state/_state_array.html#StateArray"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.state.StateArray">¶</a></dt>
+<dt class="sig sig-object py" id="ddql_optimal_execution.agent.TWAP">
+<em class="property">class<span class="w"> </span></em><code class="sig-prename descclassname">ddql_optimal_execution.agent.</code><code class="sig-name descname">TWAP</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">initial_budget</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em>, <em class="sig-param"><span class="n">horizon</span><span class="p">:</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">100</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ddql_optimal_execution/agent/_twap.html#TWAP"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.agent.TWAP">¶</a></dt>
 <dd>
 <dl class="py method code-definition">
-<dt class="sig sig-object py" id="ddql_optimal_execution.state.StateArray.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">None</span></span><a class="reference internal" href="../_modules/ddql_optimal_execution/state/_state_array.html#StateArray.__init__"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.state.StateArray.__init__">¶</a></dt>
+<dt class="sig sig-object py" id="ddql_optimal_execution.agent.TWAP.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">initial_budget</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em>, <em class="sig-param"><span class="n">horizon</span><span class="p">:</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">100</span></em><span class="sig-paren">)</span><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.agent.TWAP.__init__">¶</a></dt>
 <dd>
 </dd></dl>
 <p class="rubric">Methods</p>
@@ -78,35 +78,30 @@
 <col style="width: 90%"/>
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.state.StateArray.__init__" title="ddql_optimal_execution.state.StateArray.__init__"><code class="xref py py-obj docutils literal notranslate">__init__</code></a>(*args)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ddql_optimal_execution.state.StateArray.append" title="ddql_optimal_execution.state.StateArray.append"><code class="xref py py-obj docutils literal notranslate">append</code></a>(state)</p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Attributes</p>
-<table class="autosummary longtable docutils align-default">
-<colgroup>
-<col style="width: 10%"/>
-<col style="width: 90%"/>
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.state.StateArray.astensor" title="ddql_optimal_execution.state.StateArray.astensor"><code class="xref py py-obj docutils literal notranslate">astensor</code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.agent.TWAP.__init__" title="ddql_optimal_execution.agent.TWAP.__init__"><code class="xref py py-obj docutils literal notranslate">__init__</code></a>(initial_budget[, horizon])</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method code-definition">
-<dt class="sig sig-object py" id="ddql_optimal_execution.state.StateArray.append">
-<code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ddql_optimal_execution/state/_state_array.html#StateArray.append"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.state.StateArray.append">¶</a></dt>
+<dt class="sig sig-object py" id="ddql_optimal_execution.agent.TWAP.__get_action">
+<code class="sig-name descname">__get_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state._state.State">ddql_optimal_execution.state._state.State</a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">int</span></span><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.agent.TWAP.__get_action">¶</a></dt>
 <dd>
-</dd></dl>
-<dl class="py property code-definition">
-<dt class="sig sig-object py" id="ddql_optimal_execution.state.StateArray.astensor">
-<em class="property">property<span class="w"> </span></em><code class="sig-name descname">astensor</code><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.state.StateArray.astensor">¶</a></dt>
-<dd>
+<p>This function returns the action to take based on the budget and horizon values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state.State"><em>State</em></a>) – The “state” parameter is an instance of the “State” class, which represents the</p>
+</dd>
+</dl>
+<p>current state of the environment in which the agent is operating. It contains information such
+as the current time step, the agent’s current position, and any other relevant information about
+the environment. The “__get_action”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>an integer value which is the result of the division of the budget attribute of the object by</p>
+</dd>
+</dl>
+<p>the horizon attribute of the object.</p>
 </dd></dl>
 </dd></dl>
 </div>
