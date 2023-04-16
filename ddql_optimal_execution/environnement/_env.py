@@ -1,7 +1,5 @@
 import os
-from typing import List
 
-import numpy as np
 import pandas as pd
 
 from ddql_optimal_execution import State, Preprocessor

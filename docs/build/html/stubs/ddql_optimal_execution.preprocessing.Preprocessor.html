@@ -6,17 +6,17 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta charset="utf-8"/>
 <meta content="Docutils 0.19: https://docutils.sourceforge.io/" name="generator"/>
-<title>ddql_optimal_execution.state.State | DDQL Optimal Execution  documentation</title>
+<title>ddql_optimal_execution.preprocessing.Preprocessor | DDQL Optimal Execution  documentation</title>
 <link href="../_static/pygments.css" rel="stylesheet"/>
 <link href="../_static/theme.2e8060a090e1247124e3.css" rel="stylesheet"/>
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
-<link href="ddql_optimal_execution.state.StateArray.html" rel="next" title="ddql_optimal_execution.state.StateArray"/>
-<link href="ddql_optimal_execution.experience_replay.ExperienceReplay.html" rel="prev" title="ddql_optimal_execution.experience_replay.ExperienceReplay"/>
+<link href="ddql_optimal_execution.experience_replay.ExperienceReplay.html" rel="next" title="ddql_optimal_execution.experience_replay.ExperienceReplay"/>
+<link href="../quickstart.html" rel="prev" title="Quickstart Guide"/>
 </head>
 <body class="antialiased text-gray scroll-smooth">
 <div class="min-h-screen xl:h-screen flex flex-col xl:grid xl:grid-layout print:block print:h-auto" data-action="keydown@window-&gt;search#focus " data-controller="sidebar search " id="page">
-<a class="block transition -translate-x-full focus:translate-x-0 opacity-0 focus:opacity-100 text-xl bg-white p-4 z-20 absolute top-0 left-0 h-14" href="#ddql-optimal-execution-state-state" title="Skip navigation links">Skip to content</a>
+<a class="block transition -translate-x-full focus:translate-x-0 opacity-0 focus:opacity-100 text-xl bg-white p-4 z-20 absolute top-0 left-0 h-14" href="#ddql-optimal-execution-preprocessing-preprocessor" title="Skip navigation links">Skip to content</a>
 <header class="grid-area-header z-10 h-14 fixed w-full top-0 print:hidden">
 <div class="bg-gray-dark shadow-md flex items-center h-full xl:px-2 relative"><div class="flex items-center">
 <button class="xl:hidden h-14 w-14 leading-14 text-gray-100 hover:bg-gray-700 hover:text-brand focus:outline-none focus:bg-gray-700 focus:text-brand" data-action="sidebar#open" data-sidebar-target="hamburger">
@@ -40,11 +40,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Main Objects:</span></p>
 <ul class="current">
-<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.preprocessing.Preprocessor.html">ddql_optimal_execution.preprocessing.Preprocessor</a></div><ul>
-<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.preprocessing.Preprocessor.html#ddql_optimal_execution.preprocessing.Preprocessor"><code class="docutils literal notranslate">Preprocessor</code></a></div><ul>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.preprocessing.Preprocessor.html#ddql_optimal_execution.preprocessing.Preprocessor.n_periods"><code class="docutils literal notranslate">n_periods</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.preprocessing.Preprocessor.html#ddql_optimal_execution.preprocessing.Preprocessor.__call__"><code class="docutils literal notranslate">__call__()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.preprocessing.Preprocessor.html#ddql_optimal_execution.preprocessing.Preprocessor.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
+<li class="toctree-l1 current expanded"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="current reference internal" data-action="click-&gt;sidebar#close" href="#">ddql_optimal_execution.preprocessing.Preprocessor</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.preprocessing.Preprocessor"><code class="docutils literal notranslate">Preprocessor</code></a></div><ul>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.preprocessing.Preprocessor.n_periods"><code class="docutils literal notranslate">n_periods</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.preprocessing.Preprocessor.__call__"><code class="docutils literal notranslate">__call__()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.preprocessing.Preprocessor.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
 </ul>
 </li>
 </ul>
@@ -59,12 +59,12 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1 current expanded"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="current reference internal" data-action="click-&gt;sidebar#close" href="#">ddql_optimal_execution.state.State</a></div><ul>
-<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.state.State"><code class="docutils literal notranslate">State</code></a></div><ul>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.state.State.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.state.State.astensor"><code class="docutils literal notranslate">astensor</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.state.State.copy"><code class="docutils literal notranslate">copy()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.state.State.update_state"><code class="docutils literal notranslate">update_state()</code></a></div></li>
+<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html">ddql_optimal_execution.state.State</a></div><ul>
+<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State"><code class="docutils literal notranslate">State</code></a></div><ul>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.astensor"><code class="docutils literal notranslate">astensor</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.copy"><code class="docutils literal notranslate">copy()</code></a></div></li>
+<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.update_state"><code class="docutils literal notranslate">update_state()</code></a></div></li>
 </ul>
 </li>
 </ul>
@@ -164,104 +164,72 @@
 </aside>
 <main class="px-4 pt-14 xl:ml-fluid grid-area-main overflow-y-auto flex flex-col flex-1 h-full mx-0 md:mx-auto xl:mr-0"><nav aria-label="breadcrumbs" class="print:hidden mt-12 text-sm text-gray-light" role="navigation">
 <a class="text-gray-light text-sm hover:text-gray-dark font-medium focus:text-gray-dark" href="../index.html">DDQL Optimal Execution  documentation</a>
-<span class="mr-1">/</span><span aria-current="page">ddql_optimal_execution.state.State</span>
+<span class="mr-1">/</span><span aria-current="page">ddql_optimal_execution.preprocessing.Preprocessor</span>
 </nav>
 <article class="flex-1" role="main">
-<section id="ddql-optimal-execution-state-state">
-<h1>ddql_optimal_execution.state.State<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql-optimal-execution-state-state">¶</a></h1>
+<section id="ddql-optimal-execution-preprocessing-preprocessor">
+<h1>ddql_optimal_execution.preprocessing.Preprocessor<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql-optimal-execution-preprocessing-preprocessor">¶</a></h1>
 <dl class="py class code-definition">
-<dt class="sig sig-object py" id="ddql_optimal_execution.state.State">
-<em class="property">class<span class="w"> </span></em><code class="sig-prename descclassname">ddql_optimal_execution.state.</code><code class="sig-name descname">State</code><a class="reference internal" href="../_modules/ddql_optimal_execution/state/_state.html#State"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.state.State">¶</a></dt>
+<dt class="sig sig-object py" id="ddql_optimal_execution.preprocessing.Preprocessor">
+<em class="property">class<span class="w"> </span></em><code class="sig-prename descclassname">ddql_optimal_execution.preprocessing.</code><code class="sig-name descname">Preprocessor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_periods</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em>, <em class="sig-param"><span class="n">QV</span><span class="p">:</span><span class="w"> </span><span class="n">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">normalize_price</span><span class="p">:</span><span class="w"> </span><span class="n">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ddql_optimal_execution/preprocessing/_preprocessor.html#Preprocessor"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.preprocessing.Preprocessor">¶</a></dt>
 <dd>
+<p>This class is used to preprocess the data before it is fed into the environment. It splits the data into periods
+and optionally calculates the QV and normalizes the price.</p>
+<dl class="py attribute code-definition">
+<dt class="sig sig-object py" id="ddql_optimal_execution.preprocessing.Preprocessor.n_periods">
+<code class="sig-name descname">n_periods</code><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.preprocessing.Preprocessor.n_periods">¶</a></dt>
+<dd>
+<p>an integer representing the number of periods in the time series data. It is the number of trading actions agents can take.
+QV : bool
+QV stands for “Quadratic Variation” and is a measure of volatility. This parameter is a boolean
+value that determines whether the QV should be calculated or not. If set to True, the QV will be
+calculated and added to the DataFrame.</p>
+<p>normalize_price : bool
+A boolean parameter that determines whether the price data should be normalized or not. If set to
+True, the price data will be normalized to have a mean of 0 and a standard deviation of 1 after substracting
+the first price value.</p>
 <dl class="py method code-definition">
-<dt class="sig sig-object py" id="ddql_optimal_execution.state.State.__init__">
-<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.state.State.__init__">¶</a></dt>
+<dt class="sig sig-object py" id="ddql_optimal_execution.preprocessing.Preprocessor.__call__">
+<code class="sig-name descname">__call__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ddql_optimal_execution/preprocessing/_preprocessor.html#Preprocessor.__call__"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.preprocessing.Preprocessor.__call__">¶</a></dt>
 <dd>
+<p>This function splits a pandas DataFrame into periods based on a specified number of periods, and
+optionally calculates the QV and normalizes the price.</p>
+</dd></dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="ddql_optimal_execution.preprocessing.Preprocessor.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_periods</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em>, <em class="sig-param"><span class="n">QV</span><span class="p">:</span><span class="w"> </span><span class="n">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">normalize_price</span><span class="p">:</span><span class="w"> </span><span class="n">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">True</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">None</span></span><a class="reference internal" href="../_modules/ddql_optimal_execution/preprocessing/_preprocessor.html#Preprocessor.__init__"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.preprocessing.Preprocessor.__init__">¶</a></dt>
+<dd>
+<p>This is a constructor function that initializes the object with the given parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_periods</strong> (<em>int</em>) – an integer representing the number of periods in the time series data. It is the number of trading actions agents can take.</p></li>
+<li><p><strong>QV</strong> (<em>bool</em><em>, </em><em>optional</em>) – QV stands for “Quadratic Variation” and is a measure of volatility. This parameter is a boolean</p></li>
+<li><p><strong>True</strong> (<em>value that determines whether the QV should be calculated</em><em> or </em><em>not. If set to</em>) – </p></li>
+<li><p><strong>be</strong> (<em>the QV will</em>) – </p></li>
+<li><p><strong>DataFrame.</strong> (<em>calculated and added to the</em>) – </p></li>
+<li><p><strong>normalize_price</strong> (<em>bool</em><em>, </em><em>optional</em>) – A boolean parameter that determines whether the price data should be normalized or not. If set to</p></li>
+<li><p><strong>True</strong> – </p></li>
+<li><p><strong>substracting</strong> (<em>the price data will be normalized to have a mean</em><em> of </em><em>0 and a standard deviation</em><em> of </em><em>1 after</em>) – </p></li>
+<li><p><strong>value.</strong> (<em>the first price</em>) – </p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.state.State.__init__" title="ddql_optimal_execution.state.State.__init__"><code class="xref py py-obj docutils literal notranslate">__init__</code></a>(*args, **kwargs)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate">clear</code>()</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.state.State.copy" title="ddql_optimal_execution.state.State.copy"><code class="xref py py-obj docutils literal notranslate">copy</code></a>()</p></td>
-<td><p>The function returns a new State object that is a copy of the current State object.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate">fromkeys</code>([value])</p></td>
-<td><p>Create a new dictionary with keys from iterable and values set to value.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate">get</code>(key[, default])</p></td>
-<td><p>Return the value for key if key is in the dictionary, else default.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate">items</code>()</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate">keys</code>()</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate">pop</code>(k[,d])</p></td>
-<td><p>If the key is not found, return the default if given; otherwise, raise a KeyError.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate">popitem</code>()</p></td>
-<td><p>Remove and return a (key, value) pair as a 2-tuple.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate">setdefault</code>(key[, default])</p></td>
-<td><p>Insert key with a value of default if key is not in the dictionary.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate">update</code>([E, ]**F)</p></td>
-<td><p>If E is present and has a .keys() method, then does:  for k in E: D[k] = E[k] If E is present and lacks a .keys() method, then does:  for k, v in E: D[k] = v In either case, this is followed by: for k in F:  D[k] = F[k]</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ddql_optimal_execution.state.State.update_state" title="ddql_optimal_execution.state.State.update_state"><code class="xref py py-obj docutils literal notranslate">update_state</code></a>(**kwargs)</p></td>
-<td><p>This function updates the state of an object with the key-value pairs passed as keyword arguments.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate">values</code>()</p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.preprocessing.Preprocessor.__init__" title="ddql_optimal_execution.preprocessing.Preprocessor.__init__"><code class="xref py py-obj docutils literal notranslate">__init__</code></a>(n_periods[, QV, normalize_price])</p></td>
+<td><p>This is a constructor function that initializes the object with the given parameters.</p></td>
 </tr>
 </tbody>
 </table>
-<p class="rubric">Attributes</p>
-<table class="autosummary longtable docutils align-default">
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.state.State.astensor" title="ddql_optimal_execution.state.State.astensor"><code class="xref py py-obj docutils literal notranslate">astensor</code></a></p></td>
-<td><p>This function converts a dictionary of values into a PyTorch tensor.</p></td>
-</tr>
-</tbody>
-</table>
-<dl class="py property code-definition">
-<dt class="sig sig-object py" id="ddql_optimal_execution.state.State.astensor">
-<em class="property">property<span class="w"> </span></em><code class="sig-name descname">astensor</code><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.state.State.astensor">¶</a></dt>
-<dd>
-<p>This function converts a dictionary of values into a PyTorch tensor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The function <cite>astensor</cite> is returning a PyTorch tensor that is created from the values of the</p>
-</dd>
-</dl>
-<p>dictionary object that the function is called on. The values are first converted to a list using the
-<cite>values()</cite> method, and then the list is converted to a PyTorch tensor using the <cite>torch.Tensor()</cite>
-function. Finally, the tensor is cast to a float data type using the <a href="#id1"><span class="problematic" id="id2">`</span></a>.float</p>
-</dd></dl>
-<dl class="py method code-definition">
-<dt class="sig sig-object py" id="ddql_optimal_execution.state.State.copy">
-<code class="sig-name descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint"><a class="reference internal" href="#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state._state.State">State</a></span></span><a class="reference internal" href="../_modules/ddql_optimal_execution/state/_state.html#State.copy"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.state.State.copy">¶</a></dt>
-<dd>
-<p>The function returns a new State object that is a copy of the current State object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The <cite>copy</cite> method is returning a new instance of the <cite>State</cite> class, which is a copy of the current</p>
-</dd>
-</dl>
-<p>instance.</p>
-</dd></dl>
-<dl class="py method code-definition">
-<dt class="sig sig-object py" id="ddql_optimal_execution.state.State.update_state">
-<code class="sig-name descname">update_state</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ddql_optimal_execution/state/_state.html#State.update_state"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.state.State.update_state">¶</a></dt>
-<dd>
-<p>This function updates the state of an object with the key-value pairs passed as keyword arguments.</p>
-</dd></dl>
 </dd></dl>
 </section>
 </article>
