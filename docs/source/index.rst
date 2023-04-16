@@ -21,11 +21,11 @@ Main Objects
      :caption: Main Objects:
 
 
-         ~ddql_optimal_execution.agent._ddql.DDQL 
-         ~ddql_optimal_execution.agent._twap.TWAP
-         ~ddql_optimal_execution.environnement._env.MarketEnvironnement
-         ~ddql_optimal_execution.experience_replay._experience_replay.ExperienceReplay
-         ~ddql_optimal_execution.state._state.State
-         ~ddql_optimal_execution.state._state_array.StateArray
+         ~ddql_optimal_execution.agent.DDQL 
+         ~ddql_optimal_execution.agent.TWAP
+         ~ddql_optimal_execution.environnement.MarketEnvironnement
+         ~ddql_optimal_execution.experience_replay.ExperienceReplay
+         ~ddql_optimal_execution.state.State
+         ~ddql_optimal_execution.state.StateArray
 
 
