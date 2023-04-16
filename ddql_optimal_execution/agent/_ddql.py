@@ -1,6 +1,5 @@
 from ._agent import Agent
-from typing import Optional
-
+from typing import Optional, Tuple
 import numpy as np
 import torch
 import torch.nn as nn
@@ -166,7 +165,7 @@ class DDQL(Agent):
 
     def __complete_target(
         self, experience_batch: np.ndarray
-    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         """This function takes in a batch of experiences and returns the corresponding targets, actions, and
         states for training a reinforcement learning agent.
 
