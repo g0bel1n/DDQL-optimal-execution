@@ -1,4 +1,4 @@
-from torch import Tensor
+from torch import TensorType
 
 from ddql_optimal_execution import State
 
@@ -10,12 +10,12 @@ class Agent:
         self.horizon = horizon
     
 
-    def __get_action(self, state: State) -> Tensor | int:
+    def __get_action(self, state: State) -> TensorType | int:
         ...
         
 
 
-    def __call__(self, state) -> Tensor | int:
+    def __call__(self, state) -> TensorType | int:
         return self.__get_action(state)
        
         
