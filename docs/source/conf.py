@@ -12,13 +12,10 @@ import os
 # goes to the root of the project
 sys.path.insert(0, os.path.abspath("../../"))
 
-import ddql_optimal_execution
-
 project = "DDQL Optimal Execution"
 copyright = "2023, g0bel1n"
 author = "g0bel1n"
 toc_object_entries_show_parents = "hide"
-
 
 
 # -- General configuration ---------------------------------------------------
@@ -33,6 +30,8 @@ extensions = [
     "sphinx.ext.mathjax",
     "sphinxawesome_theme",
 ]
+
+autodoc_mock_imports = ["torch", "numpy", "pandas"]
 
 autodoc_default_options = {
     "members": True,
