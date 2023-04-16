@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Union
 
 import torch
 import torch.nn as nn
@@ -39,7 +39,7 @@ class QNet(nn.Module):
         )
         self.output_head = nn.Linear(n_nodes, action_size)
 
-    def forward(self, states: StateArray | State | torch.Tensor):
+    def forward(self, states: Union[State, StateArray, torch.Tensor]):
         x = self.input_head(states.astensor if isinstance(states, State) else states)
         for layer in self.hidden_layers:
             x = layer(x)
