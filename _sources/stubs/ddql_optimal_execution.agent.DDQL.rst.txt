@@ -1,0 +1,25 @@
+﻿ddql\_optimal\_execution.agent.DDQL
+===================================
+
+.. currentmodule:: ddql_optimal_execution.agent
+
+.. autoclass:: DDQL
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DDQL.__init__
+      ~DDQL.eval
+      ~DDQL.learn
+      ~DDQL.train
+   
+   
+
+   
+   
+   
