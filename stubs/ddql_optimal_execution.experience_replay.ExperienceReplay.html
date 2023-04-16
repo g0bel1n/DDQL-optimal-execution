@@ -5,14 +5,13 @@
 <head>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta charset="utf-8"/>
-<meta content="Docutils 0.19: https://docutils.sourceforge.io/" name="generator"/>
 <title>ddql_optimal_execution.experience_replay.ExperienceReplay | DDQL Optimal Execution  documentation</title>
 <link href="../_static/pygments.css" rel="stylesheet"/>
 <link href="../_static/theme.2e8060a090e1247124e3.css" rel="stylesheet"/>
 <link href="../search.html" rel="search" title="Search"/>
 <link href="../genindex.html" rel="index" title="Index"/>
 <link href="ddql_optimal_execution.state.State.html" rel="next" title="ddql_optimal_execution.state.State"/>
-<link href="ddql_optimal_execution.environnement.MarketEnvironnement.html" rel="prev" title="ddql_optimal_execution.environnement.MarketEnvironnement"/>
+<link href="ddql_optimal_execution.preprocessing.Preprocessor.html" rel="prev" title="ddql_optimal_execution.preprocessing.Preprocessor"/>
 </head>
 <body class="antialiased text-gray scroll-smooth">
 <div class="min-h-screen xl:h-screen flex flex-col xl:grid xl:grid-layout print:block print:h-auto" data-action="keydown@window-&gt;search#focus " data-controller="sidebar search " id="page">
@@ -40,69 +39,10 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Main Objects:</span></p>
 <ul class="current">
-<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.DDQL.html">ddql_optimal_execution.agent.DDQL</a></div><ul>
-<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL"><code class="docutils literal notranslate">DDQL</code></a></div><ul>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.__complete_target"><code class="docutils literal notranslate">__complete_target()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.__get_action"><code class="docutils literal notranslate">__get_action()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.__update_target_net"><code class="docutils literal notranslate">__update_target_net()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.eval"><code class="docutils literal notranslate">eval()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.learn"><code class="docutils literal notranslate">learn()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.DDQL.html#ddql_optimal_execution.agent.DDQL.train"><code class="docutils literal notranslate">train()</code></a></div></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.TWAP.html">ddql_optimal_execution.agent.TWAP</a></div><ul>
-<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.TWAP.html#ddql_optimal_execution.agent.TWAP"><code class="docutils literal notranslate">TWAP</code></a></div><ul>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.TWAP.html#ddql_optimal_execution.agent.TWAP.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.TWAP.html#ddql_optimal_execution.agent.TWAP.__get_action"><code class="docutils literal notranslate">__get_action()</code></a></div></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.environnement.MarketEnvironnement.html">ddql_optimal_execution.environnement.MarketEnvironnement</a></div><ul>
-<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement"><code class="docutils literal notranslate">MarketEnvironnement</code></a></div><ul>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.__compute_reward"><code class="docutils literal notranslate">__compute_reward()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.__update_state"><code class="docutils literal notranslate">__update_state()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.get_state"><code class="docutils literal notranslate">get_state()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.reset"><code class="docutils literal notranslate">reset()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.step"><code class="docutils literal notranslate">step()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.swap_episode"><code class="docutils literal notranslate">swap_episode()</code></a></div></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1 current expanded"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="current reference internal" data-action="click-&gt;sidebar#close" href="#">ddql_optimal_execution.experience_replay.ExperienceReplay</a></div><ul>
-<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.experience_replay.ExperienceReplay"><code class="docutils literal notranslate">ExperienceReplay</code></a></div><ul>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.__make_room"><code class="docutils literal notranslate">__make_room()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.get_sample"><code class="docutils literal notranslate">get_sample()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.push"><code class="docutils literal notranslate">push()</code></a></div></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html">ddql_optimal_execution.state.State</a></div><ul>
-<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State"><code class="docutils literal notranslate">State</code></a></div><ul>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.astensor"><code class="docutils literal notranslate">astensor</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.copy"><code class="docutils literal notranslate">copy()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.update_state"><code class="docutils literal notranslate">update_state()</code></a></div></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.StateArray.html">ddql_optimal_execution.state.StateArray</a></div><ul>
-<li class="toctree-l2"><div class="nav-link"><svg class="expand" data-action="click-&gt;sidebar#expand keydown-&gt;sidebar#expandKeyPressed" tabindex="0" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></svg><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.StateArray.html#ddql_optimal_execution.state.StateArray"><code class="docutils literal notranslate">StateArray</code></a></div><ul>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.StateArray.html#ddql_optimal_execution.state.StateArray.__init__"><code class="docutils literal notranslate">__init__()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.StateArray.html#ddql_optimal_execution.state.StateArray.append"><code class="docutils literal notranslate">append()</code></a></div></li>
-<li class="toctree-l3"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.StateArray.html#ddql_optimal_execution.state.StateArray.astensor"><code class="docutils literal notranslate">astensor</code></a></div></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.preprocessing.Preprocessor.html">ddql_optimal_execution.preprocessing.Preprocessor</a></div></li>
+<li class="toctree-l1 current expanded"><div class="nav-link"><a class="current reference internal" data-action="click-&gt;sidebar#close" href="#">ddql_optimal_execution.experience_replay.ExperienceReplay</a></div></li>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.State.html">ddql_optimal_execution.state.State</a></div></li>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.StateArray.html">ddql_optimal_execution.state.StateArray</a></div></li>
 </ul>
 </div>
 <button class="text-4xl text-gray-800 p-4 bottom-0 hover:text-brand xl:hidden focus:text-brand self-center" data-action="sidebar#close" title="Close navigation menu">
@@ -116,7 +56,7 @@
 <span class="mr-1">/</span><span aria-current="page">ddql_optimal_execution.experience_replay.ExperienceReplay</span>
 </nav>
 <article class="flex-1" role="main">
-<section id="ddql-optimal-execution-experience-replay-experiencereplay">
+<div class="section" id="ddql-optimal-execution-experience-replay-experiencereplay">
 <h1>ddql_optimal_execution.experience_replay.ExperienceReplay<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql-optimal-execution-experience-replay-experiencereplay">¶</a></h1>
 <dl class="py class code-definition">
 <dt class="sig sig-object py" id="ddql_optimal_execution.experience_replay.ExperienceReplay">
@@ -129,6 +69,10 @@
 </dd></dl>
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
+<colgroup>
+<col style="width: 10%"/>
+<col style="width: 90%"/>
+</colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.__init__" title="ddql_optimal_execution.experience_replay.ExperienceReplay.__init__"><code class="xref py py-obj docutils literal notranslate">__init__</code></a>([capacity])</p></td>
 <td><p></p></td>
@@ -155,7 +99,7 @@ position.</p>
 <dd>
 <p>This function returns a random sample of a specified batch size from a memory.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>batch_size</strong> (<em>int</em><em>, </em><em>optional</em>) – The batch size is the number of samples that will be randomly selected from the memory buffer to be</p></li>
 <li><p><strong>case</strong> (<em>used for training</em><em> or </em><em>inference. In this</em>) – </p></li>
@@ -164,7 +108,7 @@ position.</p>
 <li><p><strong>buffer.</strong> (<em>samples will be randomly selected from the memory</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Return type</dt>
 <dd class="field-even"><p>The function <cite>get_sample</cite> is returning a batch of randomly selected samples from the memory. The</p>
 </dd>
 </dl>
@@ -174,32 +118,32 @@ next_state, done)</cite> values.</p>
 </dd></dl>
 <dl class="py method code-definition">
 <dt class="sig sig-object py" id="ddql_optimal_execution.experience_replay.ExperienceReplay.push">
-<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state._state.State">State</a></span></em>, <em class="sig-param"><span class="n">action</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em>, <em class="sig-param"><span class="n">reward</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">next_state</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state._state.State">State</a></span></em>, <em class="sig-param"><span class="n">dist2Horizon</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">None</span></span><a class="reference internal" href="../_modules/ddql_optimal_execution/experience_replay/_experience_replay.html#ExperienceReplay.push"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.push">¶</a></dt>
+<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state._state.State">ddql_optimal_execution.state._state.State</a></span></em>, <em class="sig-param"><span class="n">action</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em>, <em class="sig-param"><span class="n">reward</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">next_state</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state._state.State">ddql_optimal_execution.state._state.State</a></span></em>, <em class="sig-param"><span class="n">dist2Horizon</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">None</span></span><a class="reference internal" href="../_modules/ddql_optimal_execution/experience_replay/_experience_replay.html#ExperienceReplay.push"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.push">¶</a></dt>
 <dd>
 <p>This is a method to add an experience tuple to a memory buffer with a fixed capacity.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>state</strong> (<a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state.State"><em>State</em></a>) – The current state of the agent, which is usually represented as a vector or an array of values that</p></li>
 <li><p><strong>environment.</strong> (<em>describe the</em>) – </p></li>
 <li><p><strong>action</strong> (<em>int</em>) – The action taken by the agent in the given state.</p></li>
 <li><p><strong>reward</strong> (<em>float</em>) – The reward parameter is a float value that represents the reward received by the agent for taking</p></li>
-<li><p><strong>the</strong> (<em>the action in the given state. It is used to update the Q-values</em><em> of </em><em>the state-action pairs in</em>) – </p></li>
+<li><p><strong>the</strong> (<em>the action in the given state. It is used to update the Q-values of the state-action pairs in</em>) – </p></li>
 <li><p><strong>algorithm.</strong> (<em>reinforcement learning</em>) – </p></li>
 <li><p><strong>next_state</strong> (<a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state.State"><em>State</em></a>) – The next state is the state that the agent transitions to after taking an action in the current</p></li>
-<li><p><strong>class.</strong> (<em>state. It is represented as an object</em><em> of </em><em>the State</em>) – </p></li>
+<li><p><strong>class.</strong> (<em>state. It is represented as an object of the State</em>) – </p></li>
 <li><p><strong>dist2Horizon</strong> (<em>int</em>) – dist2Horizon refers to the distance to the horizon, which is the maximum number of steps the agent</p></li>
-<li><p><strong>episode</strong> (<em>can take before the episode ends. It is used to keep track</em><em> of </em><em>how many steps are left in the</em>) – </p></li>
+<li><p><strong>episode</strong> (<em>can take before the episode ends. It is used to keep track of how many steps are left in the</em>) – </p></li>
 <li><p><strong>buffer.</strong> (<em>when storing experiences in the replay</em>) – </p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 </dd></dl>
-</section>
+</div>
 </article>
 <footer>
-<div class="mt-20 mb-4 text-sm text-gray-700 print:mt-4">© 2023, g0bel1n Made with <a href="https://www.sphinx-doc.org">Sphinx 6.1.3</a></div>
+<div class="mt-20 mb-4 text-sm text-gray-700 print:mt-4">© 2023, g0bel1n Made with <a href="https://www.sphinx-doc.org">Sphinx 4.5.0</a></div>
 </footer></main>
 <button class="fixed bottom-0 right-0 z-20 opacity-0 p-4 m-4 tracking-wide bg-gray-900 text-gray-100 transition transform transform-gpu duration-500 translate-y-full" data-action="search#hideSnackbar" data-search-target="snackbar">
   Clear highlights
@@ -207,8 +151,9 @@ next_state, done)</cite> values.</p>
 </div>
 </div>
 <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/jquery.js"></script>
+<script src="../_static/underscore.js"></script>
 <script src="../_static/doctools.js"></script>
-<script src="../_static/sphinx_highlight.js"></script>
 <script src="../_static/theme.b62e1ded0c8c099a2d47.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <head>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta charset="utf-8"/>
-<title>ddql_optimal_execution.state._state | DDQL Optimal Execution  documentation</title>
+<title>ddql_optimal_execution.preprocessing._preprocessor | DDQL Optimal Execution  documentation</title>
 <link href="../../../_static/pygments.css" rel="stylesheet"/>
 <link href="../../../_static/theme.2e8060a090e1247124e3.css" rel="stylesheet"/>
 <link href="../../../search.html" rel="search" title="Search"/>
@@ -13,7 +13,7 @@
 </head>
 <body class="antialiased text-gray scroll-smooth">
 <div class="min-h-screen xl:h-screen flex flex-col xl:grid xl:grid-layout print:block print:h-auto" data-action="keydown@window-&gt;search#focus " data-controller="sidebar search " id="page">
-<a class="block transition -translate-x-full focus:translate-x-0 opacity-0 focus:opacity-100 text-xl bg-white p-4 z-20 absolute top-0 left-0 h-14" href="#ddql-optimal-execution-state-state" title="Skip navigation links">Skip to content</a>
+<a class="block transition -translate-x-full focus:translate-x-0 opacity-0 focus:opacity-100 text-xl bg-white p-4 z-20 absolute top-0 left-0 h-14" href="#ddql-optimal-execution-preprocessing-preprocessor" title="Skip navigation links">Skip to content</a>
 <header class="grid-area-header z-10 h-14 fixed w-full top-0 print:hidden">
 <div class="bg-gray-dark shadow-md flex items-center h-full xl:px-2 relative"><div class="flex items-center">
 <button class="xl:hidden h-14 w-14 leading-14 text-gray-100 hover:bg-gray-700 hover:text-brand focus:outline-none focus:bg-gray-700 focus:text-brand" data-action="sidebar#open" data-sidebar-target="hamburger">
@@ -162,45 +162,99 @@
 <main class="px-4 pt-14 xl:ml-fluid grid-area-main overflow-y-auto flex flex-col flex-1 h-full mx-0 md:mx-auto xl:mr-0"><nav aria-label="breadcrumbs" class="print:hidden mt-12 text-sm text-gray-light" role="navigation">
 <a class="text-gray-light text-sm hover:text-gray-dark font-medium focus:text-gray-dark" href="../../../index.html">DDQL Optimal Execution  documentation</a>
 <span class="mr-1">/</span><a class="text-gray-light text-sm hover:text-gray-dark" href="../../index.html">Module code</a>
-<span class="mr-1">/</span><span aria-current="page">ddql_optimal_execution.state._state</span>
+<span class="mr-1">/</span><span aria-current="page">ddql_optimal_execution.preprocessing._preprocessor</span>
 </nav>
 <article class="flex-1" role="main">
-<h1>Source code for ddql_optimal_execution.state._state</h1><div class="highlight"><pre>
-<code><span class="kn">import</span> <span class="nn">torch</span>
+<h1>Source code for ddql_optimal_execution.preprocessing._preprocessor</h1><div class="highlight"><pre>
+<code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 
-<div class="viewcode-block" id="State"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State">[docs]</a><span class="k">class</span> <span class="nc">State</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
-<div class="viewcode-block" id="State.update_state"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.update_state">[docs]</a>    <span class="k">def</span> <span class="nf">update_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">'''This function updates the state of an object with the key-value pairs passed as keyword arguments.</span>
+<div class="viewcode-block" id="Preprocessor"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.preprocessing.Preprocessor.html#ddql_optimal_execution.preprocessing.Preprocessor">[docs]</a><span class="k">class</span> <span class="nc">Preprocessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">'''</span>
+<span class="sd">    This class is used to preprocess the data before it is fed into the environment. It splits the data into periods</span>
+<span class="sd">    and optionally calculates the QV and normalizes the price.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    n_periods : int</span>
+<span class="sd">        an integer representing the number of periods in the time series data. It is the number of trading actions agents can take.</span>
+<span class="sd">        QV : bool</span>
+<span class="sd">        QV stands for "Quadratic Variation" and is a measure of volatility. This parameter is a boolean</span>
+<span class="sd">        value that determines whether the QV should be calculated or not. If set to True, the QV will be</span>
+<span class="sd">        calculated and added to the DataFrame.</span>
+<span class="sd">        </span>
+<span class="sd">        normalize_price : bool</span>
+<span class="sd">        A boolean parameter that determines whether the price data should be normalized or not. If set to</span>
+<span class="sd">        True, the price data will be normalized to have a mean of 0 and a standard deviation of 1 after substracting</span>
+<span class="sd">        the first price value.</span>
+<span class="sd">        </span>
+<span class="sd">        Methods</span>
+<span class="sd">        -------</span>
+<span class="sd">        __call__(df)</span>
+<span class="sd">            This function splits a pandas DataFrame into periods based on a specified number of periods, and</span>
+<span class="sd">            optionally calculates the QV and normalizes the price.</span>
+<span class="sd">                </span>
+<span class="sd">    '''</span>
+
+
+<div class="viewcode-block" id="Preprocessor.__init__"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.preprocessing.Preprocessor.html#ddql_optimal_execution.preprocessing.Preprocessor.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_periods</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">QV</span> <span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">normalize_price</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>  <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">'''This is a constructor function that initializes the object with the given parameters.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        n_periods : int</span>
+<span class="sd">            an integer representing the number of periods in the time series data. It is the number of trading actions agents can take.</span>
+<span class="sd">        QV : bool, optional</span>
+<span class="sd">            QV stands for "Quadratic Variation" and is a measure of volatility. This parameter is a boolean</span>
+<span class="sd">        value that determines whether the QV should be calculated or not. If set to True, the QV will be</span>
+<span class="sd">        calculated and added to the DataFrame.</span>
+<span class="sd">        normalize_price : bool, optional</span>
+<span class="sd">            A boolean parameter that determines whether the price data should be normalized or not. If set to</span>
+<span class="sd">        True, the price data will be normalized to have a mean of 0 and a standard deviation of 1 after substracting </span>
+<span class="sd">        the first price value.</span>
 <span class="sd">        </span>
 <span class="sd">        '''</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="bp">self</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_periods</span> <span class="o">=</span> <span class="n">n_periods</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">QV</span> <span class="o">=</span> <span class="n">QV</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normalize_price</span> <span class="o">=</span> <span class="n">normalize_price</span></div>
 
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">astensor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">'''This function converts a dictionary of values into a PyTorch tensor.</span>
+    
+<div class="viewcode-block" id="Preprocessor.__call__"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.preprocessing.Preprocessor.html#ddql_optimal_execution.preprocessing.Preprocessor.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">'''This function splits a pandas DataFrame into periods based on a specified number of periods, and</span>
+<span class="sd">        optionally calculates the QV and normalizes the price.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        df : pd.DataFrame</span>
+<span class="sd">            A pandas DataFrame containing financial data with a "Date" column and a "Price" column.</span>
 <span class="sd">        </span>
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">            The function `astensor` is returning a PyTorch tensor that is created from the values of the</span>
-<span class="sd">        dictionary object that the function is called on. The values are first converted to a list using the</span>
-<span class="sd">        `values()` method, and then the list is converted to a PyTorch tensor using the `torch.Tensor()`</span>
-<span class="sd">        function. Finally, the tensor is cast to a float data type using the `.float</span>
+<span class="sd">            a pandas DataFrame.</span>
 <span class="sd">        </span>
 <span class="sd">        '''</span>
-        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"Date"</span><span class="p">)</span>
+        <span class="n">_date_splits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_periods</span><span class="p">)</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">split</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">_date_splits</span><span class="p">):</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">split</span><span class="p">,</span> <span class="s2">"period"</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
 
-<div class="viewcode-block" id="State.copy"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"State"</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">'''The function returns a new State object that is a copy of the current State object.</span>
-<span class="sd">        </span>
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">            The `copy` method is returning a new instance of the `State` class, which is a copy of the current</span>
-<span class="sd">        instance.</span>
-<span class="sd">        </span>
-<span class="sd">        '''</span>
-        <span class="k">return</span> <span class="n">State</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">QV</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"period"</span><span class="p">)[</span><span class="s2">"Price"</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span> <span class="o">-=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span> <span class="o">/=</span> <span class="mi">2</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_price</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span> <span class="o">-=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span> <span class="o">-=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span> <span class="o">/=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="k">return</span> <span class="n">df</span></div></div>
+        
 </code></pre></div>
 </article>
 <footer>
