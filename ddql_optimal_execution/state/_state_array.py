@@ -7,7 +7,7 @@ from ._state import State
 #useless
 class StateArray:
     def __init__(self, *args) -> None:
-        self.values: List[State] = list(args) if args else []
+        self.values: List = list(args) if args else []
         self.n: int = len(self.values)
 
     def __getitem__(self, item):

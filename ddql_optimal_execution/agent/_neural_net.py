@@ -39,13 +39,13 @@ class QNet(nn.Module):
         )
         self.output_head = nn.Linear(n_nodes, action_size)
 
-    def forward(self, states: Union[State, StateArray, torch.Tensor]):
+    def forward(self, states: Union[State, StateArray, torch.Tensor]) -> torch.Tensor:
         x = self.input_head(states.astensor if isinstance(states, State) else states)
         for layer in self.hidden_layers:
             x = layer(x)
         x = self.output_head(x)
         if isinstance(states, (State, StateArray)):
-            x[states["inventory"]:] = -torch.inf
+            x[states["inventory"] :] = -torch.inf
         else:
             for i, state in enumerate(states):
                 x[i, state[-1].long() :] = -torch.inf
