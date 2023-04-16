@@ -3,6 +3,7 @@ from ._utils import get_device
 from .experience_replay._experience_replay import ExperienceReplay, ExperienceDict
 from .agent import TWAP, DDQL
 from .environnement import MarketEnvironnement
+from .preprocessing.preprocessor import Preprocessor
 #from ._ddql import DDQL
 
 __all__ = [
@@ -14,4 +15,5 @@ __all__ = [
     "get_device",
     "TWAP",
     "ExperienceDict",
+    "Preprocessor",
 ]

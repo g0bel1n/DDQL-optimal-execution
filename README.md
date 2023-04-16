@@ -6,6 +6,7 @@ Documentation with quickstart and installation guide : [here](https://g0bel1n.gi
 # Notes
 
 - Action space is taken as an integer to avoid minimization 
+- Miss pretraining and normalization of inventory
 
 # Bibliography
 
