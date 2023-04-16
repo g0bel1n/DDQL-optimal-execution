@@ -122,14 +122,16 @@ class MarketEnvironnement:
         return reward
     
     def __update_state(self, action:int) -> None:
-        """
-        This function updates the state of an inventory management environment based on a given action and
+        '''This function updates the state of an inventory management environment based on a given action and
         historical data.
         
-        Args:
-          action (int): The parameter `action` is an integer representing the amount of inventory to be
-        subtracted from the current inventory level in the `self.state` State object.
-        """
+        Parameters
+        ----------
+        action : int
+            The parameter `action` is an integer representing the amount of inventory to be subtracted from the
+        current inventory level in the `self.state` dictionary.
+        
+        '''
   
         self.state["inventory"] -= action  
 
@@ -169,17 +171,21 @@ class MarketEnvironnement:
         return self.state.copy() if copy else self.state
 
     def __compute_reward(self, action: int) -> float:
-        """
-        This function computes the reward for a given action based on the current inventory and historical
+        '''This function computes the reward for a given action based on the current inventory and historical
         price data.
         
-        Args:
-          action (int): The input parameter `action` is an integer representing the number of shares to sell at each time step.
+        Parameters
+        ----------
+        action : int
+            The input parameter `action` is an integer representing the number of shares to sell at each
+        time step.
         
-        Returns:
-          The function `__compute_reward` returns a float value which represents the reward calculated based
+        Returns
+        -------
+            The function `__compute_reward` returns a float value which represents the reward calculated based
         on the given action and the current state of the environment.
-        """
+        
+        '''
         inventory = self.state["inventory"]
         intra_time_steps = self.historical_data[
             self.historical_data.period == self.state["period"]
@@ -196,9 +202,9 @@ class MarketEnvironnement:
         return reward
 
     def reset(self) -> None:
-        """
-        The "reset" function reinitializes the environment to its initial state.
-        """
+        '''The "reset" function initializes the state and sets the "done" flag to False.
+        
+        '''
         self.state = State(
             dict(
                 zip(

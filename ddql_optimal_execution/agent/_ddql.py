@@ -72,19 +72,24 @@ class DDQL(Agent):
         self.mode = "eval"
 
     def __get_action(self, state: State) -> torch.Tensor:
-        """
-        This function returns a tensor that is either a random binomial distribution or the index of the
+        """This function returns a tensor that is either a random binomial distribution or the index of the
         maximum value in the output of a neural network, depending on certain conditions.
 
-        Args:
-          state (State): The `state` parameter is an instance of the `State` class, which contains
-        information about the current state of the environment in which the agent is operating.
+        Parameters
+        ----------
+        state : State
+            The `state` parameter is an instance of the `State` class, which contains information about the
+        current state of the environment in which the agent is operating. This information typically
+        includes things like the agent's current position, the state of the game board, and any other
+        relevant information that the agent needs
 
-        Returns:
-          a tensor that represents the action to be taken based on the given state. If the `greediness`
-        parameter is set and the `mode` is set to 'train', a random binomial distribution is generated using
-        the state's inventory as the number of trials and the probability of success as 1/inventory.
-        Otherwise, the action is determined by the main neural network's output
+        Returns
+        -------
+            a tensor that represents the action to be taken based on the given state. If the `greediness`
+        parameter is set and the `mode` is "train", a random binomial distribution is generated using the
+        state's inventory as the number of trials and the probability of success as 1/inventory. Otherwise,
+        the action is determined by the main neural network's output, which
+
         """
         return (
             np.random.binomial(state["inventory"], 1 / state["inventory"])
@@ -93,25 +98,26 @@ class DDQL(Agent):
         )
 
     def __update_target_net(self) -> None:
-        """
-        This function updates the target network by loading the state dictionary of the main network.
-        """
+        """This function updates the target network by loading the state dictionary of the main network."""
         self.target_net.load_state_dict(self.main_net.state_dict())
 
     def __complete_target(
         self, experience_batch: np.ndarray
     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
-        """
-        The function takes in a batch of experiences and returns the corresponding targets, actions, and
+        """This function takes in a batch of experiences and returns the corresponding targets, actions, and
         states for training a reinforcement learning agent.
 
-        Args:
-          experience_batch (np.ndarray): A batch of experiences, where each experience is a dictionary
-        containing information about a single transition in the environment. The dictionary contains keys
-        such as 'state', 'action', 'reward', 'next_state', and 'done'.
+        Parameters
+        ----------
+        experience_batch : np.ndarray
+            `experience_batch` is a numpy array containing a batch of experiences. Each experience is a
+        dictionary containing information about a single step taken by the agent in the environment. The
+        dictionary contains keys such as "state", "action", "reward", "next_state", and "done".
 
-        Returns:
-          a tuple of three torch Tensors: targets, actions, and states.
+        Returns
+        -------
+            a tuple of three torch Tensors: targets, actions, and states.
+
         """
         targets, actions, states = (
             torch.empty(len(experience_batch)),
@@ -145,13 +151,16 @@ class DDQL(Agent):
         return targets, actions, states
 
     def learn(self, experience_batch: np.ndarray) -> None:
-        """
-        This is a function for training a neural network using a batch of experiences and updating the
-        target network periodically.
+        """This function trains a neural network using a batch of experiences and updates the target network
+        periodically.
 
-        Args:
-          experience_batch (np.ndarray): `experience_batch` is a numpy array containing a batch of
-        experiences. Each experience is a tuple of (state, action, reward, next_state, done) where:
+        Parameters
+        ----------
+        experience_batch : np.ndarray
+            The experience_batch parameter is a numpy array containing a batch of experiences, where each
+        experience is a tuple of (state, action, reward, next_state, done). This batch is used to update the
+        neural network's weights through backpropagation.
+
         """
 
         targets, actions, states = self.__complete_target(experience_batch)
