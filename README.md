@@ -1,20 +1,12 @@
 # DDQL-optimal-execution
 Double Deep Q-Learning for Optimal Execution implementation
 
-- Original Paper [link](https://arxiv.org/abs/1812.06600)
-- Potential data source : [dukascopy](https://www.dukascopy.com/trading-tools/widgets/quotes/historical_data_feed)
-
-Work Repartition :
-
-[WIP]
-
-
-# Code convention
-
-Black formatting
-flake8 linting (except line size)
-
+Documentation with quickstart and installation guide : [here](https://g0bel1n.github.io/DDQL-optimal-execution/index.html)
 
 # Notes
 
 - Action space is taken as an integer to avoid minimization 
+
+# Bibliography
+
+Ning, B., Lin, F.H.T. and Jaimungal, S. (2020) Double deep Q-learning for optimal execution, arXiv.org. Available at: https://arxiv.org/abs/1812.06600 (Accessed: April 16, 2023). 
