@@ -1,5 +1,5 @@
-from src.agent._agent import Agent
-from src.environnement import MarketEnvironnement
+from ddql_optimal_execution.agent._agent import Agent
+from ddql_optimal_execution.environnement import MarketEnvironnement
 
 class Trainer:
 

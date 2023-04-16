@@ -8,7 +8,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 
 from ._neural_net import QNet
-from src import State, get_device
+from ddql_optimal_execution import State, get_device
 
 
 class DDQL(Agent):
@@ -60,10 +60,14 @@ class DDQL(Agent):
             self.loss_fn = nn.MSELoss()
 
     def train(self) -> None:
+        """This function sets the mode to "train" and trains the main neural network."""
+
         self.main_net.train()
         self.mode = "train"
 
     def eval(self) -> None:
+        """This function sets the mode to "eval" and puts the main network in evaluation mode."""
+
         self.main_net.eval()
         self.mode = "eval"
 

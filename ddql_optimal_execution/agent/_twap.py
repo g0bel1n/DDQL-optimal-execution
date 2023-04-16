@@ -1,5 +1,5 @@
 from ._agent import Agent
-from src import State
+from ddql_optimal_execution import State
 
 
 # The TWAP class is an agent that calculates the action based on the budget and horizon.

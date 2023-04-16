@@ -4,7 +4,7 @@ from typing import List
 import numpy as np
 import pandas as pd
 
-from src import State
+from ddql_optimal_execution import State
 
 from ._exceptions import InvalidActionError, InvalidSwapError
 
@@ -147,6 +147,26 @@ class MarketEnvironnement:
                 .iloc[0]
                 .to_dict()
             )
+
+    def get_state(self, copy=True) -> State:
+        '''This function returns a copy of the current state of an object if the copy parameter is True,
+        otherwise it returns the current state itself.
+        
+        Parameters
+        ----------
+        copy, optional
+            A boolean parameter that determines whether a copy of the state should be returned or the original
+        state object. If copy is True, a copy of the state object is returned, otherwise the original state
+        object is returned.
+        
+        Returns 
+        -------
+            The method `get_state` is returning a copy of the current state of the object if `copy` is set to
+        `True`, otherwise it returns the current state object itself. The return type is `State`.
+        
+        '''
+
+        return self.state.copy() if copy else self.state
 
     def __compute_reward(self, action: int) -> float:
         """
