@@ -64,6 +64,25 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 
+<span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">'''This function normalizes the price data to have a mean of 0 and a standard deviation of 1 after substracting </span>
+<span class="sd">    the first price value.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    df : pd.DataFrame</span>
+<span class="sd">        A pandas DataFrame containing financial data with a "Date" column and a "Price" column.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        a pandas DataFrame.</span>
+<span class="sd">    </span>
+<span class="sd">    '''</span>
+    <span class="n">df</span> <span class="o">-=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">-=</span> <span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">/=</span> <span class="n">df</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">df</span>
+
 <div class="viewcode-block" id="Preprocessor"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.preprocessing.Preprocessor.html#ddql_optimal_execution.preprocessing.Preprocessor">[docs]</a><span class="k">class</span> <span class="nc">Preprocessor</span><span class="p">:</span>
     <span class="sd">'''</span>
 <span class="sd">    This class is used to preprocess the data before it is fed into the environment. It splits the data into periods</span>
@@ -141,9 +160,12 @@
             <span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span> <span class="o">/=</span> <span class="mi">2</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_price</span><span class="p">:</span>
-            <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span> <span class="o">-=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span> <span class="o">-=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
-            <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span> <span class="o">/=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">])</span>
+            
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+
 
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 
