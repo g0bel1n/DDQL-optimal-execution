@@ -4,8 +4,13 @@ import torch
 
 from ._state import State
 
-#useless
+
+# useless
 class StateArray:
+    """
+    A class to represent a list of states
+    """
+
     def __init__(self, *args) -> None:
         self.values: List = list(args) if args else []
         self.n: int = len(self.values)
@@ -25,7 +30,7 @@ class StateArray:
 
     def __get_item__(self, item):
         return torch.tensor([state[item] for state in self.values]).float()
-    
+
     def __iter__(self):
         return iter(self.values)
 

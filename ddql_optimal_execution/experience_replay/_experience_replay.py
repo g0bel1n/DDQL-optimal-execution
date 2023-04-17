@@ -10,6 +10,33 @@ from ._experience_dict import ExperienceDict
 # The `ExperienceReplay` class is a memory buffer that stores and retrieves experiences for
 # reinforcement learning agents.
 class ExperienceReplay:
+    """The `ExperienceReplay` class is a memory buffer that stores and retrieves experiences for
+    reinforcement learning agents.
+
+    Attributes
+    ----------
+    capacity : int
+        The `capacity` attribute is an integer that represents the maximum number of experiences that can be stored in the memory buffer.
+    memory : np.ndarray
+        The `memory` attribute is a numpy array that stores the experiences in the memory buffer.
+    position : int
+        The `position` attribute is an integer that represents the current position in the memory buffer.
+
+    Methods
+    -------
+    __make_room()
+        This function randomly deletes a row from a memory list in the first half of the list
+        and shifts the remaining rows up by one
+        position.
+    push(state: State, action: int, reward: float, next_state: State, dist2Horizon: int)
+        This is a method to add an experience tuple to a memory buffer with a fixed capacity.
+    sample(batch_size: int)
+        This function samples a batch of experiences from the memory buffer.
+    __len__()
+        This function returns the length of the memory buffer.
+
+    """
+
     def __init__(self, capacity: int = 10000):
         self.capacity = capacity
         self.memory = np.empty(capacity, dtype=object)
