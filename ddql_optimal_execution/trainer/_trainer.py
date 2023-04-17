@@ -94,7 +94,7 @@ class Trainer:
                 )
 
             n_steps += 1
-            self.agent.learn(self.exp_replay.sample(batch_size))
+            self.agent.learn(self.exp_replay.get_sample(batch_size))
 
     def train(self, max_steps: int = 1000, batch_size: int = 32):
         """This function trains an agent using the DDQL algorithm and an experience replay buffer.
@@ -134,7 +134,7 @@ class Trainer:
                 )
 
             n_steps += 1
-            self.agent.learn(self.exp_replay.sample(batch_size))
+            self.agent.learn(self.exp_replay.get_sample(batch_size))
 
     def test(self, max_steps: int = 1000):
         ...

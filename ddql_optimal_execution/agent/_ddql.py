@@ -133,7 +133,7 @@ class DDQL(Agent):
         self.main_net.eval()
         self.mode = "eval"
 
-    def __get_action(self, state: State) -> torch.Tensor:
+    def __get_action(self, state: State) -> int:
         """This function returns a tensor that is either a random binomial distribution or the index of the
         maximum value in the output of a neural network, depending on certain conditions.
 
@@ -147,10 +147,11 @@ class DDQL(Agent):
 
         Returns
         -------
-            a tensor that represents the action to be taken based on the given state. If the `greediness`
+            an integer that represents the action to be taken based on the given state. If the `greediness`
         parameter is set and the `mode` is "train", a random binomial distribution is generated using the
         state's inventory as the number of trials and the probability of success as 1/inventory. Otherwise,
-        the action is determined by the main neural network's output, which
+        the action is determined by the main neural network's output, which is the index of the maximum
+        value in the output Q-values tensor.
 
         """
         return (

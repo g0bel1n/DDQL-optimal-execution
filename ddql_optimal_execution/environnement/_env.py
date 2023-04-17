@@ -11,11 +11,11 @@ class MarketEnvironnement:
     """
     This class represents the environment in which the agent is operating. It contains information such
     as the current time step, the agent's current position, and any other relevant information about
-    the environment. 
+    the environment.
 
     Parameters
     ----------
-    initial_inventory : float, optional
+    initial_inventory : int, optional
         The `initial_inventory` parameter is a float that represents the initial inventory of the agent.
         The default value is 100.0.
     data_path : str, optional
@@ -33,7 +33,7 @@ class MarketEnvironnement:
 
     Attributes
     ----------
-    initial_inventory : float
+    initial_inventory : int
         The `initial_inventory` attribute is a float that represents the initial inventory of the agent.
     n_periods : int
         The `n_periods` attribute is an integer that represents the number of periods in the data files.
@@ -66,13 +66,12 @@ class MarketEnvironnement:
 
     def __init__(
         self,
-        initial_inventory: float = 100.0,
+        initial_inventory: int = 100,
         data_path: str = "../data",
         n_periods: int = 5,
         quadratic_penalty_coefficient: float = 0.01,
         multi_episodes: bool = False,
     ) -> None:
-
         self.initial_inventory = initial_inventory
         self.n_periods = n_periods
 
@@ -112,20 +111,19 @@ class MarketEnvironnement:
         )
 
     def __load_episode(self, df: pd.DataFrame) -> None:
-        '''This function loads an episode by preprocessing historical data, initializing the state, and setting
+        """This function loads an episode by preprocessing historical data, initializing the state, and setting
         the "done" flag to False.
-        
+
         Parameters
         ----------
         df : pd.DataFrame
             The parameter `df` is a pandas DataFrame that is being passed as an argument to the
         `__load_episode` method. However, it is not being used in the method and seems to be unnecessary.
-        
-        '''
+
+        """
         self.historical_data = self.preprocessor(self.historical_data)
         self.__initialize_state()
         self.done = False
-
 
     def swap_episode(self, episode: int) -> None:
         """
@@ -143,8 +141,6 @@ class MarketEnvironnement:
         self.historical_data = pd.read_csv(self.historical_data_series[episode])
 
         self.__load_episode(self.historical_data_series[episode])
-        
-
 
     def step(self, action: int) -> float:
         """

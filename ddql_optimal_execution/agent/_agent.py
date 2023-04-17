@@ -10,12 +10,12 @@ class Agent:
         self.horizon = horizon
     
 
-    def __get_action(self, state: State) -> Tensor:
+    def __get_action(self, state: State) -> int:
         ...
         
 
 
-    def __call__(self, state) -> Tensor:
+    def __call__(self, state) -> int:
         return self.__get_action(state)
        
         

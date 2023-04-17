@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-def normalize(df: pd.DataFrame) -> pd.DataFrame:
+def normalize(df: pd.Series) -> pd.Series:
     '''This function normalizes the price data to have a mean of 0 and a standard deviation of 1 after substracting 
     the first price value.
     
@@ -99,7 +99,7 @@ class Preprocessor:
 
         if self.normalize_price:
             df["Price"] = normalize(df["Price"])
-            
+
         for col in df.columns:
             df[col] = df[col].astype(float)
             df[col] = normalize(df[col])
