@@ -72,6 +72,33 @@
 <span class="c1"># The `ExperienceReplay` class is a memory buffer that stores and retrieves experiences for</span>
 <span class="c1"># reinforcement learning agents.</span>
 <div class="viewcode-block" id="ExperienceReplay"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.experience_replay.ExperienceReplay.html#ddql_optimal_execution.experience_replay.ExperienceReplay">[docs]</a><span class="k">class</span> <span class="nc">ExperienceReplay</span><span class="p">:</span>
+    <span class="sd">"""The `ExperienceReplay` class is a memory buffer that stores and retrieves experiences for</span>
+<span class="sd">    reinforcement learning agents.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    capacity : int</span>
+<span class="sd">        The `capacity` attribute is an integer that represents the maximum number of experiences that can be stored in the memory buffer.</span>
+<span class="sd">    memory : np.ndarray</span>
+<span class="sd">        The `memory` attribute is a numpy array that stores the experiences in the memory buffer.</span>
+<span class="sd">    position : int</span>
+<span class="sd">        The `position` attribute is an integer that represents the current position in the memory buffer.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    __make_room()</span>
+<span class="sd">        This function randomly deletes a row from a memory list in the first half of the list</span>
+<span class="sd">        and shifts the remaining rows up by one</span>
+<span class="sd">        position.</span>
+<span class="sd">    push(state: State, action: int, reward: float, next_state: State, dist2Horizon: int)</span>
+<span class="sd">        This is a method to add an experience tuple to a memory buffer with a fixed capacity.</span>
+<span class="sd">    sample(batch_size: int)</span>
+<span class="sd">        This function samples a batch of experiences from the memory buffer.</span>
+<span class="sd">    __len__()</span>
+<span class="sd">        This function returns the length of the memory buffer.</span>
+
+<span class="sd">    """</span>
+
 <div class="viewcode-block" id="ExperienceReplay.__init__"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.experience_replay.ExperienceReplay.html#ddql_optimal_execution.experience_replay.ExperienceReplay.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capacity</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">capacity</span> <span class="o">=</span> <span class="n">capacity</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">memory</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">capacity</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
@@ -154,8 +181,8 @@
         <span class="n">idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">[</span><span class="n">idxs</span><span class="p">]</span></div>
 
-    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">)</span></div>
+<div class="viewcode-block" id="ExperienceReplay.__len__"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.experience_replay.ExperienceReplay.html#ddql_optimal_execution.experience_replay.ExperienceReplay.__len__">[docs]</a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">)</span></div></div>
 </code></pre></div>
 </article>
 <footer>

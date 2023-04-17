@@ -66,6 +66,67 @@
 <dt class="sig sig-object py" id="ddql_optimal_execution.experience_replay.ExperienceReplay">
 <em class="property">class<span class="w"> </span></em><code class="sig-prename descclassname">ddql_optimal_execution.experience_replay.</code><code class="sig-name descname">ExperienceReplay</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">capacity</span><span class="p">:</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">10000</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ddql_optimal_execution/experience_replay/_experience_replay.html#ExperienceReplay"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.experience_replay.ExperienceReplay">¶</a></dt>
 <dd>
+<p>The <cite>ExperienceReplay</cite> class is a memory buffer that stores and retrieves experiences for
+reinforcement learning agents.</p>
+<dl class="py attribute code-definition">
+<dt class="sig sig-object py" id="ddql_optimal_execution.experience_replay.ExperienceReplay.capacity">
+<code class="sig-name descname">capacity</code><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.capacity">¶</a></dt>
+<dd>
+<p>The <cite>capacity</cite> attribute is an integer that represents the maximum number of experiences that can be stored in the memory buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute code-definition">
+<dt class="sig sig-object py" id="ddql_optimal_execution.experience_replay.ExperienceReplay.memory">
+<code class="sig-name descname">memory</code><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.memory">¶</a></dt>
+<dd>
+<p>The <cite>memory</cite> attribute is a numpy array that stores the experiences in the memory buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py attribute code-definition">
+<dt class="sig sig-object py" id="ddql_optimal_execution.experience_replay.ExperienceReplay.position">
+<code class="sig-name descname">position</code><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.position">¶</a></dt>
+<dd>
+<p>The <cite>position</cite> attribute is an integer that represents the current position in the memory buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="ddql_optimal_execution.experience_replay.ExperienceReplay.__make_room">
+<code class="sig-name descname">__make_room</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.__make_room">¶</a></dt>
+<dd>
+<p>This function randomly deletes a row from a memory list in the first half of the list
+and shifts the remaining rows up by one
+position.</p>
+</dd></dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="ddql_optimal_execution.experience_replay.ExperienceReplay.push">
+<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state.State">State</a></span></em>, <em class="sig-param"><span class="n">action</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em>, <em class="sig-param"><span class="n">reward</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">next_state</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state.State">State</a></span></em>, <em class="sig-param"><span class="n">dist2Horizon</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ddql_optimal_execution/experience_replay/_experience_replay.html#ExperienceReplay.push"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.push">¶</a></dt>
+<dd>
+<p>This is a method to add an experience tuple to a memory buffer with a fixed capacity.</p>
+</dd></dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="ddql_optimal_execution.experience_replay.ExperienceReplay.sample">
+<code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch_size</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em><span class="sig-paren">)</span><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.sample">¶</a></dt>
+<dd>
+<p>This function samples a batch of experiences from the memory buffer.</p>
+</dd></dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="ddql_optimal_execution.experience_replay.ExperienceReplay.__len__">
+<code class="sig-name descname">__len__</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ddql_optimal_execution/experience_replay/_experience_replay.html#ExperienceReplay.__len__"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.__len__">¶</a></dt>
+<dd>
+<p>This function returns the length of the memory buffer.</p>
+</dd></dl>
 <dl class="py method code-definition">
 <dt class="sig sig-object py" id="ddql_optimal_execution.experience_replay.ExperienceReplay.__init__">
 <code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">capacity</span><span class="p">:</span><span class="w"> </span><span class="n">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="default_value">10000</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ddql_optimal_execution/experience_replay/_experience_replay.html#ExperienceReplay.__init__"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.__init__">¶</a></dt>
@@ -84,14 +145,14 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.get_sample" title="ddql_optimal_execution.experience_replay.ExperienceReplay.get_sample"><code class="xref py py-obj docutils literal notranslate">get_sample</code></a>([batch_size])</p></td>
 <td><p>This function returns a random sample of a specified batch size from a memory.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.push" title="ddql_optimal_execution.experience_replay.ExperienceReplay.push"><code class="xref py py-obj docutils literal notranslate">push</code></a>(state, action, reward, next_state, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#id1" title="ddql_optimal_execution.experience_replay.ExperienceReplay.push"><code class="xref py py-obj docutils literal notranslate">push</code></a>(state, action, reward, next_state, ...)</p></td>
 <td><p>This is a method to add an experience tuple to a memory buffer with a fixed capacity.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py method code-definition">
-<dt class="sig sig-object py" id="ddql_optimal_execution.experience_replay.ExperienceReplay.__make_room">
-<code class="sig-name descname">__make_room</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.__make_room">¶</a></dt>
+<dt class="sig sig-object py" id="id0">
+<code class="sig-name descname">__make_room</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id0">¶</a></dt>
 <dd>
 <p>This function randomly deletes a row from a memory list in the first half of the list
 and shifts the remaining rows up by one
@@ -121,8 +182,8 @@ samples from the memory, where each sample is represented as a tuple of <cite>(s
 next_state, done)</cite> values.</p>
 </dd></dl>
 <dl class="py method code-definition">
-<dt class="sig sig-object py" id="ddql_optimal_execution.experience_replay.ExperienceReplay.push">
-<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state._state.State">ddql_optimal_execution.state._state.State</a></span></em>, <em class="sig-param"><span class="n">action</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em>, <em class="sig-param"><span class="n">reward</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">next_state</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state._state.State">ddql_optimal_execution.state._state.State</a></span></em>, <em class="sig-param"><span class="n">dist2Horizon</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">None</span></span><a class="reference internal" href="../_modules/ddql_optimal_execution/experience_replay/_experience_replay.html#ExperienceReplay.push"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.experience_replay.ExperienceReplay.push">¶</a></dt>
+<dt class="sig sig-object py" id="id1">
+<code class="sig-name descname">push</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state._state.State">ddql_optimal_execution.state._state.State</a></span></em>, <em class="sig-param"><span class="n">action</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em>, <em class="sig-param"><span class="n">reward</span><span class="p">:</span><span class="w"> </span><span class="n">float</span></em>, <em class="sig-param"><span class="n">next_state</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state._state.State">ddql_optimal_execution.state._state.State</a></span></em>, <em class="sig-param"><span class="n">dist2Horizon</span><span class="p">:</span><span class="w"> </span><span class="n">int</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">None</span></span><a class="reference internal" href="../_modules/ddql_optimal_execution/experience_replay/_experience_replay.html#ExperienceReplay.push"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#id1">¶</a></dt>
 <dd>
 <p>This is a method to add an experience tuple to a memory buffer with a fixed capacity.</p>
 <dl class="field-list simple">
