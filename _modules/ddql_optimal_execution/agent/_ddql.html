@@ -195,7 +195,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">main_net</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s2">"eval"</span></div>
 
-    <span class="k">def</span> <span class="nf">__get_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__get_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">State</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">"""This function returns a tensor that is either a random binomial distribution or the index of the</span>
 <span class="sd">        maximum value in the output of a neural network, depending on certain conditions.</span>
 
@@ -209,10 +209,11 @@
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">            a tensor that represents the action to be taken based on the given state. If the `greediness`</span>
+<span class="sd">            an integer that represents the action to be taken based on the given state. If the `greediness`</span>
 <span class="sd">        parameter is set and the `mode` is "train", a random binomial distribution is generated using the</span>
 <span class="sd">        state's inventory as the number of trials and the probability of success as 1/inventory. Otherwise,</span>
-<span class="sd">        the action is determined by the main neural network's output, which</span>
+<span class="sd">        the action is determined by the main neural network's output, which is the index of the maximum</span>
+<span class="sd">        value in the output Q-values tensor.</span>
 
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="p">(</span>

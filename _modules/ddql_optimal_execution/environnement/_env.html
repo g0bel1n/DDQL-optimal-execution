@@ -73,11 +73,11 @@
     <span class="sd">"""</span>
 <span class="sd">    This class represents the environment in which the agent is operating. It contains information such</span>
 <span class="sd">    as the current time step, the agent's current position, and any other relevant information about</span>
-<span class="sd">    the environment. </span>
+<span class="sd">    the environment.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    initial_inventory : float, optional</span>
+<span class="sd">    initial_inventory : int, optional</span>
 <span class="sd">        The `initial_inventory` parameter is a float that represents the initial inventory of the agent.</span>
 <span class="sd">        The default value is 100.0.</span>
 <span class="sd">    data_path : str, optional</span>
@@ -95,7 +95,7 @@
 
 <span class="sd">    Attributes</span>
 <span class="sd">    ----------</span>
-<span class="sd">    initial_inventory : float</span>
+<span class="sd">    initial_inventory : int</span>
 <span class="sd">        The `initial_inventory` attribute is a float that represents the initial inventory of the agent.</span>
 <span class="sd">    n_periods : int</span>
 <span class="sd">        The `n_periods` attribute is an integer that represents the number of periods in the data files.</span>
@@ -128,13 +128,12 @@
 
 <div class="viewcode-block" id="MarketEnvironnement.__init__"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">initial_inventory</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">,</span>
+        <span class="n">initial_inventory</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
         <span class="n">data_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"../data"</span><span class="p">,</span>
         <span class="n">n_periods</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
         <span class="n">quadratic_penalty_coefficient</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
         <span class="n">multi_episodes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-
         <span class="bp">self</span><span class="o">.</span><span class="n">initial_inventory</span> <span class="o">=</span> <span class="n">initial_inventory</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_periods</span> <span class="o">=</span> <span class="n">n_periods</span>
 
@@ -174,20 +173,19 @@
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__load_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">'''This function loads an episode by preprocessing historical data, initializing the state, and setting</span>
+        <span class="sd">"""This function loads an episode by preprocessing historical data, initializing the state, and setting</span>
 <span class="sd">        the "done" flag to False.</span>
-<span class="sd">        </span>
+
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        df : pd.DataFrame</span>
 <span class="sd">            The parameter `df` is a pandas DataFrame that is being passed as an argument to the</span>
 <span class="sd">        `__load_episode` method. However, it is not being used in the method and seems to be unnecessary.</span>
-<span class="sd">        </span>
-<span class="sd">        '''</span>
+
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__initialize_state</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">done</span> <span class="o">=</span> <span class="kc">False</span>
-
 
 <div class="viewcode-block" id="MarketEnvironnement.swap_episode"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.swap_episode">[docs]</a>    <span class="k">def</span> <span class="nf">swap_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">episode</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""</span>
@@ -205,8 +203,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data_series</span><span class="p">[</span><span class="n">episode</span><span class="p">])</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__load_episode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data_series</span><span class="p">[</span><span class="n">episode</span><span class="p">])</span></div>
-        
-
 
 <div class="viewcode-block" id="MarketEnvironnement.step"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">"""</span>

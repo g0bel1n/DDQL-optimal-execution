@@ -292,7 +292,7 @@ states for training a reinforcement learning agent.</p>
 </dd></dl>
 <dl class="py method code-definition">
 <dt class="sig sig-object py" id="ddql_optimal_execution.agent.DDQL.__get_action">
-<code class="sig-name descname">__get_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state._state.State">ddql_optimal_execution.state._state.State</a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">torch.Tensor</span></span><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.agent.DDQL.__get_action">¶</a></dt>
+<code class="sig-name descname">__get_action</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state</span><span class="p">:</span><span class="w"> </span><span class="n"><a class="reference internal" href="ddql_optimal_execution.state.State.html#ddql_optimal_execution.state.State" title="ddql_optimal_execution.state._state.State">ddql_optimal_execution.state._state.State</a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">int</span></span><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.agent.DDQL.__get_action">¶</a></dt>
 <dd>
 <p>This function returns a tensor that is either a random binomial distribution or the index of the
 maximum value in the output of a neural network, depending on certain conditions.</p>
@@ -308,12 +308,13 @@ maximum value in the output of a neural network, depending on certain conditions
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>a tensor that represents the action to be taken based on the given state. If the <cite>greediness</cite></p>
+<dd class="field-even"><p>an integer that represents the action to be taken based on the given state. If the <cite>greediness</cite></p>
 </dd>
 </dl>
 <p>parameter is set and the <cite>mode</cite> is “train”, a random binomial distribution is generated using the
 state’s inventory as the number of trials and the probability of success as 1/inventory. Otherwise,
-the action is determined by the main neural network’s output, which</p>
+the action is determined by the main neural network’s output, which is the index of the maximum
+value in the output Q-values tensor.</p>
 </dd></dl>
 <dl class="py method code-definition">
 <dt class="sig sig-object py" id="ddql_optimal_execution.agent.DDQL.__update_target_net">
