@@ -2,6 +2,25 @@ import numpy as np
 import pandas as pd
 
 
+def normalize(df: pd.DataFrame) -> pd.DataFrame:
+    '''This function normalizes the price data to have a mean of 0 and a standard deviation of 1 after substracting 
+    the first price value.
+    
+    Parameters
+    ----------
+    df : pd.DataFrame
+        A pandas DataFrame containing financial data with a "Date" column and a "Price" column.
+    
+    Returns
+    -------
+        a pandas DataFrame.
+    
+    '''
+    df -= df.iloc[0]
+    df -= df.mean()
+    df /= df.std()
+    return df
+
 class Preprocessor:
     '''
     This class is used to preprocess the data before it is fed into the environment. It splits the data into periods
@@ -79,9 +98,12 @@ class Preprocessor:
             df["QV"] /= 2*df["QV"].std()
 
         if self.normalize_price:
-            df["Price"] -= df["Price"].iloc[0]
-            df["Price"] -= df["Price"].mean()
-            df["Price"] /= df["Price"].std()
+            df["Price"] = normalize(df["Price"])
+            
+        for col in df.columns:
+            df[col] = df[col].astype(float)
+            df[col] = normalize(df[col])
+
 
         df = df.iloc[1:]
 
