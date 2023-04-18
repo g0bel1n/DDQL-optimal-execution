@@ -121,3 +121,7 @@ class ExperienceReplay:
 
     def __len__(self):
         return len(self.memory)
+
+    @property
+    def is_full(self):
+        return self.position >= self.capacity

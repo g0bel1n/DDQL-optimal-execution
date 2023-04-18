@@ -175,7 +175,7 @@ class DDQL(Agent):
         experience_batch : np.ndarray
             `experience_batch` is a numpy array containing a batch of experiences. Each experience is a
         dictionary containing information about a single step taken by the agent in the environment. The
-        dictionary contains keys such as "state", "action", "reward", "next_state", and "done".
+        dictionary contains keys such as "state", "action", "reward", "next_state", and "dist2Horizon".
 
         Returns
         -------
@@ -190,10 +190,10 @@ class DDQL(Agent):
         for i, experience in enumerate(experience_batch):  # can be vectorized
             actions[i] = experience["action"]
             states[i] = experience["state"].astensor
-            if experience["done"] == 1:
+            if experience["dist2Horizon"] == 1:
                 targets[i] = experience["reward"]
 
-            elif experience["done"] == 0:
+            elif experience["dist2Horizon"] == 0:
                 targets[i] = (
                     experience["reward"]
                     + self.gamma
@@ -221,7 +221,7 @@ class DDQL(Agent):
         ----------
         experience_batch : np.ndarray
             The experience_batch parameter is a numpy array containing a batch of experiences, where each
-        experience is a tuple of (state, action, reward, next_state, done). This batch is used to update the
+        experience is a tuple of (state, action, reward, next_state, dist2Horizon). This batch is used to update the
         neural network's weights through backpropagation.
 
         """

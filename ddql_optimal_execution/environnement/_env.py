@@ -4,7 +4,7 @@ import pandas as pd
 
 from ddql_optimal_execution import State, Preprocessor
 
-from ._exceptions import InvalidActionError, InvalidSwapError
+from ._exceptions import InvalidActionError, InvalidSwapError, EpisodeIndexError
 
 
 class MarketEnvironnement:
@@ -97,7 +97,9 @@ class MarketEnvironnement:
         else:
             self.historical_data = pd.read_csv(f"{data_path}/historical_data.csv")
 
-        self.__load_episode(self.historical_data)
+        self.__load_episode()
+
+        self.state_size = len(self.state)
 
     def __initialize_state(self) -> None:
         """This function initializes the state of an object with historical data and an initial inventory."""
@@ -110,7 +112,7 @@ class MarketEnvironnement:
             )
         )
 
-    def __load_episode(self, df: pd.DataFrame) -> None:
+    def __load_episode(self) -> None:
         """This function loads an episode by preprocessing historical data, initializing the state, and setting
         the "done" flag to False.
 
@@ -137,10 +139,13 @@ class MarketEnvironnement:
         if self.state["period"] >= 1 and not self.done:
             raise InvalidSwapError
 
+        if episode >= len(self.historical_data_series):
+            raise EpisodeIndexError
+
         self.current_episode = episode
         self.historical_data = pd.read_csv(self.historical_data_series[episode])
 
-        self.__load_episode(self.historical_data_series[episode])
+        self.__load_episode()
 
     def step(self, action: int) -> float:
         """
@@ -232,12 +237,12 @@ class MarketEnvironnement:
 
         """
         inventory = self.state["inventory"]
-        intra_time_steps = self.historical_data[
+        intra_time_steps_prices = self.historical_data[
             self.historical_data.period == self.state["period"]
         ].Price.values
-        len_ts = len(intra_time_steps)
+        len_ts = len(intra_time_steps_prices)
         reward = 0
-        for p1, p2 in zip(intra_time_steps[:-1], intra_time_steps[1:]):
+        for p1, p2 in zip(intra_time_steps_prices[:-1], intra_time_steps_prices[1:]):
             inventory -= action / len_ts
             reward += (
                 inventory * (p2 - p1)

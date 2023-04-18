@@ -24,3 +24,16 @@ class InvalidSwapError(Exception):
 
     def __str__(self):
         return self.message
+
+class EpisodeIndexError(Exception):
+    """Exception raised when an episode index is out of range.
+
+    Attributes:
+        message -- explanation of the error
+    """
+
+    def __init__(self, message = "Episode index is out of range"):
+        self.message = message
+
+    def __str__(self):
+        return self.message

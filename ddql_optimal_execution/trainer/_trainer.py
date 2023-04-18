@@ -1,8 +1,13 @@
+import random
+import warnings
+
+from tqdm import tqdm
+
 from ddql_optimal_execution.agent import DDQL
 from ddql_optimal_execution.environnement import MarketEnvironnement
 from ddql_optimal_execution.experience_replay import ExperienceReplay
 
-import random
+from ._warnings import MaxStepsTooLowWarning
 
 
 class Trainer:
@@ -51,6 +56,60 @@ class Trainer:
         self.env = env
         self.exp_replay = ExperienceReplay(capacity=kwargs.get("capacity", 10000))
 
+    def fill_exp_replay(self, max_steps: int = 1000, verbose: bool = True):
+        """This function fills an experience replay buffer with experiences from random episodes.
+
+        Parameters
+        ----------
+        max_steps : int
+            The `max_steps` parameter is the maximum number of steps that the function will take before
+        stopping. It is used to prevent the function from running indefinitely if the experience replay
+        buffer is full.
+
+        """
+
+        if max_steps < self.exp_replay.capacity:
+            max_steps = self.exp_replay.capacity
+            warnings.warn(MaxStepsTooLowWarning(max_steps))
+
+        if verbose:
+            pbar = tqdm(total=self.exp_replay.capacity)
+
+        n_steps = 0
+        while (not self.exp_replay.is_full) and n_steps < max_steps:
+            self.__random_border_actions()
+            n_steps += 1
+            if verbose:
+                pbar.update(1)
+
+    def __random_border_actions(self):
+        """This function runs a random episode, taking limit actions (sell all at the beginning or the end) and storing the experiences in an experience replay buffer."""
+
+        random_episode = random.randint(0, len(self.env.historical_data_series) - 1)
+        sell_beginning = random.randint(0, 1)
+        self.env.swap_episode(random_episode)
+        distance2horizon = self.env.horizon
+        while not self.env.done:
+            current_state = self.env.state.copy()
+            action = (
+                self.env.initial_inventory
+                if (
+                    (distance2horizon == 1 and not sell_beginning)
+                    or (distance2horizon == self.env.horizon and sell_beginning)
+                )
+                else 0
+            )
+            reward = self.env.step(action)
+
+            distance2horizon = self.env.horizon - self.env.state["period"]
+            self.exp_replay.push(
+                current_state,
+                action,
+                reward,
+                self.env.state.copy(),
+                distance2horizon,
+            )
+
     def pretrain(self, max_steps: int = 1000, batch_size: int = 32):
         """This function pretrains a DDQL agent by running random episodes, taking limit actions (sell all at the beginning or the end) and storing the experiences in an
         experience replay buffer.
@@ -67,31 +126,9 @@ class Trainer:
             raise TypeError("The agent must be an instance of the DDQL class.")
 
         n_steps = 0
-        while n_steps < max_steps:
-            random_episode = random.randint(0, len(self.env.historical_data_series) - 1)
-            sell_beginning = random.randint(0, 1)
-            self.env.swap_episode(random_episode)
-            distance2horizon = self.env.horizon
-            while not self.env.done:
-                current_state = self.env.state.copy()
-                action = (
-                    self.env.initial_inventory
-                    if (
-                        (distance2horizon == 1 and not sell_beginning)
-                        or (distance2horizon == self.env.horizon and sell_beginning)
-                    )
-                    else 0
-                )
-                reward = self.env.step(action)
 
-                distance2horizon = self.env.horizon - self.env.state["period"]
-                self.exp_replay.push(
-                    current_state,
-                    action,
-                    reward,
-                    self.env.state.copy(),
-                    distance2horizon,
-                )
+        while n_steps < max_steps:
+            self.__random_border_actions()
 
             n_steps += 1
             self.agent.learn(self.exp_replay.get_sample(batch_size))

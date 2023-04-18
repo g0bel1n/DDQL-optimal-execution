@@ -86,6 +86,14 @@ class Preprocessor:
         
         '''
         df = df.set_index("Date")
+
+        if self.normalize_price:
+            df["Price"] = normalize(df["Price"])
+
+        for col in df.columns:
+            df[col] = df[col].astype(float)
+            df[col] = normalize(df[col])
+
         _date_splits = np.split(df.index, self.n_periods)
         df["period"] = 0
         df["period"] = df["period"].astype(int)
@@ -96,13 +104,6 @@ class Preprocessor:
             df["QV"] = df.groupby("period")["Price"].transform(lambda x: ((x - x.shift(1))**2).sum())
             df["QV"] -= df["QV"].mean()
             df["QV"] /= 2*df["QV"].std()
-
-        if self.normalize_price:
-            df["Price"] = normalize(df["Price"])
-
-        for col in df.columns:
-            df[col] = df[col].astype(float)
-            df[col] = normalize(df[col])
 
 
         df = df.iloc[1:]
