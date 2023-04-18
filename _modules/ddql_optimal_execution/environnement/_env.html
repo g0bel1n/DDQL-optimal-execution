@@ -43,7 +43,6 @@
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.StateArray.html">ddql_optimal_execution.state.StateArray</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.DDQL.html">ddql_optimal_execution.agent.DDQL</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.TWAP.html">ddql_optimal_execution.agent.TWAP</a></div></li>
-<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.trainer.Trainer.html">ddql_optimal_execution.trainer.Trainer</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html">ddql_optimal_execution.environnement.MarketEnvironnement</a></div></li>
 </ul>
 </div>
@@ -66,7 +65,7 @@
 
 <span class="kn">from</span> <span class="nn">ddql_optimal_execution</span> <span class="kn">import</span> <span class="n">State</span><span class="p">,</span> <span class="n">Preprocessor</span>
 
-<span class="kn">from</span> <span class="nn">._exceptions</span> <span class="kn">import</span> <span class="n">InvalidActionError</span><span class="p">,</span> <span class="n">InvalidSwapError</span>
+<span class="kn">from</span> <span class="nn">._exceptions</span> <span class="kn">import</span> <span class="n">InvalidActionError</span><span class="p">,</span> <span class="n">InvalidSwapError</span><span class="p">,</span> <span class="n">EpisodeIndexError</span>
 
 
 <div class="viewcode-block" id="MarketEnvironnement"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement">[docs]</a><span class="k">class</span> <span class="nc">MarketEnvironnement</span><span class="p">:</span>
@@ -159,7 +158,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{data_path}</span><span class="s2">/historical_data.csv"</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__load_episode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__load_episode</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__initialize_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""This function initializes the state of an object with historical data and an initial inventory."""</span>
@@ -172,7 +173,7 @@
             <span class="p">)</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__load_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__load_episode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""This function loads an episode by preprocessing historical data, initializing the state, and setting</span>
 <span class="sd">        the "done" flag to False.</span>
 
@@ -199,10 +200,13 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">done</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">InvalidSwapError</span>
 
+        <span class="k">if</span> <span class="n">episode</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data_series</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">EpisodeIndexError</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">current_episode</span> <span class="o">=</span> <span class="n">episode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data_series</span><span class="p">[</span><span class="n">episode</span><span class="p">])</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__load_episode</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">historical_data_series</span><span class="p">[</span><span class="n">episode</span><span class="p">])</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__load_episode</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="MarketEnvironnement.step"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html#ddql_optimal_execution.environnement.MarketEnvironnement.step">[docs]</a>    <span class="k">def</span> <span class="nf">step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">"""</span>
@@ -294,12 +298,12 @@
 
 <span class="sd">        """</span>
         <span class="n">inventory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"inventory"</span><span class="p">]</span>
-        <span class="n">intra_time_steps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="p">[</span>
+        <span class="n">intra_time_steps_prices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="p">[</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">historical_data</span><span class="o">.</span><span class="n">period</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span>
         <span class="p">]</span><span class="o">.</span><span class="n">Price</span><span class="o">.</span><span class="n">values</span>
-        <span class="n">len_ts</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">intra_time_steps</span><span class="p">)</span>
+        <span class="n">len_ts</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">intra_time_steps_prices</span><span class="p">)</span>
         <span class="n">reward</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">intra_time_steps</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">intra_time_steps</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
+        <span class="k">for</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">intra_time_steps_prices</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">intra_time_steps_prices</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
             <span class="n">inventory</span> <span class="o">-=</span> <span class="n">action</span> <span class="o">/</span> <span class="n">len_ts</span>
             <span class="n">reward</span> <span class="o">+=</span> <span class="p">(</span>
                 <span class="n">inventory</span> <span class="o">*</span> <span class="p">(</span><span class="n">p2</span> <span class="o">-</span> <span class="n">p1</span><span class="p">)</span>

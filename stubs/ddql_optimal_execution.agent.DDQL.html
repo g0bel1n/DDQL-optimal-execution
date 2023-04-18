@@ -45,7 +45,6 @@
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.state.StateArray.html">ddql_optimal_execution.state.StateArray</a></div></li>
 <li class="toctree-l1 current expanded"><div class="nav-link"><a class="current reference internal" data-action="click-&gt;sidebar#close" href="#">ddql_optimal_execution.agent.DDQL</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.agent.TWAP.html">ddql_optimal_execution.agent.TWAP</a></div></li>
-<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.trainer.Trainer.html">ddql_optimal_execution.trainer.Trainer</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="ddql_optimal_execution.environnement.MarketEnvironnement.html">ddql_optimal_execution.environnement.MarketEnvironnement</a></div></li>
 </ul>
 </div>
@@ -279,7 +278,7 @@ states for training a reinforcement learning agent.</p>
 <li><p><strong>"action"</strong> – </p></li>
 <li><p><strong>"reward"</strong> – </p></li>
 <li><p><strong>"next_state"</strong> – </p></li>
-<li><p><strong>"done".</strong> (<em>and</em>) – </p></li>
+<li><p><strong>"dist2Horizon".</strong> (<em>and</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -342,7 +341,7 @@ periodically.</p>
 <li><p><strong>action</strong> – </p></li>
 <li><p><strong>reward</strong> – </p></li>
 <li><p><strong>next_state</strong> – </p></li>
-<li><p><strong>the</strong> (<em>done</em><em>)</em><em>. This batch is used to update</em>) – </p></li>
+<li><p><strong>the</strong> (<em>dist2Horizon</em><em>)</em><em>. This batch is used to update</em>) – </p></li>
 <li><p><strong>backpropagation.</strong> (<em>neural network's weights through</em>) – </p></li>
 </ul>
 </dd>

@@ -43,7 +43,6 @@
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.StateArray.html">ddql_optimal_execution.state.StateArray</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.DDQL.html">ddql_optimal_execution.agent.DDQL</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.TWAP.html">ddql_optimal_execution.agent.TWAP</a></div></li>
-<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.trainer.Trainer.html">ddql_optimal_execution.trainer.Trainer</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html">ddql_optimal_execution.environnement.MarketEnvironnement</a></div></li>
 </ul>
 </div>
@@ -148,6 +147,14 @@
 <span class="sd">        </span>
 <span class="sd">        '''</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"Date"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_price</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+            <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+
         <span class="n">_date_splits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_periods</span><span class="p">)</span>
         <span class="n">df</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">df</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
@@ -158,13 +165,6 @@
             <span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"period"</span><span class="p">)[</span><span class="s2">"Price"</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
             <span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span> <span class="o">-=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
             <span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span> <span class="o">/=</span> <span class="mi">2</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_price</span><span class="p">:</span>
-            <span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Price"</span><span class="p">])</span>
-
-        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-            <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
-            <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
 
 
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>

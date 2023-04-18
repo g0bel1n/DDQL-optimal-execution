@@ -43,7 +43,6 @@
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.StateArray.html">ddql_optimal_execution.state.StateArray</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.DDQL.html">ddql_optimal_execution.agent.DDQL</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.TWAP.html">ddql_optimal_execution.agent.TWAP</a></div></li>
-<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.trainer.Trainer.html">ddql_optimal_execution.trainer.Trainer</a></div></li>
 <li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html">ddql_optimal_execution.environnement.MarketEnvironnement</a></div></li>
 </ul>
 </div>
@@ -237,7 +236,7 @@
 <span class="sd">        experience_batch : np.ndarray</span>
 <span class="sd">            `experience_batch` is a numpy array containing a batch of experiences. Each experience is a</span>
 <span class="sd">        dictionary containing information about a single step taken by the agent in the environment. The</span>
-<span class="sd">        dictionary contains keys such as "state", "action", "reward", "next_state", and "done".</span>
+<span class="sd">        dictionary contains keys such as "state", "action", "reward", "next_state", and "dist2Horizon".</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -252,10 +251,10 @@
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">experience</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">experience_batch</span><span class="p">):</span>  <span class="c1"># can be vectorized</span>
             <span class="n">actions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">experience</span><span class="p">[</span><span class="s2">"action"</span><span class="p">]</span>
             <span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">experience</span><span class="p">[</span><span class="s2">"state"</span><span class="p">]</span><span class="o">.</span><span class="n">astensor</span>
-            <span class="k">if</span> <span class="n">experience</span><span class="p">[</span><span class="s2">"done"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">experience</span><span class="p">[</span><span class="s2">"dist2Horizon"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">targets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">experience</span><span class="p">[</span><span class="s2">"reward"</span><span class="p">]</span>
 
-            <span class="k">elif</span> <span class="n">experience</span><span class="p">[</span><span class="s2">"done"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">experience</span><span class="p">[</span><span class="s2">"dist2Horizon"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">targets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
                     <span class="n">experience</span><span class="p">[</span><span class="s2">"reward"</span><span class="p">]</span>
                     <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span>
@@ -283,7 +282,7 @@
 <span class="sd">        ----------</span>
 <span class="sd">        experience_batch : np.ndarray</span>
 <span class="sd">            The experience_batch parameter is a numpy array containing a batch of experiences, where each</span>
-<span class="sd">        experience is a tuple of (state, action, reward, next_state, done). This batch is used to update the</span>
+<span class="sd">        experience is a tuple of (state, action, reward, next_state, dist2Horizon). This batch is used to update the</span>
 <span class="sd">        neural network's weights through backpropagation.</span>
 
 <span class="sd">        """</span>
