@@ -1,8 +1,9 @@
 from torch import Tensor
 
 from ddql_optimal_execution import State
+from abc import ABC, abstractmethod
 
-class Agent:
+class Agent(ABC):
 
     def __init__(self, initial_budget: int, horizon:int = 100):
 
@@ -10,13 +11,14 @@ class Agent:
         self.horizon = horizon
     
 
-    def __get_action(self, state: State) -> int:
+    @abstractmethod
+    def get_action(self, state: State) -> int:
         ...
         
 
 
     def __call__(self, state) -> int:
-        return self.__get_action(state)
+        return self.get_action(state)
        
         
         

@@ -37,7 +37,7 @@ class QNet(nn.Module):
         self.hidden_layers = nn.ModuleList(
             [BaseQNetLayer(n_nodes, n_nodes, nn.ReLU()) for _ in range(n_layers - 2)]
         )
-        self.output_head = nn.Linear(n_nodes, action_size)
+        self.output_head = nn.Linear(n_nodes, action_size+1) # +1 for the "do nothing" action
 
     def forward(self, states: Union[State, StateArray, torch.Tensor]) -> torch.Tensor:
         x = self.input_head(states.astensor if isinstance(states, State) else states)

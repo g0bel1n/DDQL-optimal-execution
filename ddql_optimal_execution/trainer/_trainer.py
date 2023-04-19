@@ -9,6 +9,8 @@ from ddql_optimal_execution.experience_replay import ExperienceReplay
 
 from ._warnings import MaxStepsTooLowWarning
 
+from rich.progress import track, Progress
+
 
 class Trainer:
     """This class is used to train a DDQL agent in a given environment.
@@ -73,14 +75,17 @@ class Trainer:
             warnings.warn(MaxStepsTooLowWarning(max_steps))
 
         if verbose:
-            pbar = tqdm(total=self.exp_replay.capacity)
+            p_bar = Progress()
+            task1 = p_bar.add_task(
+                "Filling experience replay buffer...", total=max_steps
+            )
 
         n_steps = 0
         while (not self.exp_replay.is_full) and n_steps < max_steps:
             self.__random_border_actions()
             n_steps += 1
             if verbose:
-                pbar.update(1)
+                p_bar.update(task1, advance=1)
 
     def __random_border_actions(self):
         """This function runs a random episode, taking limit actions (sell all at the beginning or the end) and storing the experiences in an experience replay buffer."""
@@ -127,11 +132,15 @@ class Trainer:
 
         n_steps = 0
 
+        p_bar = Progress()
+        task1 = p_bar.add_task("Pretraining...", total=max_steps)
+
         while n_steps < max_steps:
             self.__random_border_actions()
 
             n_steps += 1
             self.agent.learn(self.exp_replay.get_sample(batch_size))
+            p_bar.update(task1, advance=1)
 
     def train(self, max_steps: int = 1000, batch_size: int = 32):
         """This function trains an agent using the DDQL algorithm and an experience replay buffer.

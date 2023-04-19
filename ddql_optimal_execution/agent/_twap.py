@@ -29,7 +29,7 @@ class TWAP(Agent):
         The horizon of the agent.
     """
 
-    def __get_action(self, state: State) -> int:
+    def get_action(self, state: State) -> int:
         """
         This function returns the action to take based on the budget and horizon values.
 

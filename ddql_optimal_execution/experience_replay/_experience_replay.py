@@ -6,6 +6,8 @@ from ddql_optimal_execution import State
 
 from ._experience_dict import ExperienceDict
 
+from ._exceptions import ReplayMemoryNotFullEnoughError
+
 
 # The `ExperienceReplay` class is a memory buffer that stores and retrieves experiences for
 # reinforcement learning agents.
@@ -116,7 +118,10 @@ class ExperienceReplay:
         next_state, done)` values.
 
         """
-        idxs = np.random.choice(len(self.memory), batch_size, replace=False)
+        if self.position < batch_size:
+            raise ReplayMemoryNotFullEnoughError
+
+        idxs = np.random.choice(self.position, batch_size, replace=False)
         return self.memory[idxs]
 
     def __len__(self):

@@ -133,7 +133,7 @@ class DDQL(Agent):
         self.main_net.eval()
         self.mode = "eval"
 
-    def __get_action(self, state: State) -> int:
+    def get_action(self, state: State) -> int:
         """This function returns a tensor that is either a random binomial distribution or the index of the
         maximum value in the output of a neural network, depending on certain conditions.
 
@@ -236,11 +236,11 @@ class DDQL(Agent):
         for batch in dataloader:
             target = batch[2]
             pred = self.main_net(batch[0])[torch.arange(len(batch[0])), batch[1].long()]
+            print(pred)
             loss = self.loss_fn(pred, target)
             self.optimizer.zero_grad()
             loss.backward(retain_graph=True)
             self.optimizer.step()
-            print(loss)
 
         self.learning_step += 1
         self.greediness = max(0.01, self.greediness * self.greedy_decay_rate)
