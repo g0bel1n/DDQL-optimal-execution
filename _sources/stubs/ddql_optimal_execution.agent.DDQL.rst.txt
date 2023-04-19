@@ -15,6 +15,7 @@
    
       ~DDQL.__init__
       ~DDQL.eval
+      ~DDQL.get_action
       ~DDQL.learn
       ~DDQL.train
    

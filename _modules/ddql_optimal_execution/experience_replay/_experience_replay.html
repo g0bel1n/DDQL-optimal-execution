@@ -67,6 +67,8 @@
 
 <span class="kn">from</span> <span class="nn">._experience_dict</span> <span class="kn">import</span> <span class="n">ExperienceDict</span>
 
+<span class="kn">from</span> <span class="nn">._exceptions</span> <span class="kn">import</span> <span class="n">ReplayMemoryNotFullEnoughError</span>
+
 
 <span class="c1"># The `ExperienceReplay` class is a memory buffer that stores and retrieves experiences for</span>
 <span class="c1"># reinforcement learning agents.</span>
@@ -177,7 +179,10 @@
 <span class="sd">        next_state, done)` values.</span>
 
 <span class="sd">        """</span>
-        <span class="n">idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">&lt;</span> <span class="n">batch_size</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ReplayMemoryNotFullEnoughError</span>
+
+        <span class="n">idxs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">memory</span><span class="p">[</span><span class="n">idxs</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="ExperienceReplay.__len__"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.experience_replay.ExperienceReplay.html#ddql_optimal_execution.experience_replay.ExperienceReplay.__len__">[docs]</a>    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
