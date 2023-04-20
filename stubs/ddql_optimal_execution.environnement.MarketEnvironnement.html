@@ -226,16 +226,19 @@ environment.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.environnement.MarketEnvironnement.__init__" title="ddql_optimal_execution.environnement.MarketEnvironnement.__init__"><code class="xref py py-obj docutils literal notranslate">__init__</code></a>([initial_inventory, data_path, ...])</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ddql_optimal_execution.environnement.MarketEnvironnement.get_state" title="ddql_optimal_execution.environnement.MarketEnvironnement.get_state"><code class="xref py py-obj docutils literal notranslate">get_state</code></a>([copy])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ddql_optimal_execution.environnement.MarketEnvironnement.get_current_raw_price" title="ddql_optimal_execution.environnement.MarketEnvironnement.get_current_raw_price"><code class="xref py py-obj docutils literal notranslate">get_current_raw_price</code></a>()</p></td>
+<td><p>This function returns the current raw price.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.environnement.MarketEnvironnement.get_state" title="ddql_optimal_execution.environnement.MarketEnvironnement.get_state"><code class="xref py py-obj docutils literal notranslate">get_state</code></a>([copy])</p></td>
 <td><p>This function returns a copy of the current state of an object if the copy parameter is True, otherwise it returns the current state itself.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.environnement.MarketEnvironnement.reset" title="ddql_optimal_execution.environnement.MarketEnvironnement.reset"><code class="xref py py-obj docutils literal notranslate">reset</code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ddql_optimal_execution.environnement.MarketEnvironnement.reset" title="ddql_optimal_execution.environnement.MarketEnvironnement.reset"><code class="xref py py-obj docutils literal notranslate">reset</code></a>()</p></td>
 <td><p>The "reset" function initializes the state and sets the "done" flag to False.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#ddql_optimal_execution.environnement.MarketEnvironnement.step" title="ddql_optimal_execution.environnement.MarketEnvironnement.step"><code class="xref py py-obj docutils literal notranslate">step</code></a>(action)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.environnement.MarketEnvironnement.step" title="ddql_optimal_execution.environnement.MarketEnvironnement.step"><code class="xref py py-obj docutils literal notranslate">step</code></a>(action)</p></td>
 <td><p>This function executes one time step within the environment, raises an error if the action is invalid, executes the action, updates the state, and returns the reward.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#ddql_optimal_execution.environnement.MarketEnvironnement.swap_episode" title="ddql_optimal_execution.environnement.MarketEnvironnement.swap_episode"><code class="xref py py-obj docutils literal notranslate">swap_episode</code></a>(episode)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#ddql_optimal_execution.environnement.MarketEnvironnement.swap_episode" title="ddql_optimal_execution.environnement.MarketEnvironnement.swap_episode"><code class="xref py py-obj docutils literal notranslate">swap_episode</code></a>(episode)</p></td>
 <td><p>This function swaps the current episode in a time series environment and updates the historical data, periods, and state accordingly.</p></td>
 </tr>
 </tbody>
@@ -295,6 +298,12 @@ historical data.</p>
 </ul>
 </dd>
 </dl>
+</dd></dl>
+<dl class="py method code-definition">
+<dt class="sig sig-object py" id="ddql_optimal_execution.environnement.MarketEnvironnement.get_current_raw_price">
+<code class="sig-name descname">get_current_raw_price</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">→</span> <span class="sig-return-typehint">float</span></span><a class="reference internal" href="../_modules/ddql_optimal_execution/environnement/_env.html#MarketEnvironnement.get_current_raw_price"><span class="viewcode-link">[source]</span></a><a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#ddql_optimal_execution.environnement.MarketEnvironnement.get_current_raw_price">¶</a></dt>
+<dd>
+<p>This function returns the current raw price.</p>
 </dd></dl>
 <dl class="py method code-definition">
 <dt class="sig sig-object py" id="ddql_optimal_execution.environnement.MarketEnvironnement.get_state">
