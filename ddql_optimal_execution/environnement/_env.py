@@ -123,9 +123,13 @@ class MarketEnvironnement:
         `__load_episode` method. However, it is not being used in the method and seems to be unnecessary.
 
         """
-        self.historical_data = self.preprocessor(self.historical_data)
+        self.historical_data, self.raw_prices = self.preprocessor(self.historical_data)
         self.__initialize_state()
         self.done = False
+
+    def get_current_raw_price(self) -> float:
+        """This function returns the current raw price."""
+        return self.raw_prices[int(self.state["period"])]
 
     def swap_episode(self, episode: int) -> None:
         """

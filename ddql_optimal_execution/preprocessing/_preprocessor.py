@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from typing import Tuple
 
 
 def normalize(df: pd.Series) -> pd.Series:
@@ -71,7 +72,7 @@ class Preprocessor:
         self.normalize_price = normalize_price
 
     
-    def __call__(self, df: pd.DataFrame) -> pd.DataFrame:
+    def __call__(self, df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.Series]:
         '''This function splits a pandas DataFrame into periods based on a specified number of periods, and
         optionally calculates the QV and normalizes the price.
         
@@ -87,18 +88,25 @@ class Preprocessor:
         '''
         df = df.set_index("Date")
 
-        if self.normalize_price:
-            df["Price"] = normalize(df["Price"])
-
-        for col in df.columns:
-            df[col] = df[col].astype(float)
-            df[col] = normalize(df[col])
-
         _date_splits = np.split(df.index, self.n_periods)
+
         df["period"] = 0
         df["period"] = df["period"].astype(int)
         for i, split in enumerate(_date_splits):
             df.loc[split, "period"] = i
+
+        raw_prices = df.groupby("period")["Price"].first().copy()
+
+        if self.normalize_price:
+            df["Price"] = normalize(df["Price"])
+
+        for col in df.columns:
+            if col == "period":
+                continue
+            df[col] = df[col].astype(float)
+            df[col] = normalize(df[col])
+
+
 
         if self.QV:
             df["QV"] = df.groupby("period")["Price"].transform(lambda x: ((x - x.shift(1))**2).sum())
@@ -108,5 +116,5 @@ class Preprocessor:
 
         df = df.iloc[1:]
 
-        return df
+        return df, raw_prices
         

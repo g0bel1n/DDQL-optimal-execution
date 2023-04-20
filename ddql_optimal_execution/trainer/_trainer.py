@@ -143,21 +143,22 @@ class Trainer:
             max_steps = self.exp_replay.capacity
             warnings.warn(MaxStepsTooLowWarning(max_steps))
 
-        if self.verbose:
-            p_bar = tqdm(
+        p_bar = (
+            tqdm(
                 total=min(max_steps, self.exp_replay.capacity),
                 desc="Filling experience replay buffer",
             )
+            if verbose
+            else None
+        )
 
         n_steps = 0
 
         while (not self.exp_replay.is_full) and n_steps < max_steps:
-            self.__random_border_actions()
+            self.__random_border_actions(p_bar=p_bar)
             n_steps += 1
-            if self.verbose:
-                p_bar.update(1)
 
-    def __random_border_actions(self):
+    def __random_border_actions(self, p_bar: Optional[tqdm] = None):
         """This function runs a random episode, taking limit actions (sell all at the beginning or the end) and storing the experiences in an experience replay buffer."""
 
         random_episode = random.randint(0, len(self.env.historical_data_series) - 1)
@@ -185,6 +186,9 @@ class Trainer:
                 distance2horizon,
             )
 
+            if self.verbose and p_bar is not None:
+                p_bar.update(1)
+
     def pretrain(self, max_steps: int = 1000, batch_size: int = 32):
         """This function pretrains a DDQL agent by running random episodes, taking limit actions (sell all at the beginning or the end) and storing the experiences in an
         experience replay buffer.
@@ -200,17 +204,16 @@ class Trainer:
         if not isinstance(self.agent, DDQL):
             raise TypeError("The agent must be an instance of the DDQL class.")
 
-        n_steps = 0
+        p_bar = (
+            tqdm(total=max_steps, desc="Pretraining agent") if self.verbose else None
+        )
 
-        if self.verbose:
-            p_bar = tqdm(total=max_steps, desc="Pretraining agent")
-
-        while n_steps < max_steps:
+        for _ in range(max_steps):
             self.__random_border_actions()
 
-            n_steps += 1
             self.agent.learn(self.exp_replay.get_sample(batch_size))
-            if self.verbose:
+
+            if self.verbose and p_bar is not None:
                 p_bar.update(1)
 
     def train(self, max_steps: int = 1000, batch_size: int = 32):
