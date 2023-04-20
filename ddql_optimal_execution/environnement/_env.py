@@ -71,6 +71,7 @@ class MarketEnvironnement:
         n_periods: int = 5,
         quadratic_penalty_coefficient: float = 0.01,
         multi_episodes: bool = False,
+        **kwargs,
     ) -> None:
         self.initial_inventory = initial_inventory
         self.n_periods = n_periods
@@ -81,7 +82,9 @@ class MarketEnvironnement:
         self.horizon = n_periods
 
         self.preprocessor = Preprocessor(
-            n_periods=n_periods, QV=True, normalize_price=True
+            n_periods=n_periods,
+            QV=kwargs.get("QV", True),
+            normalize_price=kwargs.get("normalize_price", True),
         )
 
         if multi_episodes:

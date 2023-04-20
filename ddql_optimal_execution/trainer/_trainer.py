@@ -1,83 +1,16 @@
 import random
 import warnings
+from typing import Optional
 
 from tqdm import tqdm
 
 from ddql_optimal_execution.agent import DDQL
 from ddql_optimal_execution.environnement import MarketEnvironnement
 from ddql_optimal_execution.experience_replay import ExperienceReplay
+from ddql_optimal_execution.experience_replay._warnings import \
+    ExperienceReplayEmptyWarning
 
 from ._warnings import MaxStepsTooLowWarning
-from ddql_optimal_execution.experience_replay._warnings import (
-    ExperienceReplayEmptyWarning,
-)
-
-from rich.progress import track, Progress, TaskID
-
-from typing import Any, Optional
-
-
-class ConditionalProgress(Progress):
-    def __init__(self, verbose=True, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self._enabled = verbose
-
-    def __enter__(self):
-        if self._enabled:
-            super().__enter__()
-        return self
-
-    def __exit__(self, *args, **kwargs):
-        if self._enabled:
-            super().__exit__(*args, **kwargs)
-
-    def disable(self):
-        self._enabled = False
-
-    def enable(self):
-        self._enabled = True
-
-    def add_task(
-        self,
-        description: str,
-        start: bool = True,
-        total: Optional[float] = 100,
-        completed: int = 0,
-        visible: bool = True,
-        **fields: Any
-    ) -> Optional[TaskID]:
-        return (
-            super().add_task(description, start, total, completed, visible, **fields)
-            if self._enabled
-            else None
-        )
-
-    def update(
-        self,
-        task_id: TaskID,
-        *,
-        total: Optional[float] = None,
-        completed: Optional[float] = None,
-        advance: Optional[float] = None,
-        description: Optional[str] = None,
-        visible: Optional[bool] = None,
-        refresh: bool = False,
-        **fields: Any
-    ) -> None:
-        return (
-            super().update(
-                task_id,
-                total=total,
-                completed=completed,
-                advance=advance,
-                description=description,
-                visible=visible,
-                refresh=refresh,
-                **fields
-            )
-            if self._enabled
-            else None
-        )
 
 
 class Trainer:
