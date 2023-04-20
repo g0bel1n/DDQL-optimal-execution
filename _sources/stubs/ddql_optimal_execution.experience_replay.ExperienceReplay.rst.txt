@@ -25,6 +25,7 @@
 
    .. autosummary::
    
+      ~ExperienceReplay.is_empty
       ~ExperienceReplay.is_full
    
    
