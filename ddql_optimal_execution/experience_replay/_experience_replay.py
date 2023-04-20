@@ -8,7 +8,6 @@ from ._experience_dict import ExperienceDict
 
 from ._exceptions import ReplayMemoryNotFullEnoughError
 
-
 # The `ExperienceReplay` class is a memory buffer that stores and retrieves experiences for
 # reinforcement learning agents.
 class ExperienceReplay:
@@ -130,3 +129,7 @@ class ExperienceReplay:
     @property
     def is_full(self):
         return self.position >= self.capacity
+    
+    @property
+    def is_empty(self):
+        return self.position == 0

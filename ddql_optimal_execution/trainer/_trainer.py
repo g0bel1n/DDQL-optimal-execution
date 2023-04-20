@@ -8,8 +8,76 @@ from ddql_optimal_execution.environnement import MarketEnvironnement
 from ddql_optimal_execution.experience_replay import ExperienceReplay
 
 from ._warnings import MaxStepsTooLowWarning
+from ddql_optimal_execution.experience_replay._warnings import (
+    ExperienceReplayEmptyWarning,
+)
 
-from rich.progress import track, Progress
+from rich.progress import track, Progress, TaskID
+
+from typing import Any, Optional
+
+
+class ConditionalProgress(Progress):
+    def __init__(self, verbose=True, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._enabled = verbose
+
+    def __enter__(self):
+        if self._enabled:
+            super().__enter__()
+        return self
+
+    def __exit__(self, *args, **kwargs):
+        if self._enabled:
+            super().__exit__(*args, **kwargs)
+
+    def disable(self):
+        self._enabled = False
+
+    def enable(self):
+        self._enabled = True
+
+    def add_task(
+        self,
+        description: str,
+        start: bool = True,
+        total: Optional[float] = 100,
+        completed: int = 0,
+        visible: bool = True,
+        **fields: Any
+    ) -> Optional[TaskID]:
+        return (
+            super().add_task(description, start, total, completed, visible, **fields)
+            if self._enabled
+            else None
+        )
+
+    def update(
+        self,
+        task_id: TaskID,
+        *,
+        total: Optional[float] = None,
+        completed: Optional[float] = None,
+        advance: Optional[float] = None,
+        description: Optional[str] = None,
+        visible: Optional[bool] = None,
+        refresh: bool = False,
+        **fields: Any
+    ) -> None:
+        return (
+            super().update(
+                task_id,
+                total=total,
+                completed=completed,
+                advance=advance,
+                description=description,
+                visible=visible,
+                refresh=refresh,
+                **fields
+            )
+            if self._enabled
+            else None
+        )
 
 
 class Trainer:
@@ -57,6 +125,7 @@ class Trainer:
         self.agent = agent
         self.env = env
         self.exp_replay = ExperienceReplay(capacity=kwargs.get("capacity", 10000))
+        self.verbose = kwargs.get("verbose", True)
 
     def fill_exp_replay(self, max_steps: int = 1000, verbose: bool = True):
         """This function fills an experience replay buffer with experiences from random episodes.
@@ -74,18 +143,19 @@ class Trainer:
             max_steps = self.exp_replay.capacity
             warnings.warn(MaxStepsTooLowWarning(max_steps))
 
-        if verbose:
-            p_bar = Progress()
-            task1 = p_bar.add_task(
-                "Filling experience replay buffer...", total=max_steps
+        if self.verbose:
+            p_bar = tqdm(
+                total=min(max_steps, self.exp_replay.capacity),
+                desc="Filling experience replay buffer",
             )
 
         n_steps = 0
+
         while (not self.exp_replay.is_full) and n_steps < max_steps:
             self.__random_border_actions()
             n_steps += 1
-            if verbose:
-                p_bar.update(task1, advance=1)
+            if self.verbose:
+                p_bar.update(1)
 
     def __random_border_actions(self):
         """This function runs a random episode, taking limit actions (sell all at the beginning or the end) and storing the experiences in an experience replay buffer."""
@@ -132,15 +202,16 @@ class Trainer:
 
         n_steps = 0
 
-        p_bar = Progress()
-        task1 = p_bar.add_task("Pretraining...", total=max_steps)
+        if self.verbose:
+            p_bar = tqdm(total=max_steps, desc="Pretraining agent")
 
         while n_steps < max_steps:
             self.__random_border_actions()
 
             n_steps += 1
             self.agent.learn(self.exp_replay.get_sample(batch_size))
-            p_bar.update(task1, advance=1)
+            if self.verbose:
+                p_bar.update(1)
 
     def train(self, max_steps: int = 1000, batch_size: int = 32):
         """This function trains an agent using the DDQL algorithm and an experience replay buffer.
@@ -159,6 +230,16 @@ class Trainer:
         """
         if not isinstance(self.agent, DDQL):
             raise TypeError("The agent must be an instance of the DDQL class.")
+
+        if self.exp_replay.is_empty:
+            warnings.warn(ExperienceReplayEmptyWarning())
+            self.fill_exp_replay(max_steps=max_steps)
+
+        if self.verbose:
+            p_bar = tqdm(
+                total=min(max_steps, len(self.env.historical_data_series)),
+                desc="Training agent",
+            )
 
         n_steps = 0
         for episode in range(len(self.env.historical_data_series)):
@@ -180,6 +261,8 @@ class Trainer:
                 )
 
             n_steps += 1
+            if self.verbose:
+                p_bar.update(1)
             self.agent.learn(self.exp_replay.get_sample(batch_size))
 
     def test(self, max_steps: int = 1000):
