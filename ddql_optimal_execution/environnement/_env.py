@@ -85,6 +85,7 @@ class MarketEnvironnement:
             n_periods=n_periods,
             QV=kwargs.get("QV", True),
             normalize_price=kwargs.get("normalize_price", True),
+            volume = kwargs.get("Volume", True),
         )
 
         if multi_episodes:

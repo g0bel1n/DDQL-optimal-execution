@@ -1,6 +1,7 @@
+from typing import Tuple
+
 import numpy as np
 import pandas as pd
-from typing import Tuple
 
 
 def normalize(df: pd.Series) -> pd.Series:
@@ -50,7 +51,7 @@ class Preprocessor:
     '''
 
 
-    def __init__(self, n_periods : int, QV :bool = True, normalize_price : bool = True  ) -> None:
+    def __init__(self, n_periods : int, QV :bool = True, normalize_price : bool = True , volume: bool = True) -> None:
         '''This is a constructor function that initializes the object with the given parameters.
         
         Parameters
@@ -70,6 +71,7 @@ class Preprocessor:
         self.n_periods = n_periods
         self.QV = QV
         self.normalize_price = normalize_price
+        self.volume = volume
 
     
     def __call__(self, df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.Series]:
@@ -112,6 +114,13 @@ class Preprocessor:
             df["QV"] = df.groupby("period")["Price"].transform(lambda x: ((x - x.shift(1))**2).sum())
             df["QV"] -= df["QV"].mean()
             df["QV"] /= 2*df["QV"].std()
+
+        if self.volume:
+            if "volume" not in df.columns:
+                raise ValueError("Volume data is not present in the DataFrame.")
+        else :
+            df = df.drop("volume", axis = 1) 
+
 
 
         df = df.iloc[1:]
