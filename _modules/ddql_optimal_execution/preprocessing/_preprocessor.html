@@ -59,9 +59,10 @@
 </nav>
 <article class="flex-1" role="main">
 <h1>Source code for ddql_optimal_execution.preprocessing._preprocessor</h1><div class="highlight"><pre>
-<code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span>
 
 
 <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
@@ -111,7 +112,7 @@
 <span class="sd">    '''</span>
 
 
-<div class="viewcode-block" id="Preprocessor.__init__"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.preprocessing.Preprocessor.html#ddql_optimal_execution.preprocessing.Preprocessor.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_periods</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">QV</span> <span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">normalize_price</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>  <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="Preprocessor.__init__"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.preprocessing.Preprocessor.html#ddql_optimal_execution.preprocessing.Preprocessor.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_periods</span> <span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">QV</span> <span class="p">:</span><span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">normalize_price</span> <span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">,</span> <span class="n">volume</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">'''This is a constructor function that initializes the object with the given parameters.</span>
 <span class="sd">        </span>
 <span class="sd">        Parameters</span>
@@ -130,7 +131,8 @@
 <span class="sd">        '''</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">n_periods</span> <span class="o">=</span> <span class="n">n_periods</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">QV</span> <span class="o">=</span> <span class="n">QV</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">normalize_price</span> <span class="o">=</span> <span class="n">normalize_price</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normalize_price</span> <span class="o">=</span> <span class="n">normalize_price</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">volume</span></div>
 
     
 <div class="viewcode-block" id="Preprocessor.__call__"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.preprocessing.Preprocessor.html#ddql_optimal_execution.preprocessing.Preprocessor.__call__">[docs]</a>    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]:</span>
@@ -173,6 +175,13 @@
             <span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"period"</span><span class="p">)[</span><span class="s2">"Price"</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
             <span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span> <span class="o">-=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
             <span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span> <span class="o">/=</span> <span class="mi">2</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s2">"QV"</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">"volume"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Volume data is not present in the DataFrame."</span><span class="p">)</span>
+        <span class="k">else</span> <span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"volume"</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> 
+
 
 
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
