@@ -10,6 +10,8 @@ class State(dict):
     def update_state(self, **kwargs):
         """This function updates the state of an object with the key-value pairs passed as keyword arguments."""
         for k, v in kwargs.items():
+            if k not in self.keys():
+                raise KeyError(f"Key {k} not initialized state")
             self[k] = v
 
     @property

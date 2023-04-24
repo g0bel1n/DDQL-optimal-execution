@@ -6,7 +6,8 @@ from ddql_optimal_execution import State
 
 from ._experience_dict import ExperienceDict
 
-from ._exceptions import ReplayMemoryNotFullEnoughError
+from ._exceptions import ReplayMemorySamplingError
+
 
 # The `ExperienceReplay` class is a memory buffer that stores and retrieves experiences for
 # reinforcement learning agents.
@@ -115,10 +116,10 @@ class ExperienceReplay:
         size of the batch is determined by the `batch_size` parameter. The function returns an array of
         samples from the memory, where each sample is represented as a tuple of `(state, action, reward,
         next_state, done)` values.
-
         """
+
         if self.position < batch_size:
-            raise ReplayMemoryNotFullEnoughError
+            raise ReplayMemorySamplingError
 
         idxs = np.random.choice(self.position, batch_size, replace=False)
         return self.memory[idxs]
@@ -129,7 +130,7 @@ class ExperienceReplay:
     @property
     def is_full(self):
         return self.position >= self.capacity
-    
+
     @property
     def is_empty(self):
         return self.position == 0
