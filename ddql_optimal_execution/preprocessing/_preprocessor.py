@@ -97,7 +97,7 @@ class Preprocessor:
         for i, split in enumerate(_date_splits):
             df.loc[split, "period"] = i
 
-        raw_prices = df.groupby("period")["Price"].first().copy()
+        raw_prices = df[["Price", "period"]].iloc[1:].copy()
 
         if self.normalize_price:
             df["Price"] = normalize(df["Price"])

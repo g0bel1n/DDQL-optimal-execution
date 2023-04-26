@@ -85,7 +85,7 @@ class MarketEnvironnement:
             n_periods=n_periods,
             QV=kwargs.get("QV", True),
             normalize_price=kwargs.get("normalize_price", True),
-            volume = kwargs.get("Volume", True),
+            volume=kwargs.get("Volume", True),
         )
 
         if multi_episodes:
@@ -131,9 +131,13 @@ class MarketEnvironnement:
         self.__initialize_state()
         self.done = False
 
-    def get_current_raw_price(self) -> float:
+        self.pnl_for_episode = []
+
+    def get_current_raw_price(self) -> pd.Series:
         """This function returns the current raw price."""
-        return self.raw_prices[int(self.state["period"])]
+        return self.raw_prices[self.raw_prices["period"] == int(self.state["period"])][
+            "Price"
+        ]
 
     def swap_episode(self, episode: int) -> None:
         """
@@ -250,12 +254,25 @@ class MarketEnvironnement:
         ].Price.values
         len_ts = len(intra_time_steps_prices)
         reward = 0
-        for p1, p2 in zip(intra_time_steps_prices[:-1], intra_time_steps_prices[1:]):
+        pnl_comp = 0
+        for p1, p2, true_p in zip(
+            intra_time_steps_prices[:-1],
+            intra_time_steps_prices[1:],
+            self.get_current_raw_price(),
+        ):
             inventory -= action / len_ts
             reward += (
                 inventory * (p2 - p1)
-                - self.quadratic_penalty_coefficient * (action / len_ts) ** 2
+                - self.quadratic_penalty_coefficient
+                * (action / ((self.initial_inventory + 1) * len_ts)) ** 2
             )
+            pnl_comp += (
+                inventory * p2
+                - self.quadratic_penalty_coefficient
+                * (action / ((self.initial_inventory + 1) * len_ts)) ** 2
+            )
+
+        self.pnl_for_episode.append(pnl_comp)
 
         return reward
 
@@ -270,6 +287,7 @@ class MarketEnvironnement:
             )
         )
         self.done = False
+        self.pnl_for_episode = []
 
     def __repr__(self) -> str:
         return f"MarketEnvironnement(initial_inventory={self.initial_inventory}, quadratic_penalty_coefficient={self.quadratic_penalty_coefficient}, current_episode={self.current_episode}, multi_episodes={self.multi_episodes})"

@@ -7,8 +7,9 @@ from tqdm import tqdm
 from ddql_optimal_execution.agent import DDQL
 from ddql_optimal_execution.environnement import MarketEnvironnement
 from ddql_optimal_execution.experience_replay import ExperienceReplay
-from ddql_optimal_execution.experience_replay._warnings import \
-    ExperienceReplayEmptyWarning
+from ddql_optimal_execution.experience_replay._warnings import (
+    ExperienceReplayEmptyWarning,
+)
 
 from ._warnings import MaxStepsTooLowWarning
 
@@ -173,14 +174,14 @@ class Trainer:
 
         if self.verbose:
             p_bar = tqdm(
-                total=min(max_steps, len(self.env.historical_data_series)),
+                total=max_steps,
                 desc="Training agent",
             )
 
         n_steps = 0
-        for episode in range(len(self.env.historical_data_series)):
-            if n_steps > max_steps:
-                break
+
+        while n_steps < max_steps:
+            episode = random.randint(0, len(self.env.historical_data_series) - 1)
             self.env.swap_episode(episode)
             while not self.env.done:
                 current_state = self.env.state.copy()

@@ -87,6 +87,7 @@ class DDQL(Agent):
         horizon: int = 100,
         gamma: float = 0.99,
         quadratic_penalty_coefficient: float = 0.01,
+        verbose : bool = False
     ) -> None:
         super().__init__(initial_budget, horizon)
 
@@ -120,6 +121,8 @@ class DDQL(Agent):
         if self.mode == "train":
             self.optimizer = optim.RMSprop(self.main_net.parameters(), lr=lr)
             self.loss_fn = nn.MSELoss()
+
+        self.verbose = verbose
 
     def train(self) -> None:
         """This function sets the mode to "train" and trains the main neural network."""
@@ -243,7 +246,7 @@ class DDQL(Agent):
 
         self.learning_step += 1
         self.greediness = max(0.01, self.greediness * self.greedy_decay_rate)
-        if self.learning_step % self.target_update_rate == 0:
+        if self.learning_step % self.target_update_rate == 0 and self.verbose==True:
             self.__update_target_net()
             print(
                 f"Target network updated at step {self.learning_step} with greediness {self.greediness:.2f}"
