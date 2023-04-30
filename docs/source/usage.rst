@@ -4,7 +4,14 @@ Installation
 
 
 The DDQL-optimal-execution source code is available on GitHub. 
-You can clone the repository with the following command.
+
+You can either install the package using pip :
+
+.. code-block:: bash
+
+    $ pip install ddql_optimal_execution 
+
+or clone the repository with the following command.
 
 .. code-block:: bash
 
