@@ -31,7 +31,7 @@ extensions = [
     "sphinxawesome_theme",
 ]
 
-autodoc_mock_imports = ["torch", "numpy", "pandas"]
+autodoc_mock_imports = ["torch", "numpy", "pandas", "tqdm"]
 
 autodoc_default_options = {
     "members": True,
