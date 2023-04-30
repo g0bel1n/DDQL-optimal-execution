@@ -61,32 +61,65 @@
 <article class="flex-1" role="main">
 <div class="section" id="quickstart-guide">
 <h1>Quickstart Guide<a aria-label="Click to copy this link" class="headerlink tooltipped tooltipped-ne" data-action="click-&gt;clipboard#copyHeaderLink" data-controller="clipboard" href="#quickstart-guide">¶</a></h1>
+<p>Training</p>
 <div class="code-wrapper" data-controller="code">
 <div class="code-header">
 <span class="code-lang">python</span></div>
-<div class="highlight"><pre><code> <span class="kn">from</span> <span class="nn">ddql_optimal_execution</span> <span class="kn">import</span> <span class="n">DDQL</span><span class="p">,</span> <span class="n">MarketEnvironnement</span><span class="p">,</span> <span class="n">ExperienceReplay</span><span class="p">,</span> <span class="n">TWAP</span>
+<div class="highlight"><pre><code><span class="kn">from</span> <span class="nn">ddql_optimal_execution</span> <span class="kn">import</span> <span class="n">DDQL</span><span class="p">,</span> <span class="n">MarketEnvironnement</span><span class="p">,</span> <span class="n">Trainer</span>
+
 
 <span class="c1">#Create environnement</span>
-<span class="n">env</span> <span class="o">=</span> <span class="n">MarketEnvironnement</span><span class="p">(</span><span class="n">initial_inventory</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">multi_episodes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
+<span class="n">env</span> <span class="o">=</span> <span class="n">MarketEnvironnement</span><span class="p">(</span><span class="n">initial_inventory</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">multi_episodes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">QV</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Volume</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data_path</span><span class="o">=</span><span class="s1">'../data/train'</span><span class="p">)</span>
 <span class="c1">#Create agent</span>
 <span class="n">agent</span> <span class="o">=</span> <span class="n">DDQL</span><span class="p">(</span><span class="n">state_size</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">state_size</span><span class="p">,</span> <span class="n">initial_budget</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">initial_inventory</span><span class="p">,</span> <span class="n">horizon</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">horizon</span><span class="p">)</span>
 
 <span class="c1">#Create experience replay for storing experience</span>
-<span class="n">exp_replay</span> <span class="o">=</span> <span class="n">ExperienceReplay</span><span class="p">(</span><span class="n">state_size</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">state_size</span><span class="p">,</span> <span class="n">capacity</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">agent</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">capacity</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 
-<span class="c1">#Train agent on every detected episode</span>
-<span class="k">for</span> <span class="n">episode</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">historical_data_series</span><span class="p">)):</span>
-   <span class="n">env</span><span class="o">.</span><span class="n">swap_episode</span><span class="p">(</span><span class="n">episode</span><span class="p">)</span>
-   <span class="k">while</span> <span class="ow">not</span> <span class="n">env</span><span class="o">.</span><span class="n">done</span><span class="p">:</span>
-      <span class="n">current_state</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
-      <span class="n">action</span> <span class="o">=</span> <span class="n">agent</span><span class="p">(</span><span class="n">current_state</span><span class="p">)</span>
-      <span class="n">reward</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">fill_exp_replay</span><span class="p">(</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 
-      <span class="n">distance2horizon</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">horizon</span> <span class="o">-</span> <span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span>
-      <span class="n">exp_replay</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">current_state</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">distance2horizon</span> <span class="k">if</span> <span class="n">distance2horizon</span> <span class="o">&lt;=</span><span class="mi">1</span> <span class="k">else</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">pretrain</span><span class="p">(</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
 
-   <span class="n">agent</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="n">exp_replay</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span> <span class="c1">#Learn from experience replay</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">max_steps</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Testing vs TWAP</p>
+<div class="code-wrapper" data-controller="code">
+<div class="code-header">
+<span class="code-lang">python</span></div>
+<div class="highlight"><pre><code><span class="kn">from</span> <span class="nn">ddql_optimal_execution</span> <span class="kn">import</span> <span class="n">TWAP</span>
+
+<span class="c1">#Create environnement</span>
+<span class="n">env</span> <span class="o">=</span> <span class="n">MarketEnvironnement</span><span class="p">(</span><span class="n">initial_inventory</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">multi_episodes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">QV</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Volume</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">data_path</span><span class="o">=</span><span class="s1">'../data/test'</span><span class="p">)</span>
+
+<span class="c1">#Create agent</span>
+<span class="n">agent</span> <span class="o">=</span> <span class="n">DDQL</span><span class="p">(</span><span class="n">state_size</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">state_size</span><span class="p">,</span> <span class="n">initial_budget</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">initial_inventory</span><span class="p">,</span> <span class="n">horizon</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">horizon</span><span class="p">)</span>
+<span class="n">twap</span> <span class="o">=</span> <span class="n">TWAP</span><span class="p">(</span><span class="n">initial_inventory</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">initial_inventory</span><span class="p">,</span> <span class="n">horizon</span><span class="o">=</span><span class="n">env</span><span class="o">.</span><span class="n">horizon</span><span class="p">)</span>
+
+<span class="n">pnl_twap</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">pnl_ddql</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">n_episodes</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_env</span><span class="o">.</span><span class="n">historical_data_series</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">random_ep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_episodes</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">n_episodes</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">random_ep</span><span class="p">:</span>
+   <span class="n">test_env</span><span class="o">.</span><span class="n">swap_episode</span><span class="p">(</span><span class="n">ep</span><span class="p">)</span>
+   <span class="n">_pnl_twap</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+   <span class="k">while</span> <span class="ow">not</span> <span class="n">test_env</span><span class="o">.</span><span class="n">done</span><span class="p">:</span>
+      <span class="n">current_state</span> <span class="o">=</span> <span class="n">test_env</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+      <span class="n">action</span> <span class="o">=</span> <span class="n">twap</span><span class="p">(</span><span class="n">current_state</span><span class="p">)</span>
+      <span class="n">_</span> <span class="o">=</span> <span class="n">test_env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+
+   <span class="n">pnl_twap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_env</span><span class="o">.</span><span class="n">pnl_for_episode</span> <span class="o">+</span> <span class="p">[</span><span class="n">test_env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">'Price'</span><span class="p">]</span><span class="o">*</span><span class="n">test_env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">'inventory'</span><span class="p">]</span> <span class="o">-</span> <span class="n">test_env</span><span class="o">.</span><span class="n">quadratic_penalty_coefficient</span><span class="o">*</span><span class="p">(</span><span class="n">test_env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">'inventory'</span><span class="p">]</span><span class="o">/</span><span class="n">test_env</span><span class="o">.</span><span class="n">initial_inventory</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">test_env</span><span class="o">.</span><span class="n">horizon</span><span class="p">])</span>
+
+   <span class="n">test_env</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+
+   <span class="n">_pnl_ddql</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+   <span class="k">while</span> <span class="ow">not</span> <span class="n">test_env</span><span class="o">.</span><span class="n">done</span><span class="p">:</span>
+      <span class="n">current_state</span> <span class="o">=</span> <span class="n">test_env</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+      <span class="n">action</span> <span class="o">=</span> <span class="n">trainer</span><span class="o">.</span><span class="n">agent</span><span class="p">(</span><span class="n">current_state</span><span class="p">)</span>
+      <span class="n">_</span> <span class="o">=</span> <span class="n">test_env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+   <span class="n">pnl_ddql</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">test_env</span><span class="o">.</span><span class="n">pnl_for_episode</span> <span class="o">+</span> <span class="p">[</span><span class="n">test_env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">'Price'</span><span class="p">]</span><span class="o">*</span><span class="n">test_env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">'inventory'</span><span class="p">]</span> <span class="o">-</span> <span class="n">test_env</span><span class="o">.</span><span class="n">quadratic_penalty_coefficient</span><span class="o">*</span><span class="p">(</span><span class="n">test_env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s1">'inventory'</span><span class="p">]</span><span class="o">/</span><span class="n">test_env</span><span class="o">.</span><span class="n">initial_inventory</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">test_env</span><span class="o">.</span><span class="n">horizon</span><span class="p">])</span><span class="n">pnl_twap</span> <span class="o">=</span> <span class="p">[]</span>
 </code></pre></div></div>
 </div>
 </article>
