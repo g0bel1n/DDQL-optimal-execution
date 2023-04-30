@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8"/>
+<title>ddql_optimal_execution.trainer._trainer | DDQL Optimal Execution  documentation</title>
+<link href="../../../_static/pygments.css" rel="stylesheet"/>
+<link href="../../../_static/theme.2e8060a090e1247124e3.css" rel="stylesheet"/>
+<link href="../../../search.html" rel="search" title="Search"/>
+<link href="../../../genindex.html" rel="index" title="Index"/>
+</head>
+<body class="antialiased text-gray scroll-smooth">
+<div class="min-h-screen xl:h-screen flex flex-col xl:grid xl:grid-layout print:block print:h-auto" data-action="keydown@window-&gt;search#focus " data-controller="sidebar search " id="page">
+<a class="block transition -translate-x-full focus:translate-x-0 opacity-0 focus:opacity-100 text-xl bg-white p-4 z-20 absolute top-0 left-0 h-14" href="#ddql-optimal-execution-trainer-trainer" title="Skip navigation links">Skip to content</a>
+<header class="grid-area-header z-10 h-14 fixed w-full top-0 print:hidden">
+<div class="bg-gray-dark shadow-md flex items-center h-full xl:px-2 relative"><div class="flex items-center">
+<button class="xl:hidden h-14 w-14 leading-14 text-gray-100 hover:bg-gray-700 hover:text-brand focus:outline-none focus:bg-gray-700 focus:text-brand" data-action="sidebar#open" data-sidebar-target="hamburger">
+<span class="sr-only">Open navigation menu</span>
+<svg aria-hidden="true" class="fill-current h-8 w-8" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
+</button><a class="hover:bg-gray-700 focus:bg-gray-700 focus:outline-none" href="../../../index.html" title="Back to homepage"><span class="hidden lg:inline-block shrink-0 font-medium text-gray-100 mx-5 leading-14 tracking-wider">DDQL Optimal Execution  documentation</span>
+</a></div><div class="flex justify-end items-center flex-1"><form action="../../../search.html" class="flex print:hidden justify-between items-center leading-14 md:ml-4 bg-gray-dark text-gray-300 focus-within:bg-gray-50 focus-within:text-gray-800 focus-within:absolute focus-within:inset-x-0 focus-within:top-0 md:focus-within:w-full md:focus-within:static z-10" data-action="click-&gt;search#focusSearchInput" id="searchbox" method="get">
+<button aria-label="Get search results" class="text-inherit h-14 w-14" tabindex="-1">
+<svg aria-hidden="true" class="fill-current stroke-current h-8 w-8" stroke-width="0.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+</button>
+<input aria-label="Search the docs" class="pr-2 bg-transparent text-inherit focus:outline-none w-0 md:w-auto focus:w-full transition-all duration-100" data-search-target="searchInput" id="search-input" name="q" placeholder="Search the docs" type="search"/>
+</form></div>
+</div>
+</header>
+<aside class="grid-area-sidebar h-full fixed pt-14 xl:relative inset-y-0 left-0 z-20 xl:z-0 print:hidden overflow-y-auto transition-all transform transform-gpu -translate-x-full opacity-0 duration-300 xl:translate-x-0 xl:opacity-100" data-sidebar-target="sidebar">
+<nav class="h-full overflow-y-auto bg-white text-gray-600 pt-8 flex flex-col" role="navigation">
+<div class="nav-toc flex-1 pl-6"><p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../usage.html">Installation</a></div></li>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../quickstart.html">Quickstart Guide</a></div></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Main Objects:</span></p>
+<ul>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.preprocessing.Preprocessor.html">ddql_optimal_execution.preprocessing.Preprocessor</a></div></li>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.experience_replay.ExperienceReplay.html">ddql_optimal_execution.experience_replay.ExperienceReplay</a></div></li>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.State.html">ddql_optimal_execution.state.State</a></div></li>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.state.StateArray.html">ddql_optimal_execution.state.StateArray</a></div></li>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.DDQL.html">ddql_optimal_execution.agent.DDQL</a></div></li>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.agent.TWAP.html">ddql_optimal_execution.agent.TWAP</a></div></li>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.trainer.Trainer.html">ddql_optimal_execution.trainer.Trainer</a></div></li>
+<li class="toctree-l1"><div class="nav-link"><a class="reference internal" data-action="click-&gt;sidebar#close" href="../../../stubs/ddql_optimal_execution.environnement.MarketEnvironnement.html">ddql_optimal_execution.environnement.MarketEnvironnement</a></div></li>
+</ul>
+</div>
+<button class="text-4xl text-gray-800 p-4 bottom-0 hover:text-brand xl:hidden focus:text-brand self-center" data-action="sidebar#close" title="Close navigation menu">
+<span class="sr-only">Close navigation menu</span>
+<svg aria-hidden="true" class="fill-current stroke-current h-6 w-6" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</aside>
+<main class="px-4 pt-14 xl:ml-fluid grid-area-main overflow-y-auto flex flex-col flex-1 h-full mx-0 md:mx-auto xl:mr-0"><nav aria-label="breadcrumbs" class="print:hidden mt-12 text-sm text-gray-light" role="navigation">
+<a class="text-gray-light text-sm hover:text-gray-dark font-medium focus:text-gray-dark" href="../../../index.html">DDQL Optimal Execution  documentation</a>
+<span class="mr-1">/</span><a class="text-gray-light text-sm hover:text-gray-dark" href="../../index.html">Module code</a>
+<span class="mr-1">/</span><span aria-current="page">ddql_optimal_execution.trainer._trainer</span>
+</nav>
+<article class="flex-1" role="main">
+<h1>Source code for ddql_optimal_execution.trainer._trainer</h1><div class="highlight"><pre>
+<code><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">from</span> <span class="nn">ddql_optimal_execution.agent</span> <span class="kn">import</span> <span class="n">DDQL</span>
+<span class="kn">from</span> <span class="nn">ddql_optimal_execution.environnement</span> <span class="kn">import</span> <span class="n">MarketEnvironnement</span>
+<span class="kn">from</span> <span class="nn">ddql_optimal_execution.experience_replay</span> <span class="kn">import</span> <span class="n">ExperienceReplay</span>
+<span class="kn">from</span> <span class="nn">ddql_optimal_execution.experience_replay._warnings</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ExperienceReplayEmptyWarning</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">._warnings</span> <span class="kn">import</span> <span class="n">MaxStepsTooLowWarning</span>
+
+
+<div class="viewcode-block" id="Trainer"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.trainer.Trainer.html#ddql_optimal_execution.trainer.Trainer">[docs]</a><span class="k">class</span> <span class="nc">Trainer</span><span class="p">:</span>
+    <span class="sd">"""This class is used to train a DDQL agent in a given environment.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    agent : DDQL</span>
+<span class="sd">        The agent attribute is an instance of the DDQL class, which is a reinforcement learning algorithm</span>
+<span class="sd">    used for decision making in an environment.</span>
+<span class="sd">    env : MarketEnvironnement</span>
+<span class="sd">        The `env` attribute is an instance of the `MarketEnvironnement` class, which represents the</span>
+<span class="sd">    environment in which the agent will interact and learn. It provides the agent with information about</span>
+<span class="sd">    the current state of the market and allows it to take actions based on that information.</span>
+<span class="sd">    exp_replay : ExperienceReplay</span>
+<span class="sd">        The `exp_replay` attribute is an instance of the `ExperienceReplay` class, which is a memory buffer</span>
+<span class="sd">    that stores and retrieves experiences for reinforcement learning agents.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    pretrain(max_steps: int = 1000, batch_size: int = 32)</span>
+<span class="sd">        This function pretrains a DDQL agent by running random episodes, taking limit actions (sell all at the beginning or the end) and storing the experiences in an</span>
+<span class="sd">    experience replay buffer.</span>
+
+<span class="sd">    train(max_steps: int = 1000, batch_size: int = 32)</span>
+<span class="sd">        This function trains a DDQL agent by running episodes, taking actions based on the current state of the environment, and storing the experiences in an</span>
+<span class="sd">    experience replay buffer.</span>
+
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="Trainer.__init__"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.trainer.Trainer.html#ddql_optimal_execution.trainer.Trainer.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">:</span> <span class="n">DDQL</span><span class="p">,</span> <span class="n">env</span><span class="p">:</span> <span class="n">MarketEnvironnement</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">"""This function initializes an object with an agent, environment, and experience replay capacity.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        agent : DDQL</span>
+<span class="sd">            The agent parameter is an instance of the DDQL class, which is a reinforcement learning algorithm</span>
+<span class="sd">        used for decision making in an environment.</span>
+<span class="sd">        env : MarketEnvironnement</span>
+<span class="sd">            The `env` parameter is an instance of the `MarketEnvironnement` class, which represents the</span>
+<span class="sd">        environment in which the agent will interact and learn. It provides the agent with information about</span>
+<span class="sd">        the current state of the market and allows it to take actions based on that information.</span>
+
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent</span> <span class="o">=</span> <span class="n">agent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">env</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exp_replay</span> <span class="o">=</span> <span class="n">ExperienceReplay</span><span class="p">(</span><span class="n">capacity</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"capacity"</span><span class="p">,</span> <span class="mi">10000</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"verbose"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Trainer.fill_exp_replay"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.trainer.Trainer.html#ddql_optimal_execution.trainer.Trainer.fill_exp_replay">[docs]</a>    <span class="k">def</span> <span class="nf">fill_exp_replay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="sd">"""This function fills an experience replay buffer with experiences from random episodes.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        max_steps : int</span>
+<span class="sd">            The `max_steps` parameter is the maximum number of steps that the function will take before</span>
+<span class="sd">        stopping. It is used to prevent the function from running indefinitely if the experience replay</span>
+<span class="sd">        buffer is full.</span>
+
+<span class="sd">        """</span>
+
+        <span class="k">if</span> <span class="n">max_steps</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_replay</span><span class="o">.</span><span class="n">capacity</span><span class="p">:</span>
+            <span class="n">max_steps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_replay</span><span class="o">.</span><span class="n">capacity</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">MaxStepsTooLowWarning</span><span class="p">(</span><span class="n">max_steps</span><span class="p">))</span>
+
+        <span class="n">p_bar</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">tqdm</span><span class="p">(</span>
+                <span class="n">total</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">max_steps</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_replay</span><span class="o">.</span><span class="n">capacity</span><span class="p">),</span>
+                <span class="n">desc</span><span class="o">=</span><span class="s2">"Filling experience replay buffer"</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">verbose</span>
+            <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+
+        <span class="n">n_steps</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_replay</span><span class="o">.</span><span class="n">is_full</span><span class="p">)</span> <span class="ow">and</span> <span class="n">n_steps</span> <span class="o">&lt;</span> <span class="n">max_steps</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__random_border_actions</span><span class="p">(</span><span class="n">p_bar</span><span class="o">=</span><span class="n">p_bar</span><span class="p">)</span>
+            <span class="n">n_steps</span> <span class="o">+=</span> <span class="mi">1</span></div>
+
+    <span class="k">def</span> <span class="nf">__random_border_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_bar</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">tqdm</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">"""This function runs a random episode, taking limit actions (sell all at the beginning or the end) and storing the experiences in an experience replay buffer."""</span>
+
+        <span class="n">random_episode</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">historical_data_series</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">sell_beginning</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">swap_episode</span><span class="p">(</span><span class="n">random_episode</span><span class="p">)</span>
+        <span class="n">distance2horizon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">horizon</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">done</span><span class="p">:</span>
+            <span class="n">current_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">initial_inventory</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="p">(</span><span class="n">distance2horizon</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">sell_beginning</span><span class="p">)</span>
+                    <span class="ow">or</span> <span class="p">(</span><span class="n">distance2horizon</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">horizon</span> <span class="ow">and</span> <span class="n">sell_beginning</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="k">else</span> <span class="mi">0</span>
+            <span class="p">)</span>
+            <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+
+            <span class="n">distance2horizon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">horizon</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">exp_replay</span><span class="o">.</span><span class="n">push</span><span class="p">(</span>
+                <span class="n">current_state</span><span class="p">,</span>
+                <span class="n">action</span><span class="p">,</span>
+                <span class="n">reward</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                <span class="n">distance2horizon</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="ow">and</span> <span class="n">p_bar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">p_bar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Trainer.pretrain"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.trainer.Trainer.html#ddql_optimal_execution.trainer.Trainer.pretrain">[docs]</a>    <span class="k">def</span> <span class="nf">pretrain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">):</span>
+        <span class="sd">"""This function pretrains a DDQL agent by running random episodes, taking limit actions (sell all at the beginning or the end) and storing the experiences in an</span>
+<span class="sd">        experience replay buffer.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        max_steps : int, optional</span>
+<span class="sd">            The maximum number of steps to pretrain the agent for.</span>
+<span class="sd">        batch_size : int, optional</span>
+<span class="sd">            The number of experiences to sample from the experience replay buffer at each training step.</span>
+
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="p">,</span> <span class="n">DDQL</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"The agent must be an instance of the DDQL class."</span><span class="p">)</span>
+
+        <span class="n">p_bar</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"Pretraining agent"</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_steps</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__random_border_actions</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exp_replay</span><span class="o">.</span><span class="n">get_sample</span><span class="p">(</span><span class="n">batch_size</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="ow">and</span> <span class="n">p_bar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">p_bar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Trainer.train"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.trainer.Trainer.html#ddql_optimal_execution.trainer.Trainer.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">):</span>
+        <span class="sd">"""This function trains an agent using the DDQL algorithm and an experience replay buffer.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        max_steps : int, optional</span>
+<span class="sd">            max_steps is an optional integer parameter that specifies the maximum number of steps to train the</span>
+<span class="sd">        agent for. If the number of steps taken during training exceeds this value, the training process</span>
+<span class="sd">        will stop.</span>
+
+<span class="sd">        batch_size : int, optional</span>
+<span class="sd">            batch_size is an optional integer parameter that specifies the number of experiences to sample</span>
+<span class="sd">        from the experience replay buffer at each training step.</span>
+
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="p">,</span> <span class="n">DDQL</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"The agent must be an instance of the DDQL class."</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp_replay</span><span class="o">.</span><span class="n">is_empty</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">ExperienceReplayEmptyWarning</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fill_exp_replay</span><span class="p">(</span><span class="n">max_steps</span><span class="o">=</span><span class="n">max_steps</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="n">p_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span>
+                <span class="n">total</span><span class="o">=</span><span class="n">max_steps</span><span class="p">,</span>
+                <span class="n">desc</span><span class="o">=</span><span class="s2">"Training agent"</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">n_steps</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="k">while</span> <span class="n">n_steps</span> <span class="o">&lt;</span> <span class="n">max_steps</span><span class="p">:</span>
+            <span class="n">episode</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">historical_data_series</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">swap_episode</span><span class="p">(</span><span class="n">episode</span><span class="p">)</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">done</span><span class="p">:</span>
+                <span class="n">current_state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="p">(</span><span class="n">current_state</span><span class="p">)</span>
+                <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+
+                <span class="n">distance2horizon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">horizon</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="p">[</span><span class="s2">"period"</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">exp_replay</span><span class="o">.</span><span class="n">push</span><span class="p">(</span>
+                    <span class="n">current_state</span><span class="p">,</span>
+                    <span class="n">action</span><span class="p">,</span>
+                    <span class="n">reward</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                    <span class="n">distance2horizon</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="n">n_steps</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="n">p_bar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exp_replay</span><span class="o">.</span><span class="n">get_sample</span><span class="p">(</span><span class="n">batch_size</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Trainer.test"><a class="viewcode-back" href="../../../stubs/ddql_optimal_execution.trainer.Trainer.html#ddql_optimal_execution.trainer.Trainer.test">[docs]</a>    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">):</span>
+        <span class="o">...</span></div></div>
+</code></pre></div>
+</article>
+<footer>
+<div class="mt-20 mb-4 text-sm text-gray-700 print:mt-4">© 2023, g0bel1n Made with <a href="https://www.sphinx-doc.org">Sphinx 4.5.0</a></div>
+</footer></main>
+<button class="fixed bottom-0 right-0 z-20 opacity-0 p-4 m-4 tracking-wide bg-gray-900 text-gray-100 transition transform transform-gpu duration-500 translate-y-full" data-action="search#hideSnackbar" data-search-target="snackbar">
+  Clear highlights
+</button><div class="fixed hidden inset-0 bg-black bg-opacity-50" data-action="click-&gt;sidebar#close" data-sidebar-target="screen">
+</div>
+</div>
+<script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/theme.b62e1ded0c8c099a2d47.js"></script>
+</body>
+</html>
